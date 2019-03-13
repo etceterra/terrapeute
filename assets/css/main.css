@@ -106,3 +106,14 @@ body > footer .secondary {
 body > footer .secondary a:not(:last-of-type) {
   margin-right: .88rem;
 }
+
+
+.tag {
+  display: inline-block;
+  font-size: .5rem;
+  background-color: #69a2b0;
+  color: #fff;
+  padding: .2rem 1rem;
+  margin: .1rem .2rem;
+  border-radius: 2rem;
+}
