@@ -1,0 +1,109 @@
+---
+layout: default
+---
+<section id=content>
+  <article>
+    <img class=avatar src=https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg alt="MAssothérapeute">
+    <div>
+      <h1>Massothérapeute</h1>
+      <h2>Max-Antoine Breda</h2>
+      <p>Genève</p>
+    </div>
+    <footer>
+      Agréé <span>ASCA</span> <span>RME</span> <span>APTN</span>
+    </footer>
+    <a href=/provider.html>Voir ce massothérapeute</a>
+  </article>
+</section>
+
+<aside>
+  <div id="map"></div>
+</aside>
+
+
+<script>
+  function initMap() {
+    const map = L.map('map').setView([46.5, 7], 8)
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoidGVycmFwZXV0ZXMiLCJhIjoiY2p0N3IxZjRhMDB5bDQ1cW52Z2s2MnVnNCJ9.Ism1OhdYA3qPFom2htkx8w', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: 'pk.eyJ1IjoidGVycmFwZXV0ZXMiLCJhIjoiY2p0N3IxZjRhMDB5bDQ1cW52Z2s2MnVnNCJ9.Ism1OhdYA3qPFom2htkx8w'
+    }).addTo(map)
+
+    const marker = L.marker([46.2115, 6.119]).addTo(map)
+  }
+</script>
+
+
+<style>
+  main {
+    display: flex;
+  }
+
+  aside {
+    width: 20rem;
+  }
+
+  #content {
+    width: calc(100% - 20rem);
+  }
+
+  #map {
+    min-height: 300px;
+    height: calc(100vh - 12rem);
+  }
+
+  .avatar {
+    max-height: 5rem;
+  }
+
+  article {
+    position: relative;
+    display: inline-grid;
+    grid-template:
+      'img info'
+      'footer footer'
+      / 1fr auto;
+    grid-gap: 1rem;
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    margin: 1rem;
+  }
+  article h1,
+  article h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+  }
+  article > img {
+    grid-area: img;
+  }
+  article > div {
+    grid-area: info;
+  }
+  article > footer {
+    grid-area: footer;
+  }
+  article a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-indent: -999%;
+  }
+</style>
+
+
+
+<!-- Load Leaflet after css for good size calculation -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+<script>initMap()</script>
