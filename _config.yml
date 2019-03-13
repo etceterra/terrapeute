@@ -37,12 +37,12 @@ plugins:
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
 exclude:
-  - vendor
-  - gems
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+   - vendor
+   - gems
+   - Gemfile
+   - Gemfile.lock
+   - node_modules
+   - /bundle/
+   - /cache/
+   - /gems/
+   - /ruby/

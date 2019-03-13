@@ -10,7 +10,10 @@ layout: default
       <p>Genève</p>
     </div>
     <footer>
-      Agréé <span>ASCA</span> <span>RME</span> <span>APTN</span>
+      <p>Je suis massothérapeute sur Genève depuis 2012. Je pratique le massage classique et thérapeutique</p>
+      <div>
+        Agréé <span class=tag>ASCA</span> <span class=tag>RME</span> <span class=tag>APTN</span>
+      </div>
     </footer>
     <a href=/provider.html>Voir ce massothérapeute</a>
   </article>
@@ -56,10 +59,12 @@ layout: default
 
   .avatar {
     max-height: 5rem;
+    border-radius: 50%;
   }
 
   article {
     position: relative;
+    width: 20rem;
     display: inline-grid;
     grid-template:
       'img info'
@@ -67,16 +72,26 @@ layout: default
       / 1fr auto;
     grid-gap: 1rem;
     background-color: #fff;
-    padding: 2rem;
+    padding: 1.6rem;
     border: 1px solid #eee;
     border-radius: 3px;
     margin: 1rem;
+  }
+  article p {
+    margin: .3rem 0;
   }
   article h1,
   article h2 {
     margin: 0;
     padding: 0;
     font-size: 1em;
+  }
+  article h1 {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  article h2 {
+    font-size: 1rem;
   }
   article > img {
     grid-area: img;
@@ -86,6 +101,11 @@ layout: default
   }
   article > footer {
     grid-area: footer;
+}
+article > footer > div {
+  margin-top: 1rem;
+  padding-top: 1rem;
+    border-top: 1px dashed #eee;
   }
   article a {
     position: absolute;

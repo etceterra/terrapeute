@@ -1,2 +1,4 @@
 /gems/
 /_site/
+/.bundle/
+/ruby/
