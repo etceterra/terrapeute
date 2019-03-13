@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+}
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+html {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+::placeholder {
+  color: #888;
+}
