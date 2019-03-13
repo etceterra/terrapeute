@@ -1,5 +1,5 @@
-@import url('/assets/css/decor/decor.css');
-/* @import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css'); */
+@import url('https://cdn.jsdelivr.net/gh/polight/decor@master/decor.css');
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
 
 body {
   margin: 0;
