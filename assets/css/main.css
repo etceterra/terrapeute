@@ -20,6 +20,10 @@ h1, h2 {
   font-size: 3em;
 }
 
+p {
+  margin: .3rem 0;
+}
+
 button,
 .button {
   border-radius: .25rem;
@@ -116,4 +120,9 @@ body > footer .secondary a:not(:last-of-type) {
   padding: .2rem 1rem;
   margin: .1rem .2rem;
   border-radius: 2rem;
+}
+
+.avatar {
+  max-height: 5rem;
+  border-radius: 50%;
 }

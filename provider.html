@@ -1,43 +1,124 @@
 ---
 layout: default
 ---
-
 <article>
-  <h1>Danila Delfre, Masso-thérapeute</h1>
+  <div>
+    <section id=identity>
+      <img class=avatar src=https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg alt="MAssothérapeute">
+      <h1>Massothérapeute à Genève</h1>
+      <h2>Max-Antoine Breda</h2>
+      <span class=tag>ASCA</span>
+    </section>
 
-  <p>
-    De nombreux essais cliniques témoignent de l’efficacité de cette approche. Ce massage est notamment recommandé en cas de douleurs lombaires ou dorsales aiguës ou chroniques. Ses bienfaits ont été reconnus dans le domaine postopératoire ou pour soulager de l’arthrose. Grâce aux mouvements vigoureux réalisés pendant le massage, la circulation sanguine augmente favorisant ainsi une plus grande élasticité musculaire.
-  </p>
 
-  <p>
-    Plus qu’ un moment de détente, le massage contribue à réduire les malaises physiques causés par le stress :
-  </p>
+    <section>
+      <h3>À propos</h3>
+      <p>
+        Je suis massothérapeute sur Genève depuis 2012.<br>
+        Je pratique le massage classique et thérapeutique, la réflexologie plantaire ainsi que le drainage lymphatique suivant la méthode du Docteur Vodder.<br>
+        Je suis aussi formateur en massage classique (diplômé FSEA) à l'école Esclarmonde de Genève.<br>
+        Mon cabinet se trouve  Avenue Soret 39, 1003 Genève, dans cette même école.
+      </p>
+    </section>
 
-  <ul>
-      <li>maux de dos,</li>
-      <li>manque d’ énergie,</li>
-      <li>nsomnie</li>
-      <li>permet l’ ancrage</li>
-      <li>ramène et stimule l’ énergie…</li>
+    <section>
+      <h3>Tarifs</h3>
+      <div>Séance 1h : 100 CHF</div>
+      <div>Séance 1h30 : 150 CHF</div>
+    </section>
+
+    <section>
+      <h3>Adresse</h3>
+      <address>
+        Avenue Soret 39, 1003 Genève
+      </address>
+      <div id="map"></div>
+    </section>
+  </div>
+
+  <aside>
+    <ul>
+      <li><i class="fa fa-desktop"></i> <a href=http://mesurebienetre.com target=_blank>Son site web</a></li>
+      <li><i class="fab fa-facebook-square"></i> <a href=https://www.facebook.com/maxantoine.breda target=_blank>Sa page Facebook</a></li>
     </ul>
 
-  <h3>Le massage a de nombreux effets positifs</h3>
-
-  <p>
-    Sur la structure et la posture de votre corps :
-  </p>
-
-  <ul>
-    <li>soulage le mal de dos</li>
-    <li>rend nos muscles plus souples et plus élastiques</li>
-    <li>aide au relâchement de nos tensions</li>
-    <li>améliore la mobilité articulaire</li>
-  </ul>
+    <ul id=contactInfos class=hidden>
+      <li><i class="fa fa-phone"></i> Tel: +41762916951</li>
+      <li><i class="fa fa-envelope"></i> <a href="mailto:mesurebienetre@gmail.com">Envoyer un email</a></li>
+    </ul>
+    <button class=primary id=contactButton><i class="fa fa-phone"> </i> Contacter</button>
+  </aside>
 </article>
+
+<script>
+  document.querySelector('#contactButton').addEventListener('click', () => {
+    document.querySelector('#contactInfos').classList.remove('hidden')
+  })
+</script>
+
 
 <style>
   article {
+    display: flex;
     max-width: 60rem;
     margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 1px 1px 3px rgba(188, 188, 188, .3)
+  }
+
+  section {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  aside {
+    min-width: 300px;
+  }
+
+  #map {
+    width: 100%;
+    height: 300px;
+  }
+
+  #identity {
+    width: 60%;
+  }
+  #identity .avatar {
+    float: right;
+  }
+  h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
+  h3 {
+    font-size: 1em;
+    margin-bottom: .5rem;
+  }
+  .hidden {
+    display: none;
+  }
+  #contactButton {
+    width: 100%;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  aside ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  aside button {
+    margin-top: 2rem;
   }
 </style>
+
+{% include map.js %}
