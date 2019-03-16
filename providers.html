@@ -3,17 +3,15 @@ layout: default
 ---
 <section id=content>
   <article>
+    <h1>Massothérapeute</h1>
     <img class=avatar src=https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg alt="MAssothérapeute">
     <div>
-      <h1>Massothérapeute</h1>
       <h2>Max-Antoine Breda</h2>
       <p>Genève</p>
+      <p>Je suis massothérapeute sur Genève depuis 2012. Je pratique le massage classique et thérapeutique</p>
     </div>
     <footer>
-      <p>Je suis massothérapeute sur Genève depuis 2012. Je pratique le massage classique et thérapeutique</p>
-      <div>
-        Agréé <span class=tag>ASCA</span> <span class=tag>RME</span> <span class=tag>APTN</span>
-      </div>
+      <span class=tag title="Agréé ASCA">ASCA</span> <span class=tag title="Agréé RME">RME</span> <span class=tag title="Agréé APTN">APTN</span>
     </footer>
     <a href=/provider.html>Voir ce massothérapeute</a>
   </article>
@@ -46,9 +44,10 @@ layout: default
     width: 20rem;
     display: inline-grid;
     grid-template:
+      'title title'
       'img info'
       'footer footer'
-      / 1fr auto;
+      / auto 1fr;
     grid-gap: 1rem;
     background-color: #fff;
     padding: 1.6rem;
@@ -68,6 +67,7 @@ layout: default
   article h1 {
     font-weight: bold;
     font-size: 1.1rem;
+    grid-area: title;
   }
   article h2 {
     font-size: 1rem;
