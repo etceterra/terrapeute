@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+  <div>
+    <section id=identity>
+      <img class=avatar src=https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg alt="MAssothérapeute">
+      <h1>{{ provider.therapy }} à {{ provider.city }}</h1>
+      <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
+      {% for agreement in provider.agreements %}
+      <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
+      {% endfor %}
+    </section>
+
+
+    <section>
+      <h3>À propos</h3>
+      <p>
+        {{ provider.description }}
+      </p>
+    </section>
+
+    <section>
+      <h3>Paiement</h3>
+      <div>Séance 1h : 100 CHF</div>
+      <div>Séance 1h30 : 150 CHF</div>
+      <p>Paiement en espèce ou en carte bleue</p>
+    </section>
+
+    <section>
+      <h3>Adresse</h3>
+      <address>
+        Avenue Soret 39, 1003 Genève
+      </address>
+      <div id="map"></div>
+    </section>
+  </div>
+
+  <aside>
+    <ul>
+      <li><i class="fa fa-desktop"></i> <a href=http://mesurebienetre.com target=_blank>Son site web</a></li>
+      <li><i class="fab fa-facebook-square"></i> <a href=https://www.facebook.com/maxantoine.breda target=_blank>Sa page Facebook</a></li>
+    </ul>
+
+    <ul id=contactInfos class=hidden>
+      <li><i class="fa fa-phone fa-flip-horizontal"></i> Tel: +41762916951</li>
+      <li><i class="fa fa-envelope"></i> <a href="mailto:mesurebienetre@gmail.com">Envoyer un email</a></li>
+    </ul>
+    <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
+  </aside>
+</article>
+
+<script>
+  document.querySelector('#contactButton').addEventListener('click', () => {
+    document.querySelector('#contactInfos').classList.remove('hidden')
+  })
+</script>
+
+
+<style>
+  article {
+    display: flex;
+    max-width: 60rem;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 1px 1px 3px rgba(188, 188, 188, .3)
+  }
+
+  section {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  aside {
+    min-width: 300px;
+  }
+
+  #map {
+    width: 100%;
+    height: 300px;
+  }
+
+  #identity {
+    width: 60%;
+  }
+  #identity .avatar {
+    float: right;
+  }
+  h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
+  h3 {
+    font-size: 1em;
+    margin-bottom: .5rem;
+  }
+  .hidden {
+    display: none;
+  }
+  #contactButton {
+    width: 100%;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  aside ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  aside button {
+    margin-top: 2rem;
+  }
+</style>
+
+{% import 'partials/map.html' as macro %}
+{{ macro.map(latlng="[46.2115, 6.119]", zoom=12) }}
+
+{% endblock %}

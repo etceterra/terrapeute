@@ -1,0 +1,29 @@
+{
+  "name": "terrapeutes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "mocha": "^6.0.2",
+    "mocha-esm": "^1.1.1",
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10",
+    "nunjucks": "^3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon -e mjs,html --experimental-modules src/index.mjs",
+    "test": "mocha src/test/utils -r esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etceterra/terrapeutes.git"
+  },
+  "author": "Vincent Agnano",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/etceterra/terrapeutes/issues"
+  },
+  "homepage": "https://github.com/etceterra/terrapeutes#readme"
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Trouver un thérapeutes — Terrapeutes</title>
+<meta name="description" value="Trouver un thérapeute en Suisse : accupresseur, accuponcteur, masseur. Autour Genève ou Lausanne">
+<link rel="stylesheet" href="/css/main.css">
+
+<header class="row spaced">
+  <h1>
+    <a href="/">
+      <img alt="Thérapeutes" src="/img/logo.png">
+    </a>
+  </h1>
+</header>
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class=row>
+  <p>
+    <a href=http://terrapeutes.com>Terrapeutes</a> est un projet de Mesure Bien Être, SARL déposée en Suisse.
+  </p>
+  <div class=secondary>
+    <a href="https://pro.terrapeutes.com" title="Réseau thérapeutes en Suisse">Espace Thérapeute</a>
+    <a href="/policy.html">Conditions d'utilisation</a>
+    <a href="/privacy.html">Confidentialité</a>
+    <a href="mailto:contact@terrapeutes.com">Nous contacter</a>
+  </div>
+</footer>
+
+
+<!-- Matomo -->
+<script type="text/javascript">
+  var _paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stats.anonym.dev/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '2']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- End Matomo Code -->

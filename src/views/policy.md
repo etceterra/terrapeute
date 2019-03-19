@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # Conditions additionnelles applicables à l’utilisation de la Plateforme « Terrapeutes.com » par les Praticiens
 
 

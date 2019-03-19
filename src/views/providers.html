@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section id=content>
+  {% for provider in providers %}
+  <article>
+    <h1>{{ provider.therapy }}</h1>
+    <img class=avatar src={{ provider.photo }} alt="{{ provider.therapy }} in {{ provider.city }}">
+    <div>
+      <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
+      <p>{{ provider.city }}</p>
+      <p>{{ provider.description }}</p>
+    </div>
+    <footer>
+      {% for agreement in provider.agreements %}
+      <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
+      {% endfor %}
+    </footer>
+    <a href=/{{ provider.slug }} title="{{ provider.firstname }} {{ provider.lastname }}, {{ provider.therapy }} à {{ provider.city }}">Voir ce {{ provider.therapy }}</a>
+  </article>
+  {% endfor %}
+</section>
+
+<aside>
+  <div id="map"></div>
+</aside>
+
+<style>
+  main {
+    display: flex;
+  }
+
+  aside {
+    width: 20rem;
+  }
+
+  #content {
+    width: calc(100% - 20rem);
+  }
+
+  #map {
+    min-height: 300px;
+    height: calc(100vh - 12rem);
+  }
+
+  article {
+    position: relative;
+    width: 20rem;
+    display: inline-grid;
+    grid-template:
+      'title title'
+      'img info'
+      'footer footer'
+      / auto 1fr;
+    grid-gap: 1rem;
+    background-color: #fff;
+    padding: 1.6rem;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    margin: 1rem;
+  }
+  article p {
+    margin: .3rem 0;
+  }
+  article h1,
+  article h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+  }
+  article h1 {
+    font-weight: bold;
+    font-size: 1.1rem;
+    grid-area: title;
+  }
+  article h2 {
+    font-size: 1rem;
+  }
+  article > img {
+    grid-area: img;
+  }
+  article > div {
+    grid-area: info;
+  }
+  article > footer {
+    grid-area: footer;
+}
+article > footer > div {
+    margin-top: .7rem;
+    padding-top: .7rem;
+    border-top: 1px dashed #eee;
+  }
+  article a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-indent: -999%;
+  }
+  article a:hover {
+    box-shadow: 1px 1px 5px rgba(176, 176, 176, .3)
+  }
+</style>
+{% import "partials/map.html" as macro %}
+{{ macro.map(latlng='[46.5, 6.5]', zoom=9) }}
+<script>
+  const marker = L.marker([46.2115, 6.119]).addTo(map)
+</script>
+
+{% endblock %}
