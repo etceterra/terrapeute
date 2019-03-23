@@ -15,7 +15,7 @@ const Provider = mongoose.model('Provider', {
   city: String,
   country: String,
   pictures: [String],
-  loc: [Number],
+  latlng: [Number],
   description: String,
   socials: [String],
   therapy: String,

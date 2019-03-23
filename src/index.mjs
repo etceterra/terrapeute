@@ -13,15 +13,16 @@ const providers  = [
     slug: 'massotherapeute-geneve/max-antoine-breda',
     firstname: "Max-Antoine",
     lastname: "Breda",
-    photo: "https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg",
+    // photo: "https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg",
     therapy: 'Massothérapeute',
     city: "Genève",
     description: "Je suis massothérapeute sur Genève depuis 2012. Je pratique le massage classique et thérapeutique",
-    agreements: ['asca', 'rme', 'aptn']
+    agreements: ['asca', 'rme', 'aptn'],
+    latlng: [46.2115, 6.119],
   })
 ]
 
-nunjucks.configure('./views', {
+nunjucks.configure(`src/views`, {
     express: app,
     autoescape: true
 });
