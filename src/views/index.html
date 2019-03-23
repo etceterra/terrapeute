@@ -1,9 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+<section id=search>
+  <div>
+    <h1>Trouvez un thérapeute</h1>
+    <a href=/therapeutes class=button>Consulter les thérapeutes du réseau </a>
+    <p>Terrapeute est le réseau des <strong>thérapeutes en Suisse</strong>. Quelques soient vos symptômes,
+    il y a toujours un <strong>thérapeute professionnel</strong> à proximité.</p>
+  </div>
+</section>
+
 <section>
   <h2>1. Trouvez un thérapeute adapté à votre besoin</h2>
-  <div>
+  <div class=presenter>
     <div>
       <p>Terrapeute est <strong>le réseau des thérapeutes</strong> pour un accompagnement adapté et orienté.</p>
       <p>
@@ -16,7 +25,7 @@
 
 <section class=reversed>
   <h2>2. Recherchez les thérapeutes qui vous conviennent</h2>
-  <div>
+  <div class=presenter>
     <div>
       <p>
         Il y a toujours un <strong>thérapeute à proximité</strong>.
@@ -31,7 +40,7 @@
 
 <section>
   <h2>3. Validez <strong>votre thérapeute</strong></h2>
-  <div>
+  <div class=presenter>
     <div>
       <p>
         En un seul coup d'oeil vous pouvez vérifier que le thérapeute et la <strong>thérapie alternative</strong> qu'il propose
@@ -53,26 +62,26 @@
   main > section {
     padding: 5rem 10rem;
   }
-  main > section > div {
+  .presenter {
     display: flex;
   }
-  main > section > div > div {
+  .presenter > div {
     margin-right: 3rem;
     width: 58%;
   }
 
-  main > section.reversed > div {
+  main > section.reversed .presenter {
     flex-direction: row-reverse;
   }
-  main > section.reversed > div > div {
+  main > section.reversed .presenter > div {
     margin: 0 0 0 3rem;
   }
 
-  main > section > div > img {
+  .presenter > img {
     height: 13rem;
     box-shadow: 3px 3px 12px rgba(0, 0, 0, .3);
   }
-  main > section:nth-of-type(2) > div > img {
+  main > section:nth-of-type(2) .presenter > img {
     height: 16rem;
     box-shadow: 3px 3px 8px #888;
   }
@@ -98,6 +107,30 @@
   }
   main > section:nth-of-type(4) {
     background-color: #eee;
+  }
+
+  #search {
+    background-image: url('/img/home.jpg');
+    background-size: cover;
+    height: 600px;
+    color: #555;
+    filter: contrast(90%);
+    transition: all .3s;
+  }
+  #search:hover {
+    filter: contrast(110%);
+  }
+  #search > div {
+    background-color: rgba(255, 255, 255, .5);
+    padding: 4.5rem;
+    display: inline-block;
+    border-radius: .3rem;
+    box-shadow: 0 0 8px rgba(144, 144, 144, .3);
+  }
+  #search p {
+    margin-top: 2rem;
+    color: #777;
+    font-size: .8rem;
   }
 </style>
 {% endblock %}

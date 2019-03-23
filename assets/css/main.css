@@ -111,6 +111,10 @@ body > footer .secondary a:not(:last-of-type) {
   margin-right: .88rem;
 }
 
+footer .copyright {
+  font-size: .7em;
+}
+
 
 .tag {
   display: inline-block;
