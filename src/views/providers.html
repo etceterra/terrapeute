@@ -3,20 +3,20 @@
 {% block content %}
 <section id=content>
   {% for provider in providers %}
-  <article>
+  <article id="{{ provider.id }}">
     <h1>{{ provider.therapy }}</h1>
-    <img class=avatar src={{ provider.photo }} alt="{{ provider.therapy }} in {{ provider.city }}">
+    <img class=avatar src="{{ provider.photo[0].url }}" alt="{{ provider.name }} : {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">
     <div>
-      <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
+      <h2>{{ provider.name }}</h2>
       <p>{{ provider.city }}</p>
-      <p>{{ provider.description }}</p>
+      <p class=description>{{ provider.description | truncate(120) }}</p>
     </div>
     <footer>
       {% for agreement in provider.agreements %}
       <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
       {% endfor %}
     </footer>
-    <a href=/{{ provider.slug }} title="{{ provider.firstname }} {{ provider.lastname }}, {{ provider.therapy }} à {{ provider.city }}">Voir ce {{ provider.therapy }}</a>
+    <a href=/{{ provider.slug }}/{{ provider.id }} title="{{ provider.name }} est {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">Voir ce {{ provider.therapies[0].name }} à {{ provider.city }}</a>
   </article>
   {% endfor %}
 </section>
@@ -54,7 +54,7 @@
       / auto 1fr;
     grid-gap: 1rem;
     background-color: #fff;
-    padding: 1.6rem;
+    padding: 1rem;
     border: 1px solid #eee;
     border-radius: 3px;
     margin: 1rem;
@@ -84,8 +84,12 @@
   }
   article > footer {
     grid-area: footer;
-}
-article > footer > div {
+  }
+  article .description {
+    font-size: .9em;
+    line-height: 1.2;
+  }
+  article > footer > div {
     margin-top: .7rem;
     padding-top: .7rem;
     border-top: 1px dashed #eee;
@@ -107,14 +111,13 @@ article > footer > div {
 <script>
   const providers = [
     {% for provider in providers %}
-      { id: "{{provider._id}}", latlng: [{{ provider.latlng }}] },
+      { id: "{{provider.id}}", label: "{{provider.firstname}} {{provider.lastname}} — {{ provider.therapies[0].name }}", latlng: [{{ provider.latlng }}] },
     {% endfor %}
   ]
   providers.forEach(provider => {
     let marker = L.marker(provider.latlng).addTo(map)
-    marker.on('click', (event) => {
-      debugger
-    })
+    marker.bindPopup(`<p>${ provider.label }</p>`)
+    marker._provider = provider
   })
 </script>
 

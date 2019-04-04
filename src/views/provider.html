@@ -4,14 +4,13 @@
 <article>
   <div>
     <section id=identity>
-      <img class=avatar src=https://espacelingdesante.ch/wp-content/uploads/2016/08/maxantoine2-1.jpg alt="MAssothérapeute">
+      <img class=avatar src={{ provider.photo.url }} alt="{{ provider.therapies | join(', ') }}">
       <h1>{{ provider.therapy }} à {{ provider.city }}</h1>
       <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
       {% for agreement in provider.agreements %}
       <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
       {% endfor %}
     </section>
-
 
     <section>
       <h3>À propos</h3>
@@ -47,6 +46,7 @@
       <li><i class="fa fa-envelope"></i> <a href="mailto:mesurebienetre@gmail.com">Envoyer un email</a></li>
     </ul>
     <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
+    <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger son contact</a>
   </aside>
 </article>
 
