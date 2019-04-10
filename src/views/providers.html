@@ -5,7 +5,9 @@
   {% for provider in providers %}
   <article id="{{ provider.id }}">
     <h1>{{ provider.therapy }}</h1>
-    <img class=avatar src="{{ provider.photo[0].url }}" alt="{{ provider.name }} : {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">
+    <picture class=avatar>
+      <img src="{{ provider.photo[0].url }}" alt="{{ provider.name }} : {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">
+    </picture>
     <div>
       <h2>{{ provider.name }}</h2>
       <p>{{ provider.city }}</p>
@@ -45,12 +47,13 @@
 
   article {
     position: relative;
-    width: 20rem;
+    width: 24rem;
+    max-height: 14rem;
     display: inline-grid;
     grid-template:
-      'title title'
-      'img info'
-      'footer footer'
+      'avatar title'
+      'avatar info'
+      'avatar footer'
       / auto 1fr;
     grid-gap: 1rem;
     background-color: #fff;
@@ -76,8 +79,17 @@
   article h2 {
     font-size: 1rem;
   }
-  article > img {
+  article .avatar {
+    grid-area: avatar;
+  }
+  article picture {
+    overflow: hidden;
+  }
+  article picture img {
     grid-area: img;
+    width: 200px;
+    height: 100%;
+    object-fit: cover;
   }
   article > div {
     grid-area: info;
@@ -114,11 +126,15 @@
       { id: "{{provider.id}}", label: "{{provider.firstname}} {{provider.lastname}} — {{ provider.therapies[0].name }}", latlng: [{{ provider.latlng }}] },
     {% endfor %}
   ]
-  providers.forEach(provider => {
-    let marker = L.marker(provider.latlng).addTo(map)
+  const markers = providers.map(provider => {
+    const marker = L.marker(provider.latlng)
     marker.bindPopup(`<p>${ provider.label }</p>`)
     marker._provider = provider
+    return marker
   })
+  const markersGroup = L.featureGroup(markers)
+  map.fitBounds(markersGroup.getBounds())
+  markersGroup.addTo(map)
 </script>
 
 {% endblock %}
