@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block meta_title %}{{ provider.name }}, {{ provider.therapies_name[0] }} à {{ provider.city }}{% endblock %}
+
+{% block meta_description %}{{ provider.name }} est thérapeute agréé {{ provider.agreements | join(', ') }} en {{ provider.therapies_name | join(', ') }} à {{ provider.city }}.
+{{ provider.description | truncate(150) }}{% endblock %}
+
 {% block content %}
 <article>
   <div>
