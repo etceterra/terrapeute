@@ -6,7 +6,7 @@
     <section id=identity>
       {% import 'partials/avatar.html' as macro %}
       {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
-      <h1>{{ provider.therapy }} à {{ provider.city }}</h1>
+      <h1>{{ provider.therapies_name[0] }} à {{ provider.city }}</h1>
       <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
       {% for agreement in provider.agreements %}
       <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
@@ -55,7 +55,7 @@
       <li><i class="fa fa-envelope"></i> <a href="mailto:mesurebienetre@gmail.com">Envoyer un email</a></li>
     </ul>
     <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
-    <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger son contact</a>
+    <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger sa vCard</a>
   </aside>
 </article>
 
@@ -134,7 +134,7 @@
 
 {# After CSS for map sizing reasons #}
 {% import 'partials/map.html' as macro %}
-{{ macro.map(latlng="[46.2115, 6.119]", zoom=13) }}
+{{ macro.map(latlng=provider.latlng, zoom=12) }}
 
 <script>
   document.querySelector('#contactButton').addEventListener('click', () => {
