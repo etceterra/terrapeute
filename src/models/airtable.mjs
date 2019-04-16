@@ -72,7 +72,7 @@ const fakeProvider = { id: 'rec0vdz3rqJOwKPTJ',
      'Drainage lymphatique',
      'Massage thérapeutique' ],
   name: 'Max-Antoine Breda',
-  url: 'massotherapie-geneve/max-antoine/1234'
+  url: '/massotherapie-geneve/max-antoine/1234'
 }
 
 const Provider = {
@@ -81,13 +81,13 @@ const Provider = {
     provider.therapies = provider.therapies ? provider.therapies.map(t => therapies[t]) : []
     provider.therapies_name = provider.therapies.map(t => t.name)
     provider.name = `${provider.firstname} ${provider.lastname}`
-    provider.url = `${provider.slug}/${req.params.id}`
+    provider.url = `/${provider.slug}/${req.params.id}`
     provider.socials = JSON.parse(provider.socials || {})
     return provider
   },
   async getAll() {
     const data = await ProviderTable.select().firstPage()
-    return data.map(p => p.filter(p => p.fields.slug).map(p => this.toInstance(p)))
+    return data.map(p => p && p.filter(p => p.fields.slug).map(p => this.toInstance(p)))
   },
 
   async find(id) {

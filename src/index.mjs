@@ -25,10 +25,7 @@ app.get('/:slug0/:slug1/:id', async (req, res) => {
 })
 
 app.get('/:slug0/:slug1/:id/vcf', async (req, res) => {
-  const response = await Provider.find(req.params.id.split('.')[0])
-  const provider = response.fields
-  provider.id = response.id
-
+  const provider = await Provider.find(req.params.id.split('.')[0])
   const vcard = Vcard()
   vcard.firstName = provider.firstname
   vcard.lastName = provider.lastname

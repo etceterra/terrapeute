@@ -26,19 +26,18 @@ p {
 
 button,
 .button {
-  border-radius: .25rem;
-}
-a.button {
+  border-radius: .5rem;
   padding: .8rem 1.6rem;
-  background-color: #68b246;
   font-weight: normal;
-  color: #fff;
-  border: 0;
   font-size: .9rem;
+  border: 0;
+  border: 1px solid #519631;
+  color: #519631;
 }
 button.primary,
 a.button.primary {
   background-color: #68b246;
+  color: #fff;
   border: 0;
 }
 
