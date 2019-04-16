@@ -1,22 +1,10 @@
 import express from 'express'
 import nunjucks from 'nunjucks'
-import Airtable from 'airtable'
 import Vcard from 'vcards-js'
-import dotenv from 'dotenv'
-
-dotenv.config()
-
-const config = process.env
+import config from './config'
+import { Provider } from './models/airtable'
 
 const app = express()
-
-Airtable.configure({ endpointUrl: 'https://api.airtable.com', apiKey: config.AIRTABLE_API_KEY })
-const db = Airtable.base('app1Ab6PilgNTXMYp')
-const Provider = db.table('Therapeutes')
-const Symptom = db.table('Symptomes')
-const Therapy = db.table('Therapies')
-let therapies = []
-let symptoms = []
 
 nunjucks.configure(`src/views`, {
     express: app,
@@ -27,22 +15,12 @@ app.use(express.static('assets'))
 
 app.get('/', (req, res) => res.render('index', { title: 'Hey', message: 'Hello there!' }))
 app.get('/therapeutes', async (req, res) => {
-  const data = await Provider.select().firstPage()
-  const providers = data.map(p => Object.assign({ id: p.id }, p.fields)).map(p => {
-    p.therapies = p.therapies.map(t => therapies[t])
-    p.therapies_name = p.therapies.map(t => t.name)
-    p.name = `${p.firstname} ${p.lastname}`
-    return p
-  })
+  const providers = await Provider.getAll()
   res.render('providers', { providers })
 })
 
 app.get('/:slug0/:slug1/:id', async (req, res) => {
-  const response = await Provider.find(req.params.id)
-  const provider = Object.assign({}, response.fields, {
-    id: response.id,
-    url: `/${req.params.slug0}/${req.params.slug1}/${req.params.id}`
-  })
+  const provider = await Provider.find(req.params.id)
   res.render('provider', { provider })
 })
 
@@ -78,10 +56,4 @@ app.get('/:slug0/:slug1/:id/vcf', async (req, res) => {
   res.send(vcard.getFormattedString())
 })
 
-;(async () => {
-  const therapyData = await Therapy.select().firstPage()
-  therapyData.forEach(t => therapies[t.id] = t.fields)
-  const symptomData = await Symptom.select().firstPage()
-  symptomData.forEach(s => symptoms[s.id] = s.fields)
-  app.listen(config.PORT, () => console.log(`App running on port ${config.PORT}!`))
-})()
+app.listen(config.PORT, () => console.log(`App running on port ${config.PORT}!`))
