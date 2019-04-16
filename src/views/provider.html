@@ -8,9 +8,12 @@
       {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
       <h1>{{ provider.therapies_name[0] }} à {{ provider.city }}</h1>
       <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
-      {% for agreement in provider.agreements %}
-      <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
-      {% endfor %}
+      <p>
+        {% for therapy_name in provider.therapies_name %}
+          <span class=tag title="{{ therapy_name }} à {{ provider.city }}">{{ therapy_name }}</span>
+        {% endfor %}
+      </p>
+      <p id=agreements title="{{ provider.therapies_name[0] }} agréé {{ provider.agreements | join(', ') }}">Thérapeute professionnel agréé {{ provider.agreements | join(', ') | upper }}</p>
     </section>
 
     <section>
@@ -46,8 +49,8 @@
 
   <aside>
     <ul>
-      <li><i class="fa fa-desktop"></i> <a href=http://mesurebienetre.com target=_blank>Son site web</a></li>
-      <li><i class="fab fa-facebook-square"></i> <a href=https://www.facebook.com/maxantoine.breda target=_blank>Sa page Facebook</a></li>
+      <li><i class="fa fa-desktop"></i> <a href=http://mesurebienetre.com target=_blank>Site web</a></li>
+      <li><i class="fab fa-facebook-square"></i> <a href=https://www.facebook.com/maxantoine.breda target=_blank>Page Facebook</a></li>
     </ul>
 
     <ul id=contactInfos class=hidden>
@@ -55,7 +58,7 @@
       <li><i class="fa fa-envelope"></i> <a href="mailto:mesurebienetre@gmail.com">Envoyer un email</a></li>
     </ul>
     <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
-    <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger sa vCard</a>
+    <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger la vCard</a>
   </aside>
 </article>
 
@@ -67,6 +70,10 @@
     background-color: #fff;
     padding: 2rem;
     box-shadow: 1px 1px 3px rgba(188, 188, 188, .3)
+  }
+
+  #agreements {
+    font-size: .8rem;
   }
 
   section:not(:last-of-type) {

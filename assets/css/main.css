@@ -117,10 +117,11 @@ footer .copyright {
 
 .tag {
   display: inline-block;
-  font-size: .5rem;
+  font-size: .7rem;
   background-color: #69a2b0;
   color: #fff;
   padding: .2rem 1rem;
   margin: .1rem .2rem;
   border-radius: 2rem;
+  cursor: default;
 }
