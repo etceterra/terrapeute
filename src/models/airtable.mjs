@@ -77,23 +77,24 @@ const fakeProvider = { id: 'rec0vdz3rqJOwKPTJ',
 
 const Provider = {
   toInstance(p) {
+    if(!p.id) return {}
     const provider = Object.assign({ id: p.id }, p.fields)
     provider.therapies = provider.therapies ? provider.therapies.map(t => therapies[t]) : []
     provider.therapies_name = provider.therapies.map(t => t.name)
     provider.name = `${provider.firstname} ${provider.lastname}`
-    provider.url = `/${provider.slug}/${req.params.id}`
+    provider.url = `/${provider.slug}/${provider.id}`
     provider.socials = JSON.parse(provider.socials || {})
     return provider
   },
   async getAll() {
     const data = await ProviderTable.select().firstPage()
-    return data.map(p => p && p.filter(p => p.fields.slug).map(p => this.toInstance(p)))
+    return data.filter(p => p.fields.slug).map(p => this.toInstance(p))
   },
 
   async find(id) {
-    // const result = await ProviderTable.find(id)
-    // return this.toInstance(result)
-    return fakeProvider
+    const result = await ProviderTable.find(id)
+    return this.toInstance(result)
+    // return fakeProvider
   },
 }
 

@@ -5,7 +5,7 @@
   <div>
     <section id=identity>
       {% import 'partials/avatar.html' as macro %}
-      {{ macro.avatar(provider.photo[0].url, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
+      {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
       <h1>{{ provider.therapy }} à {{ provider.city }}</h1>
       <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
       {% for agreement in provider.agreements %}
@@ -37,8 +37,8 @@
     {% if provider.pictures %}
     <section>
       <h3>Le cabinet</h3>
-      {% for src in provider.pictures %}
-      <img src={{ src.url }}>
+      {% for picture in provider.pictures %}
+      <img src={{ picture.thumbnails.large.url }} height=200>
       {% endfor %}
     </section>
     {% endif %}
@@ -87,7 +87,12 @@
   #identity .avatar {
     float: right;
     margin: 0 1rem 1rem;
+    height: 300px;
   }
+  .avatar img {
+    max-height: 100%;
+  }
+
   h1, h2, h3 {
     margin: 0;
     padding: 0;

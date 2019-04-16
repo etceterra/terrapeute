@@ -6,7 +6,7 @@
   <article id="{{ provider.id }}">
     <h1>{{ provider.therapy }}</h1>
     {% import 'partials/avatar.html' as macro %}
-    {{ macro.avatar(provider.photo[0].url, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
+    {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
     <div>
       <h2>{{ provider.name }}</h2>
       <p>{{ provider.city }}</p>

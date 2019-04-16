@@ -1,5 +1,5 @@
-{% macro avatar(src, alt) %}
+{% macro avatar(provider, alt) %}
   <picture class=avatar>
-    <img src="{{ src }}" alt="{{ alt }}">
+    <img src="{{ provider.photo[0].thumbnails.large.url }}" alt="{{ alt }}">
   </picture>
 {% endmacro %}
