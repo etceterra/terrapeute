@@ -3,9 +3,9 @@ Description=Terrapeutes web server
 After=network.target
 
 [Service]
-ExecStart=nodemon -e mjs,html --experimental-modules /home/ubuntu/terrapeutes/src/index.mjs
+ExecStart=node --experimental-modules /home/ubuntu/terrapeutes/src/index.mjs
 # Required on some systems
-#WorkingDirectory=/opt/nodeserver
+WorkingDirectory=/home/ubuntu/terrapeutes
 Restart=always
 RestartSec=3
 # Output to syslog
