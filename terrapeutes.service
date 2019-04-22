@@ -1,0 +1,20 @@
+[Unit]
+Description=Terrapeutes web server
+After=network.target
+
+[Service]
+ExecStart=nodemon -e mjs,html --experimental-modules /home/ubuntu/terrapeutes/src/index.mjs
+# Required on some systems
+#WorkingDirectory=/opt/nodeserver
+Restart=always
+RestartSec=3
+# Output to syslog
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=terrapeutes
+#User=<alternate user>
+#Group=<alternate group>
+Environment=NODE_ENV=production PORT=8080
+
+[Install]
+WantedBy=multi-user.target
