@@ -37,7 +37,8 @@
     <section>
       <h3>Adresse</h3>
       <address>
-        Avenue Soret 39, 1003 Genève
+        {{ provider.street }}<br>
+        {{ provider.zipcode }} {{ provider.city }}
       </address>
       <div id="map"></div>
     </section>
@@ -54,13 +55,17 @@
 
   <aside>
     <ul>
-      <li><i class="fa fa-desktop"></i> <a href=http://mesurebienetre.com target=_blank>Site web</a></li>
-      <li><i class="fab fa-facebook-square"></i> <a href=https://www.facebook.com/maxantoine.breda target=_blank>Page Facebook</a></li>
+      {% if provider.socials.website %}
+      <li><i class="fa fa-desktop"></i> <a href={{ provider.socials.website }} target=_blank>Site web</a></li>
+      {% endif %}
+      {% if provider.socials.facebook %}
+      <li><i class="fab fa-facebook-square"></i> <a href={{ provider.socials.facebook }} target=_blank>Page Facebook</a></li>
+      {% endif %}
     </ul>
 
     <ul id=contactInfos class=hidden>
-      <li><i class="fa fa-phone fa-flip-horizontal"></i> Tel: +41762916951</li>
-      <li><i class="fa fa-envelope"></i> <a href="mailto:mesurebienetre@gmail.com">Envoyer un email</a></li>
+      <li><i class="fa fa-phone fa-flip-horizontal"></i> Tel: {{ provider.phone }}</li>
+      <li><i class="fa fa-envelope"></i> <a href="mailto:{{ provider.email }}">Envoyer un email</a></li>
     </ul>
     <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
     <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger la vCard</a>
