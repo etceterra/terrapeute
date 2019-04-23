@@ -41,16 +41,22 @@
 
   #content {
     width: calc(100% - 20rem);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: row;
   }
 
   #map {
     min-height: 300px;
-    height: calc(100vh - 12rem);
+    height: 100vh;
+    position: sticky !important;
+    top: 0;
   }
 
   article {
     position: relative;
-    width: 24rem;
+    min-width: 22rem;
     display: inline-grid;
     grid-template:
       'avatar title'
@@ -62,7 +68,8 @@
     padding: 1rem;
     border: 1px solid #eee;
     border-radius: 3px;
-    margin: 1rem;
+    flex: 1 200px;
+    margin: .5rem;
   }
   article p {
     margin: .3rem 0;
