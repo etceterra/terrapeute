@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import 'partials/avatar.html' as macro %}
 
 {% block meta_title %}Thérapeutes agréés ASCA autour de Genève{% endblock %}
 
@@ -9,7 +10,6 @@
   {% for provider in providers %}
   <article id="{{ provider.id }}">
     <h1>{{ provider.therapy }}</h1>
-    {% import 'partials/avatar.html' as macro %}
     {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
     <div>
       <h2>{{ provider.name }}</h2>
@@ -127,18 +127,57 @@
   article a:hover {
     box-shadow: 1px 1px 5px rgba(176, 176, 176, .3)
   }
+
+  .leaflet-popup-content h4,
+  .leaflet-popup-content h5,
+  .leaflet-popup-content p {
+    margin: .1rem !important;
+  }
+  .leaflet-popup-content {
+    display: flex;
+  }
+  .leaflet-popup-content img {
+    width: 100%;
+  }
+  .leaflet-popup-content aside {
+    width: 100px;
+    padding: .3rem;
+  }
+  .leaflet-popup-content h5,
+  .leaflet-popup-content .button {
+    font-size: .7rem;
+    padding: .3rem 1rem;
+    text-decoration: none;
+  }
 </style>
 {% import "partials/map.html" as macro %}
 {{ macro.map(latlng='46.5, 6.5', zoom=9) }}
 <script>
   const providers = [
     {% for provider in providers %}
-      { id: "{{provider.id}}", label: "{{provider.firstname}} {{provider.lastname}} — {{ provider.therapies[0].name }}", latlng: [{{ provider.latlng }}] },
+      {
+        id: "{{provider.id}}",
+        name: "{{provider.name}}",
+        therapy: "{{provider.therapies[0].name}}",
+        label: "{{provider.name}} — {{ provider.therapies[0].name }}",
+        latlng: [{{ provider.latlng }}],
+        url: "{{provider.slug}}/{{provider.id}}",
+        photo: `{{ provider.photo[0].thumbnails.large.url }}`,
+      },
     {% endfor %}
   ]
   const markers = providers.map(provider => {
     const marker = L.marker(provider.latlng)
-    marker.bindPopup(`<p>${ provider.label }</p>`)
+    marker.bindPopup(`
+      <aside>
+        <img src="${ provider.photo }">
+      </aside>
+      <section>
+        <h4>${ provider.name }</h4>
+        <h5>${ provider.therapy }</h5>
+        <a class="button primary" href="${ provider.url }"><i class="far fa-id-card"></i> Consulter</a>
+      </section>
+    `)
     marker._provider = provider
     return marker
   })
