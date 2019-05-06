@@ -75,11 +75,15 @@
 <style>
   article {
     display: flex;
+    justify-content: space-between;
     max-width: 60rem;
     margin: 2rem auto;
     background-color: #fff;
     padding: 2rem;
-    box-shadow: 1px 1px 3px rgba(188, 188, 188, .3)
+    box-shadow: 1px 1px 3px rgba(188, 188, 188, .3);
+  }
+  article > div {
+    flex-grow: 1;
   }
 
   #agreements {
