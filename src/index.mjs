@@ -15,8 +15,10 @@ app.use(express.static('assets'))
 
 app.get('/', (req, res) => res.render('index', { title: 'Hey', message: 'Hello there!' }))
 app.get('/therapeutes', async (req, res) => {
-  const providers = await Provider.getAll()
-  res.render('providers', { providers })
+  let q = req.query.q && req.query.q.trim()
+  const filter = q && `SEARCH("${q}", LOWER(Symptomes))`
+  const providers = await Provider.getAll(filter, [{ field: 'symptoms_count' }])
+  res.render('providers', { providers, q })
 })
 
 app.get('/:slug0/:slug1/:id', async (req, res) => {

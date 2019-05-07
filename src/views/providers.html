@@ -6,33 +6,54 @@
 {% block meta_description %}Prendre rendez-vous avec un thérapeute à Genève : accupressing, nutritionistes, massothérapeutes à Genève{% endblock %}
 
 {% block content %}
-<section id=content>
-  {% for provider in providers %}
-  <article id="{{ provider.id }}">
-    <h1>{{ provider.therapy }}</h1>
-    {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
-    <div>
-      <h2>{{ provider.name }}</h2>
-      <p>{{ provider.city }}</p>
-      <p class=description>{{ provider.description | truncate(120) }}</p>
-    </div>
-    <footer>
-      {% for agreement in provider.agreements %}
-      <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
+{% if providers | length %}
+<div class=wrapper>
+  <section id=content>
+    <h1>
+      {% if q %}Thérapeutes pour "{{ q }}"
+      {% else %}Les thérapeutes du réseau{% endif %}
+    </h1>
+    <div class=wrapper>
+      {% for provider in providers %}
+      <article id="{{ provider.id }}">
+        <h1>{{ provider.therapy }}</h1>
+        {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
+        <div>
+          <h2>{{ provider.name }}</h2>
+          <p>{{ provider.city }}</p>
+          <p class=description>{{ provider.description | truncate(120) }}</p>
+        </div>
+        <footer>
+          {% for agreement in provider.agreements %}
+          <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
+          {% endfor %}
+        </footer>
+        <a href=/{{ provider.slug }}/{{ provider.id }} title="{{ provider.name }} est {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">Voir ce {{ provider.therapies[0].name }} à {{ provider.city }}</a>
+      </article>
       {% endfor %}
-    </footer>
-    <a href=/{{ provider.slug }}/{{ provider.id }} title="{{ provider.name }} est {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">Voir ce {{ provider.therapies[0].name }} à {{ provider.city }}</a>
-  </article>
-  {% endfor %}
-</section>
+    </div>
+  </section>
+  <aside>
+    <div id="map"></div>
+  </aside>
+</div>
 
-<aside>
-  <div id="map"></div>
-</aside>
+{% else %}
+  <section class=no-result>
+    <p>Le système n'a pas pu trouver un thérapeute automatiquement expert dans les "{{ q }}".
+      <a href="mailto:contact@terrapeutes.com?subject=Recherche un thérapeute en {{ q }}">Partagez-nous votre besoin</a>
+      et nous vous indiquerons des thérapeutes adéquats.
+    </p>
+  </section>
+{% endif %}
 
 <style>
-  main {
+  .wrapper {
     display: flex;
+  }
+
+  .no-result {
+    padding: 10rem;
   }
 
   aside {
@@ -41,6 +62,8 @@
 
   #content {
     width: calc(100% - 20rem);
+  }
+  #content >.wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -150,8 +173,9 @@
     text-decoration: none;
   }
 </style>
-{% import "partials/map.html" as macro %}
-{{ macro.map(latlng='46.5, 6.5', zoom=9) }}
+{% if providers | length %}
+  {% import "partials/map.html" as macro %}
+  {{ macro.map(latlng='46.5, 6.5', zoom=9) }}
 <script>
   const providers = [
     {% for provider in providers %}
@@ -185,5 +209,6 @@
   map.fitBounds(markersGroup.getBounds())
   markersGroup.addTo(map)
 </script>
+{% endif %}
 
 {% endblock %}

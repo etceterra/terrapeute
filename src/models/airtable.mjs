@@ -28,15 +28,18 @@ const Provider = {
     provider.socials = provider.socials ? JSON.parse(provider.socials) : {}
     return provider
   },
-  async getAll() {
-    const data = await ProviderTable.select().firstPage()
+
+  async getAll(params, sort) {
+    const filters = {}
+    if (params) filters.filterByFormula = params
+    if (sort) filters.sort = sort
+    const data = await ProviderTable.select(filters).firstPage()
     return data.filter(p => p.fields.slug).map(p => this.toInstance(p))
   },
 
   async find(id) {
     const result = await ProviderTable.find(id)
     return this.toInstance(result)
-    // return fakeProvider
   },
 }
 
