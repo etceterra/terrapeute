@@ -4,7 +4,10 @@
 <section id=search>
   <div>
     <h1>Trouvez un thérapeute</h1>
-    <a href=/therapeutes class="button primary">Consulter les thérapeutes du réseau </a>
+    <form action="/therapeutes" class=row>
+      <input type=search name=q placeholder="Quel est votre symptôme principal ?">
+      <button class=primary>Rechercher les thérapeutes</button>
+    </form>
     <p>Terrapeute est le réseau des <strong>thérapeutes en Suisse</strong>. Quelques soient vos symptômes,
     il y a toujours un <strong>thérapeute professionnel</strong> à proximité.</p>
   </div>
