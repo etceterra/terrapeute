@@ -55,13 +55,8 @@ app.get('/:slug0/:slug1/:id/vcf', async (req, res) => {
   res.send(vcard.getFormattedString())
 })
 
-app.get('/privacy.html', async (req, res) => {
-  res.render('privacy')
-})
-
-app.get('/policy.html', async (req, res) => {
-  res.render('policy')
-})
-
+app.get('/privacy.html', async (req, res) => res.render('privacy'))
+app.get('/policy.html', async (req, res) => res.render('policy'))
+app.get('/evenements.html', async (req, res) => res.render('events'))
 
 app.listen(config.PORT, () => console.log(`App running on http://localhost:${config.PORT}`))
