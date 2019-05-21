@@ -26,6 +26,7 @@ const Provider = {
     provider.name = `${provider.firstname} ${provider.lastname}`
     provider.url = `/${provider.slug}/${provider.id}`
     provider.socials = provider.socials ? JSON.parse(provider.socials) : {}
+    if(!provider.agreements) provider.agreements = []
     return provider
   },
 
