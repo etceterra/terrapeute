@@ -19,7 +19,7 @@
   "scripts": {
     "start": "nodemon -e mjs,html --experimental-modules src/index.mjs",
     "debug": "DEBUG=express:* node inspect --experimental-modules src/index.mjs -- -R spec",
-    "test": "mocha src/test/utils -r esm"
+    "test": "node --experimental-modules node_modules/mocha/bin/_mocha src/test/index.mjs"
   },
   "repository": {
     "type": "git",

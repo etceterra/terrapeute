@@ -55,6 +55,7 @@ app.get('/:slug0/:slug1/:id/vcf', async (req, res) => {
   res.send(vcard.getFormattedString())
 })
 
+app.get('/therapies/:name', async (req, res) => res.render(`therapies/${req.params.name}`))
 app.get('/privacy.html', async (req, res) => res.render('privacy'))
 app.get('/policy.html', async (req, res) => res.render('policy'))
 app.get('/evenements.html', async (req, res) => res.render('events'))

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body_class %}static{% endblock %}
+
+{% block content %}
+  <article>
+  <h1>{% block title %}{% endblock %}</h1>
+  {% block main %}{% endblock %}
+  </article>
+{% endblock %}

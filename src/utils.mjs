@@ -13,4 +13,9 @@ function slugify(string) {
     .replace(/-+$/, '') // Trim - from end of text
 }
 
-export { slugify }
+function cleanForSearch(phrase) {
+  const words = slugify(phrase).split('-')
+  const cleaned = words.filter(w => w.length >= 4).join(' ')
+}
+
+export { slugify, cleanForSearch }
