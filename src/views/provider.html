@@ -18,7 +18,11 @@
           <span class=tag title="{{ therapy_name }} à {{ provider.city }}">{{ therapy_name }}</span>
         {% endfor %}
       </p>
-      <p id=agreements title="{{ provider.therapies_name[0] }} agréé {{ provider.agreements | join(', ') }}">Thérapeute professionnel agréé {{ provider.agreements | join(', ') | upper }}</p>
+      <p id=agreements title="{{ provider.therapies_name[0] }} agréé {{ provider.agreements | join(', ') }}">Thérapeute professionnel
+        {% if provider.agreements.length %}agréé {{ provider.agreements | join(', ') | upper }}
+        {% else %}diplomé
+        {% endif %}
+      </p>
     </section>
 
     <section>
