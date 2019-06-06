@@ -9,7 +9,7 @@ const app = express()
 nunjucks.configure(`src/views`, {
     express: app,
     autoescape: true
-});
+})
 app.set('view engine', 'html')
 app.use(express.static('assets'))
 
@@ -18,6 +18,12 @@ app.get('/therapeutes', async (req, res) => {
   let q = req.query.q && req.query.q.trim()
   const filter = q && `SEARCH("${q}", LOWER(Symptomes))`
   const providers = await Provider.getAll(filter, [{ field: 'symptoms_count' }])
+  res.render('providers', { providers, q })
+})
+app.get('/therapeutes/:therapy', async (req, res) => {
+  let therapy = req.params.therapy
+  const filter = q && `SEARCH("${therapy}")`
+  const providers = await Provider.getAll(filter, [{ field: 'therapies' }])
   res.render('providers', { providers, q })
 })
 
@@ -55,6 +61,7 @@ app.get('/:slug0/:slug1/:id/vcf', async (req, res) => {
   res.send(vcard.getFormattedString())
 })
 
+app.get('/therapies', async (req, res) => res.render(`therapies/index.html`))
 app.get('/therapies/:name', async (req, res) => res.render(`therapies/${req.params.name}`))
 app.get('/privacy.html', async (req, res) => res.render('privacy'))
 app.get('/policy.html', async (req, res) => res.render('policy'))
