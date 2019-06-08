@@ -22,7 +22,8 @@ app.get('/therapeutes', async (req, res) => {
 })
 app.get('/therapeutes/:therapy', async (req, res) => {
   let therapy = req.params.therapy
-  const filter = therapy && `SEARCH("${therapy}")`
+  const filter = `SEARCH("${therapy}", LOWER(Therapies))`
+  console.debug(Provider.getAll(filter, [{ field: 'therapies' }]))
   const providers = await Provider.getAll(filter, [{ field: 'therapies' }])
   res.render('providers', { providers, q: therapy })
 })
