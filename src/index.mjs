@@ -22,9 +22,9 @@ app.get('/therapeutes', async (req, res) => {
 })
 app.get('/therapeutes/:therapy', async (req, res) => {
   let therapy = req.params.therapy
-  const filter = q && `SEARCH("${therapy}")`
+  const filter = therapy && `SEARCH("${therapy}")`
   const providers = await Provider.getAll(filter, [{ field: 'therapies' }])
-  res.render('providers', { providers, q })
+  res.render('providers', { providers, q: therapy })
 })
 
 app.get('/:slug0/:slug1/:id', async (req, res) => {
