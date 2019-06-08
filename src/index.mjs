@@ -2,7 +2,7 @@ import express from 'express'
 import nunjucks from 'nunjucks'
 import Vcard from 'vcards-js'
 import config from './config'
-import { Provider } from './models/airtable'
+import { Provider, Therapy } from './models/airtable'
 
 const app = express()
 
@@ -13,7 +13,10 @@ nunjucks.configure(`src/views`, {
 app.set('view engine', 'html')
 app.use(express.static('assets'))
 
-app.get('/', (req, res) => res.render('index', { title: 'Hey', message: 'Hello there!' }))
+app.get('/', async (req, res) => {
+  const therapies = await Therapy.getAll()
+  res.render('index', { therapies })
+})
 app.get('/therapeutes', async (req, res) => {
   let q = req.query.q && req.query.q.trim()
   const filter = q && `SEARCH("${q}", LOWER(Symptomes))`

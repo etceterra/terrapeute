@@ -8,6 +8,14 @@
       <input type=search name=q placeholder="Quel est votre symptôme principal ?">
       <button class=primary>Rechercher les thérapeutes</button>
     </form>
+
+    Ou trouvez un thérapeute spécialisé dans un pratique :
+    <nav>
+      {% for therapy in therapies %}
+      <a href=/therapeutes/{{ therapy.slug }}>{{ therapy.name }}</a>
+      {% endfor %}
+    </nav>
+
     <p>Terrapeute est le réseau des <strong>thérapeutes en Suisse</strong>. Quelques soient vos symptômes,
     il y a toujours un <strong>thérapeute professionnel</strong> à proximité.</p>
   </div>
@@ -110,6 +118,13 @@
   }
   main > section:nth-of-type(4) {
     background-color: #eee;
+  }
+
+  nav a {
+    display: inline-block;
+    margin-right: 1rem;
+    color: inherit;
+    font-size: .9em;
   }
 
   #search {

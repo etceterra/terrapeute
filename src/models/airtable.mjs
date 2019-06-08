@@ -44,4 +44,20 @@ const Provider = {
   },
 }
 
-export { Provider, therapies, symptoms }
+const Therapy = {
+  async getAll(params, sort) {
+    const filters = {}
+    if (params) filters.filterByFormula = params
+    if (sort) filters.sort = sort
+    const data = await TherapyTable.select(filters).firstPage()
+    return data.filter(p => p.fields.slug).map(p => this.toInstance(p))
+  },
+
+  toInstance(t) {
+    if (!t.id) return {}
+    const therapy = Object.assign({ id: t.id }, t.fields)
+    return therapy
+  },
+}
+
+export { Provider, Therapy, therapies, symptoms }
