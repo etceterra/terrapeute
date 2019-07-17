@@ -1,5 +1,5 @@
 import Airtable from 'airtable'
-import config from '../config'
+import config from '../config.mjs'
 
 Airtable.configure({ endpointUrl: 'https://api.airtable.com', apiKey: config.AIRTABLE_API_KEY })
 const db = Airtable.base('app1Ab6PilgNTXMYp')

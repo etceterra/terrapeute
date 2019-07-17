@@ -1,8 +1,8 @@
 import express from 'express'
 import nunjucks from 'nunjucks'
 import Vcard from 'vcards-js'
-import config from './config'
-import { Provider, Therapy } from './models/airtable'
+import config from './config.mjs'
+import { Provider, Therapy } from './models/airtable.mjs'
 
 const app = express()
 
