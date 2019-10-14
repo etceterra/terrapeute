@@ -25,7 +25,7 @@ ArticleSchema.virtual('summary').get(function () {
 
 ArticleSchema.pre('save', function(next) {
   if(!this.slug) this.slug = slugify(this.title)
-  if(typeof(this.tags) === 'string') this.tags = this.tags.split(',').map(t => t.trim())
+  if(this.tags[0].includes(',')) this.tags = this.tags[0].split(',').map(t => t.trim())
   return next()
 })
 

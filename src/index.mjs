@@ -61,7 +61,10 @@ app.get('/journal/admin/:id', async (req, res) => {
 })
 
 app.post('/journal/admin/:id', async (req, res) => {
-  const article = await Article.updateOne({ _id: req.params.id }, { $set: req.body })
+  const article = await Article.findOne({ _id: req.params.id })
+  // Don't use `updateOne` so that `pre('save')` is called.
+  Object.assign(article, req.body)
+  article.save()
   res.redirect('/journal/admin')
 })
 
