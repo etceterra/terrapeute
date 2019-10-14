@@ -7,13 +7,48 @@
 l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, le shiatsu, les ventouses et la Chromotherapie.{% endblock %}
 
 {% block content %}
-<section>
+<section id=articles>
+{% for article in articles %}
   <article>
-    {% for article in articles %}
     <h1>{{ article.title }}</h1>
+    {% if article.tags[0] %}
+    <span class=tag>{{ article.tags }}</span>
+    {% endif %}
     <p>{{ article.summary|markdown|striptags }}</p>
     <a href=/journal/{{ article.slug }}>Lire cet article</a>
-    {% endfor %}
   </article>
+  {% endfor %}
 </section>
+
+<style>
+  #articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  article {
+    position: relative;
+    background-color: white;
+    padding: 2rem;
+    border: 1px solid #eee;
+    width: 20rem;
+    margin-bottom: 2rem;
+    transition: box-shadow .3s;
+  }
+  article:hover {
+    box-shadow: 0 0 3px rgba(53, 53, 53, .1);
+  }
+  article h1 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  article a {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-indent: -9999%;
+  }
+</style>
 {% endblock %}

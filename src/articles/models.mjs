@@ -20,7 +20,7 @@ ArticleSchema.virtual('label').get(function () {
 })
 ArticleSchema.virtual('summary').get(function () {
   if (!this.body) return ''
-  return filters.striptags(marked(this.body)).substr(0, 250)
+  return filters.striptags(marked(this.body)).substr(0, 100)
 })
 
 ArticleSchema.pre('save', function(next) {
