@@ -12,7 +12,7 @@ const app = express()
 
 app.set('view engine', 'html')
 const template = nunjucks.configure(`src/views`, { express: app, autoescape: true })
-template.addFilter('markdown', (str) => nunjucks.runtime.markSafe(marked(str)))
+template.addFilter('markdown', (str = '') => nunjucks.runtime.markSafe(marked(str)))
 
 app.use(express.static('assets'))
 app.use(bodyparser.urlencoded({ extended: false }))

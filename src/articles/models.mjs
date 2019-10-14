@@ -19,6 +19,7 @@ ArticleSchema.virtual('label').get(function () {
   return this.title
 })
 ArticleSchema.virtual('summary').get(function () {
+  if (!this.body) return ''
   return filters.striptags(marked(this.body)).substr(0, 250)
 })
 
