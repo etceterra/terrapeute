@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block body_class %}static{% endblock %}
+
+{% block meta_title %}Salons et rencontres des thérapies complémentaires{% endblock %}
+{% block meta_description %}Prochaines rencontres de thérapeutes professionnels en Suisse sur l'accupressing et l'accupuncture, la massothérapie, la kinésiologie, la naturopathie,
+l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, le shiatsu, les ventouses et la Chromotherapie.{% endblock %}
+
+{% block content %}
+<section>
+  <article>
+    {% for article in articles %}
+    <h1>{{ article.title }}</h1>
+    <p>{{ article.summary }}</p>
+    <a href=/journal/{{ article.slug }}>Lire cet article</a>
+    {% endfor %}
+  </article>
+</section>
+{% endblock %}

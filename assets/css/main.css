@@ -74,7 +74,21 @@ header nav a.button {
   margin-left: 3rem;
 }
 header nav a {
+  display: inline-block;
   margin-left: 1.5rem;
+  margin-right: 1rem;
+  font-size: 1.1em;
+  text-decoration: none;
+  color: inherit;
+  background-size: contain;
+  padding-left: 35px;
+}
+header nav a.journal {
+  background: url('/img/newspaper.svg') no-repeat;
+}
+header nav a.therapist {
+  background: url('/img/therapist.svg') no-repeat;
+  background-size: contain; /* not sure why it doesn't display within the block */
 }
 
 h1 a {

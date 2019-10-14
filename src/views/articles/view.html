@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block meta_title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<article>
+  <h1>{{ article.title }}</h1>
+  <p>{{ article.tags.join(', ') }}</p>
+  {{ article.body }}
+  <small><time>{{ article.creationDate.toLocaleDateString() }}</time></small>
+</article>
+
+<style>
+  article {
+    max-width: 1000px;
+    margin: 1rem auto;
+    padding: 3rem;
+  }
+</style>
+
+{% endblock %}

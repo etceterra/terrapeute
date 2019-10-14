@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body_class %}admin{% endblock %}
+
+{% block meta_title %}liste des articles{% endblock %}
+
+{% block content %}
+<ul>
+  {% for article in articles %}
+  <li><a href="/journal/admin/{{ article.id }}">{{ article.label }}</a><form method=post action=/journal/admin/{{ article.id }}/delete  onsubmit="return confirm('Supprimer définitivement cet article ?')"><input type=submit value=delete class=delete></form></li>
+  {% endfor %}
+</ul>
+<a href=/journal/admin/new>Nouvel article</a>
+{% endblock %}

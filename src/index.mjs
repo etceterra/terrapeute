@@ -3,15 +3,15 @@ import nunjucks from 'nunjucks'
 import Vcard from 'vcards-js'
 import config from './config.mjs'
 import { Provider, Therapy } from './models/airtable.mjs'
+import { Article } from './articles/models.mjs'
+import bodyparser from 'body-parser'
 
 const app = express()
 
-nunjucks.configure(`src/views`, {
-    express: app,
-    autoescape: true
-})
+nunjucks.configure(`src/views`, { express: app, autoescape: true })
 app.set('view engine', 'html')
 app.use(express.static('assets'))
+app.use(bodyparser.urlencoded({ extended: false }))
 
 app.get('/', async (req, res) => {
   const therapies = await Therapy.getAll()
@@ -30,6 +30,52 @@ app.get('/therapeutes/:therapy', async (req, res) => {
   const providers = await Provider.getAll(filter, [{ field: 'therapies' }])
   res.render('providers', { providers, q: therapy })
 })
+
+app.get('/journal', async (req, res) => {
+  const articles = await Article.find({})
+  res.render('articles/index', { articles })
+})
+
+app.get('/journal/admin', async (req, res) => {
+  const articles = await Article.find({})
+  res.render('articles/admin/list', { articles, therapists: [] })
+})
+
+app.get('/journal/admin/new', async (req, res) => {
+  const articles = await Article.find({})
+  res.render('articles/admin/edit', { article: new Article() })
+})
+
+app.post('/journal/admin/new', async (req, res) => {
+  const article = await Article.create(req.body)
+  res.redirect('/journal/admin')
+})
+
+app.get('/journal/admin/:id', async (req, res) => {
+  const article = await Article.findOne({ _id: req.params.id })
+  res.render('articles/admin/edit', { article })
+})
+
+app.post('/journal/admin/:id', async (req, res) => {
+  const article = await Article.updateOne({ _id: req.params.id }, { $set: req.body })
+  res.redirect('/journal/admin')
+})
+
+app.post('/journal/admin/:id/delete', async (req, res) => {
+  const article = await Article.deleteOne({ _id: req.params.id })
+  res.redirect('/journal/admin')
+})
+
+app.get('/journal/:slug', async (req, res) => {
+  const article = await Article.findOne({ slug: req.params.slug })
+  res.render('articles/view', { article })
+})
+
+app.get('/therapies', async (req, res) => res.render(`therapies/index.html`))
+app.get('/therapies/:name', async (req, res) => res.render(`therapies/${req.params.name}`))
+app.get('/privacy.html', async (req, res) => res.render('privacy'))
+app.get('/policy.html', async (req, res) => res.render('policy'))
+app.get('/evenements.html', async (req, res) => res.render('events'))
 
 app.get('/:slug0/:slug1/:id', async (req, res) => {
   const provider = await Provider.find(req.params.id)
@@ -64,11 +110,5 @@ app.get('/:slug0/:slug1/:id/vcf', async (req, res) => {
   res.set('Content-Disposition', `inline; filename="${provider.firstname}-${provider.lastname}.vcf"`)
   res.send(vcard.getFormattedString())
 })
-
-app.get('/therapies', async (req, res) => res.render(`therapies/index.html`))
-app.get('/therapies/:name', async (req, res) => res.render(`therapies/${req.params.name}`))
-app.get('/privacy.html', async (req, res) => res.render('privacy'))
-app.get('/policy.html', async (req, res) => res.render('policy'))
-app.get('/evenements.html', async (req, res) => res.render('events'))
 
 app.listen(config.PORT, () => console.log(`App running on http://localhost:${config.PORT}`))
