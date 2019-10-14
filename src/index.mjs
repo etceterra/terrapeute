@@ -12,7 +12,7 @@ const app = express()
 
 app.set('view engine', 'html')
 const template = nunjucks.configure(`src/views`, { express: app, autoescape: true })
-template.addFilter('markdown', (str) => nunjucks.runtime.markSafe(marked(str))
+template.addFilter('markdown', (str) => nunjucks.runtime.markSafe(marked(str)))
 
 app.use(express.static('assets'))
 app.use(bodyparser.urlencoded({ extended: false }))
@@ -36,7 +36,7 @@ app.get('/therapeutes/:therapy', async (req, res) => {
 })
 
 app.get('/journal', async (req, res) => {
-  const articles = await Article.find({})
+  const articles = await Article.find({}).sort('-creationDate')
   res.render('articles/index', { articles })
 })
 

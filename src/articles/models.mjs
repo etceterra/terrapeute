@@ -1,4 +1,6 @@
 import mongoose from 'mongoose'
+import filters from 'nunjucks/src/filters.js'
+import marked from 'marked'
 
 import { slugify } from '../utils.mjs'
 
@@ -17,7 +19,7 @@ ArticleSchema.virtual('label').get(function () {
   return this.title
 })
 ArticleSchema.virtual('summary').get(function () {
-  return this.body.replace(/\/s*/g, ' ')
+  return filters.striptags(marked(this.body)).substr(0, 250)
 })
 
 ArticleSchema.pre('save', function(next) {
