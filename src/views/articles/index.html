@@ -11,7 +11,7 @@ l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, l
   <article>
     {% for article in articles %}
     <h1>{{ article.title }}</h1>
-    <p>{{ article.summary }}</p>
+    <p>{{ article.summary|markdown|striptags }}</p>
     <a href=/journal/{{ article.slug }}>Lire cet article</a>
     {% endfor %}
   </article>

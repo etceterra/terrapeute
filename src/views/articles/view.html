@@ -6,7 +6,7 @@
 <article>
   <h1>{{ article.title }}</h1>
   <p>{{ article.tags.join(', ') }}</p>
-  {{ article.body }}
+  {{ article.body|markdown }}
   <small><time>{{ article.creationDate.toLocaleDateString() }}</time></small>
 </article>
 

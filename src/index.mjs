@@ -5,11 +5,15 @@ import config from './config.mjs'
 import { Provider, Therapy } from './models/airtable.mjs'
 import { Article } from './articles/models.mjs'
 import bodyparser from 'body-parser'
+import marked from 'marked'
+
 
 const app = express()
 
-nunjucks.configure(`src/views`, { express: app, autoescape: true })
 app.set('view engine', 'html')
+const template = nunjucks.configure(`src/views`, { express: app, autoescape: true })
+template.addFilter('markdown', (str) => nunjucks.runtime.markSafe(marked(str))
+
 app.use(express.static('assets'))
 app.use(bodyparser.urlencoded({ extended: false }))
 
