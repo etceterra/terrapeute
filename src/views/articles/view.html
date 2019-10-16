@@ -4,10 +4,21 @@
 
 {% block content %}
 <article>
-  <h1>{{ article.title }}</h1>
-  <p>{{ article.tags.join(', ') }}</p>
+  <header>
+    <h1>{{ article.title }}</h1>
+
+    {% for tag in article.tags %}
+    {% if tag %}
+    <span class=tag>{{ tag }}</span>
+    {% endif %}
+    {% endfor %}
+  </header>
+
   {{ article.body|markdown }}
-  <small><time>{{ article.creationDate.toLocaleDateString() }}</time></small>
+
+  <footer>
+    <p>Article rédigé le <time>{{ article.creationDate.toLocaleDateString() }}</time></p>
+  </footer>
 </article>
 
 <style>
@@ -15,6 +26,19 @@
     max-width: 1000px;
     margin: 1rem auto;
     padding: 3rem;
+  }
+  article > header {
+    margin-bottom: 2rem;
+  }
+  h1 {
+    margin-bottom: .3rem;
+  }
+  article > footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #ccc;
+    font-style: italic;
+    font-size: .8rem;
   }
 </style>
 

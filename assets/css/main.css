@@ -53,27 +53,27 @@ section.highlight .button.primary {
   font-weight: bold;
 }
 
-header {
+body > header {
   padding: 1rem 5rem;
   background-color: #fff;
   margin: 0 !important;
   box-shadow: 0 2px 10px #eee;
 }
-header h1,
-header h1 img {
+body > header h1,
+body > header h1 img {
   height: 60px; /* force height to match image */
   font-size: .8rem;
 }
 /* Align image with "pro" text and nav */
-header h1 img {
+body > header h1 img {
   margin-bottom: -23px;
   margin-right: -9px;
   margin-top: 4px;
 }
-header nav a.button {
+body > header nav a.button {
   margin-left: 3rem;
 }
-header nav a {
+body > header nav a {
   display: inline-block;
   margin-left: 1.5rem;
   margin-right: 1rem;
@@ -83,10 +83,10 @@ header nav a {
   background-size: contain;
   padding-left: 35px;
 }
-header nav a.journal {
+body > header nav a.journal {
   background: url('/img/newspaper.svg') no-repeat;
 }
-header nav a.therapist {
+body > header nav a.therapist {
   background: url('/img/therapist.svg') no-repeat;
   background-size: contain; /* not sure why it doesn't display within the block */
 }
@@ -124,7 +124,7 @@ body > footer .secondary a:not(:last-of-type) {
   margin-right: .88rem;
 }
 
-footer .copyright {
+body > footer .copyright {
   font-size: .7em;
 }
 
