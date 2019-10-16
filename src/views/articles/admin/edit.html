@@ -6,38 +6,47 @@
 
 {% block content %}
 <form method=post id="edit-form">
-  <input name="title" value="{{ article.title }}" required placeholder="Titre de l'article">
-  <div id=editor placeholder="Texte de l'article">{{ article.body|markdown }}</div>
-  <input type=hidden name=body value="">
-  <input name="tags" placeholder="Tags" value="{{ article.tags.join(', ') }}">
-  <select name=therapist>
-    {% for therapist in therapists %}
-    <option value="{{ therapist.id }}" {% if therapist == article.therapist %}selected{% endif %}>{{ therapist.label }}</option>
-    {% endfor %}
-  </select>
+  <div>
+    <label>Titre</label>
+    <input name="title" value="{{ article.title }}" required placeholder="Titre de l'article">
+  </div>
+  <div>
+    <label>Contenu</label>
+    <textarea name=body placeholder="Texte de l'article">{{ article.body|markdown }}</textarea>
+  </div>
+  <div>
+    <label>Tags</label>
+    <input name="tags" placeholder="Tags" value="{{ article.tags.join(', ') }}">
+  </div>
+  <div>
+    <label>Auteur</label>
+    <select name=therapist>
+      {% for therapist in therapists %}
+      <option value="{{ therapist.id }}" {% if therapist == article.therapist %}selected{% endif %}>{{ therapist.label }}</option>
+      {% endfor %}
+    </select>
+  </div>
   <input type=submit value=Enregistrer>
 </form>
 
 <style>
+  form > * {
+    margin-bottom: 1rem;
+  }
   #editor {
     min-height: 300px;
     width: 100%;
   }
+  .medium-editor-element {
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid #ccc;
+  }
 </style>
 
-<link rel=stylesheet href=https://cdn.jsdelivr.net/gh/sofish/pen/src/pen.css>
-<script src=https://cdn.jsdelivr.net/gh/sofish/pen/src/pen.js></script>
-<script>
-  const editor = new Pen({
-    editor: document.querySelector('#editor'),
-    textarea: '<textarea name="body"></textarea>',
-    // list: ['bold', 'italic', 'underline'],
-    linksInNewWindow: true
-  })
+<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
 
-  document.querySelector('#edit-form').addEventListener('submit', (event) => {
-    const form = event.target
-    form.body.value = editor.toMd()
-  })
-</script>
+<script>var editor = new MediumEditor('textarea')</script>
+
 {% endblock %}
