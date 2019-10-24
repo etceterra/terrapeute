@@ -6,15 +6,16 @@ export default function (app, prefix = '') {
   app.get('/therapeutes', async (req, res) => {
     let q = req.query.q && req.query.q.trim()
     const filter = q && `SEARCH("${q}", LOWER(Symptomes))`
-    const providers = await Provider.getAll(filter, [{ field: 'symptoms_count' }])
+    let providers = await Provider.getAll(filter, [{ field: 'symptoms_count' }])
+    providers = providers.filter(p => !p.disabled)
     res.render('providers', { providers, q })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
     let therapy = req.params.therapy
     const filter = `SEARCH("${therapy}", LOWER(Therapies))`
-    console.debug(Provider.getAll(filter, [{ field: 'therapies' }]))
     const providers = await Provider.getAll(filter, [{ field: 'therapies' }])
+    providers = providers.filter(p => !p.disabled)
     res.render('providers', { providers, q: therapy })
   })
 
