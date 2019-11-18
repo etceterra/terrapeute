@@ -16,7 +16,7 @@
   "devDependencies": {
     "mocha": "^6.2.1",
     "mocha-esm": "^1.1.1",
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.4"
   },
   "scripts": {
     "start": "nodemon -e mjs,html --experimental-modules src/index.mjs",

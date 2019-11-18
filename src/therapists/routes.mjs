@@ -14,7 +14,7 @@ export default function (app, prefix = '') {
   app.get('/therapeutes/:therapy', async (req, res) => {
     let therapy = req.params.therapy
     const filter = `SEARCH("${therapy}", LOWER(Therapies))`
-    const providers = await Provider.getAll(filter, [{ field: 'therapies' }])
+    let providers = await Provider.getAll(filter, [{ field: 'therapies' }])
     providers = providers.filter(p => !p.disabled)
     res.render('providers', { providers, q: therapy })
   })
