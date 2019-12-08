@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 
-{% block meta_title %}{{ provider.name }}, {{ provider.therapies_name[0] }} à {{ provider.city }}{% endblock %}
+{% block meta_title %}{{ therapist.name }}, {{ therapist.therapies[0] }} à {{ therapist.city }}{% endblock %}
 
-{% block meta_description %}{{ provider.name }} est thérapeute agréé {{ provider.agreements | join(', ') }} en {{ provider.therapies_name | join(', ') }} à {{ provider.city }}.
-{{ provider.description | truncate(150) }}{% endblock %}
+{% block meta_description %}{{ therapist.name }} est thérapeute agréé {{ therapist.agreements | join(', ') }} en {{ therapist.therapies | join(', ') }} à {{ therapist.city }}.
+{{ therapist.description | truncate(150) }}{% endblock %}
 
 {% block content %}
 <article>
   <div>
     <section id=identity>
       {% import 'partials/avatar.html' as macro %}
-      {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
-      <h1>{{ provider.therapies_name[0] }} à {{ provider.city }}</h1>
-      <h2>{{ provider.firstname }} {{ provider.lastname }}</h2>
+      {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies | join(', ') + ' à ' + therapist.city) }}
+      <h1>{{ therapist.therapies[0] }} à {{ therapist.city }}</h1>
+      <h2>{{ therapist.firstname }} {{ therapist.lastname }}</h2>
       <p>
-        {% for therapy_name in provider.therapies_name %}
-          <span class=tag title="{{ therapy_name }} à {{ provider.city }}">{{ therapy_name }}</span>
+        {% for therapy_name in therapist.therapies %}
+          <span class=tag title="{{ therapy_name }} à {{ therapist.city }}">{{ therapy_name }}</span>
         {% endfor %}
       </p>
-      <p id=agreements title="{{ provider.therapies_name[0] }} agréé {{ provider.agreements | join(', ') }}">Thérapeute professionnel
-        {% if provider.agreements.length %}agréé {{ provider.agreements | join(', ') | upper }}
+      <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements | join(', ') }}">Thérapeute professionnel
+        {% if therapist.agreements.length %}agréé {{ therapist.agreements | join(', ') | upper }}
         {% else %}diplomé
         {% endif %}
       </p>
@@ -28,29 +28,29 @@
     <section>
       <h3>À propos</h3>
       <p>
-        {{ provider.description }}
+        {{ therapist.description }}
       </p>
     </section>
 
     <section>
       <h3>Paiement</h3>
-      {{ provider.price }}
-      <p>Moyens de paiement : {{ provider.payment_means }}</p>
+      {{ therapist.price }}
+      <p>Moyens de paiement : {{ therapist.payment_means }}</p>
     </section>
 
     <section>
       <h3>Adresse</h3>
       <address>
-        {{ provider.street }}<br>
-        {{ provider.zipcode }} {{ provider.city }}
+        {{ therapist.street }}<br>
+        {{ therapist.zipcode }} {{ therapist.city }}
       </address>
       <div id="map"></div>
     </section>
 
-    {% if provider.pictures %}
+    {% if therapist.pictures %}
     <section>
       <h3>Le cabinet</h3>
-      {% for picture in provider.pictures %}
+      {% for picture in therapist.pictures %}
       <img src={{ picture.thumbnails.large.url }} height=200>
       {% endfor %}
     </section>
@@ -59,20 +59,20 @@
 
   <aside>
     <ul>
-      {% if provider.socials.website %}
-      <li><i class="fa fa-desktop"></i> <a href={{ provider.socials.website }} target=_blank>Site web</a></li>
+      {% if therapist.socials.website %}
+      <li><i class="fa fa-desktop"></i> <a href={{ therapist.socials.website }} target=_blank>Site web</a></li>
       {% endif %}
-      {% if provider.socials.facebook %}
-      <li><i class="fab fa-facebook-square"></i> <a href={{ provider.socials.facebook }} target=_blank>Page Facebook</a></li>
+      {% if therapist.socials.facebook %}
+      <li><i class="fab fa-facebook-square"></i> <a href={{ therapist.socials.facebook }} target=_blank>Page Facebook</a></li>
       {% endif %}
     </ul>
 
     <ul id=contactInfos class=hidden>
-      <li><i class="fa fa-phone fa-flip-horizontal"></i> Tel: {{ provider.phone }}</li>
-      <li><i class="fa fa-envelope"></i> <a href="mailto:{{ provider.email }}">Envoyer un email</a></li>
+      <li><i class="fa fa-phone fa-flip-horizontal"></i> Tel: {{ therapist.phone }}</li>
+      <li><i class="fa fa-envelope"></i> <a href="mailto:{{ therapist.email }}">Envoyer un email</a></li>
     </ul>
     <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
-    <a class=button href={{ provider.url }}/vcf><i class="far fa-address-card"></i> Télécharger la vCard</a>
+    <a class=button href={{ therapist.url }}/vcf><i class="far fa-address-card"></i> Télécharger la vCard</a>
   </aside>
 </article>
 
@@ -159,13 +159,13 @@
 
 {# After CSS for map sizing reasons #}
 {% import 'partials/map.html' as macro %}
-{{ macro.map(latlng=provider.latlng, zoom=12) }}
+{{ macro.map(latlng=therapist.offices[0].location.coordinates.reverse(), zoom=12) }}
 
 <script>
   document.querySelector('#contactButton').addEventListener('click', () => {
     document.querySelector('#contactInfos').classList.remove('hidden')
   })
-  const latlng = [{{ provider.latlng }}]
+  const latlng = [{{ therapist.offices[0].location.coordinates }}]
   const marker = L.marker(latlng).addTo(map)
 </script>
 

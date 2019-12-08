@@ -12,6 +12,7 @@
     "mongoose": "^5.7.4",
     "multer": "^1.4.2",
     "nunjucks": "^3.2.0",
+    "request-promise-native": "^1.0.8",
     "vcards-js": "^2.10.0"
   },
   "devDependencies": {

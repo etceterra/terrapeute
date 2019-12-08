@@ -1,45 +1,46 @@
-import { Provider } from './airtable.mjs'
+import { Therapist } from './models.mjs'
 import Vcard from 'vcards-js'
+import mongoose from 'mongoose'
+
 
 export default function (app, prefix = '') {
 
   app.get('/therapeutes', async (req, res) => {
     let q = req.query.q && req.query.q.trim()
-    const filter = q && `SEARCH("${q}", LOWER(Symptomes))`
-    let providers = await Provider.getAll(filter, [{ field: 'symptoms_count' }])
-    providers = providers.filter(p => !p.disabled)
-    res.render('providers', { providers, q })
+    let therapists = await Therapist.find()
+    res.render('providers', { therapists, q })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
     let therapy = req.params.therapy
     const filter = `SEARCH("${therapy}", LOWER(Therapies))`
-    let providers = await Provider.getAll(filter, [{ field: 'therapies' }])
-    providers = providers.filter(p => !p.disabled)
-    res.render('providers', { providers, q: therapy })
+    let therapists = await Therapist.getAll(filter, [{ field: 'therapies' }])
+    therapists = therapists.filter(p => !p.disabled)
+    res.render('providers', { therapists, q: therapy })
   })
 
   app.get(`${prefix}/:slug0/:slug1/:id`, async (req, res) => {
-    const provider = await Provider.find(req.params.id)
-    res.render('provider', { provider })
+    const therapist = await Therapist.findOne({ id: mongoose.ObjectId(req.params.id) })
+    console.log(therapist)
+    res.render('provider', { therapist })
   })
 
   app.get(`${prefix}/:slug0/:slug1/:id/vcf`, async (req, res) => {
-    const provider = await Provider.find(req.params.id.split('.')[0])
+    const therapist = await Therapist.find(req.params.id.split('.')[0])
     const vcard = Vcard()
-    vcard.firstName = provider.firstname
-    vcard.lastName = provider.lastname
-    vcard.workPhone = provider.phone
-    vcard.workEmail = provider.email
-    if (provider.socials) {
-      vcard.workUrl = provider.socials.website
+    vcard.firstName = therapist.firstname
+    vcard.lastName = therapist.lastname
+    vcard.workPhone = therapist.phone
+    vcard.workEmail = therapist.email
+    if (therapist.socials) {
+      vcard.workUrl = therapist.socials.website
       // ignoring social networks, vCard renders 'CHARSET:UTF8' instead.
       // try {
       //   vcard.socialUrls['facebook'] = 'https://...'
       // } catch(e) {}
     }
-    if (provider.photo) vcard.photo.attachFromUrl(provider.photo[0].url, 'JPEG')
-    vcard.note = provider.timetable
+    if (therapist.photoUrl) vcard.photo.attachFromUrl(therapist.photoUrl, 'JPEG')
+    vcard.note = therapist.timetable
     // if (provider.therapies) vcard.title = vcard.role = provider.therapies.map(t => therapies[t]).join(', ')
     vcard.organization = 'Thérapeute membre de Terrapeutes.com'
     vcard.source = req.url

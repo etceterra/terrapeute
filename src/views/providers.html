@@ -6,7 +6,7 @@
 {% block meta_description %}Prendre rendez-vous avec un thérapeute à Genève : accupressing, nutritionistes, massothérapeutes à Genève{% endblock %}
 
 {% block content %}
-{% if providers | length %}
+{% if therapists | length %}
 <div class=wrapper>
   <section id=content>
     <h1>
@@ -14,21 +14,21 @@
       {% else %}Les thérapeutes en Suisse{% endif %}
     </h1>
     <div class=wrapper>
-      {% for provider in providers %}
-      <article id="{{ provider.id }}">
-        <h1>{{ provider.therapy }}</h1>
-        {{ macro.avatar(provider, provider.name + ' : ' + provider.therapies_name | join(', ') + ' à ' + provider.city) }}
+      {% for therapist in therapists %}
+      <article id="{{ therapist.id }}">
+        <h1>{{ therapist.therapy }}</h1>
+        {{ macro.avatar(therapist, therapist.name + ' : thérapeute à ' + therapist.city) }}
         <div>
-          <h2>{{ provider.name }}</h2>
-          <p>{{ provider.city }}</p>
-          <p class=description>{{ provider.description | truncate(120) }}</p>
+          <h2>{{ therapist.name }}</h2>
+          <p>{{ therapist.city }}</p>
+          <p class=description>{{ therapist.description | truncate(120) }}</p>
         </div>
         <footer>
-          {% for agreement in provider.agreements %}
-          <span class=tag title="{{ provider.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
+          {% for agreement in therapist.agreements %}
+          <span class=tag title="{{ therapist.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
           {% endfor %}
         </footer>
-        <a href=/{{ provider.slug }}/{{ provider.id }} title="{{ provider.name }} est {{ provider.therapies_name | join(', ') }} à {{ provider.city }}">Voir ce {{ provider.therapies[0].name }} à {{ provider.city }}</a>
+        <a href=/{{ therapist.slug }}/{{ therapist.id }} title="{{ therapist.name }} est {# therapist.therapies_name | join(', ') #} à {{ therapist.city }}">Voir ce {{ therapist.therapies[0].name }} à {{ therapist.city }}</a>
       </article>
       {% endfor %}
     </div>
@@ -173,36 +173,36 @@
     text-decoration: none;
   }
 </style>
-{% if providers | length %}
+{% if therapists | length %}
   {% import "partials/map.html" as macro %}
   {{ macro.map(latlng='46.5, 6.5', zoom=9) }}
 <script>
-  const providers = [
-    {% for provider in providers %}
+  const therapists = [
+    {% for therapist in therapists %}
       {
-        id: "{{provider.id}}",
-        name: "{{provider.name}}",
-        therapy: "{{provider.therapies[0].name}}",
-        label: "{{provider.name}} — {{ provider.therapies[0].name }}",
-        latlng: [{{ provider.latlng }}],
-        url: "{{provider.slug}}/{{provider.id}}",
-        photo: `{{ provider.photo[0].thumbnails.large.url }}`,
+        id: "{{therapist.id}}",
+        name: "{{therapist.name}}",
+        therapy: "{{therapist.therapies[0].name}}",
+        label: "{{therapist.name}} — {{ therapist.therapies[0].name }}",
+        latlng: [{{ therapist.latlng }}],
+        url: "{{therapist.slug}}/{{therapist.id}}",
+        photo: `{{ therapist.photo }}`,
       },
     {% endfor %}
   ]
-  const markers = providers.map(provider => {
-    const marker = L.marker(provider.latlng)
+  const markers = therapists.map(therapist => {
+    const marker = L.marker(therapist.latlng)
     marker.bindPopup(`
       <aside>
-        <img src="${ provider.photo }">
+        <img src="${ therapist.photo }">
       </aside>
       <section>
-        <h4>${ provider.name }</h4>
-        <h5>${ provider.therapy }</h5>
-        <a class="button primary" href="${ provider.url }"><i class="far fa-id-card"></i> Consulter</a>
+        <h4>${ therapist.name }</h4>
+        <h5>${ therapist.therapy }</h5>
+        <a class="button primary" href="${ therapist.url }"><i class="far fa-id-card"></i> Consulter</a>
       </section>
     `)
-    marker._provider = provider
+    marker._therapist = therapist
     return marker
   })
   const markersGroup = L.featureGroup(markers)
