@@ -32,20 +32,24 @@
       </p>
     </section>
 
+    {% if therapist.paymentTypes.length %}
     <section>
       <h3>Paiement</h3>
       {{ therapist.price }}
-      <p>Moyens de paiement : {{ therapist.payment_means }}</p>
+      <p>Moyens de paiement : {{ therapist.paymentTypes.join('<br>') }}</p>
     </section>
+    {% endif %}
 
+    {% if therapist.offices.length %}
     <section>
       <h3>Adresse</h3>
       <address>
-        {{ therapist.street }}<br>
-        {{ therapist.zipcode }} {{ therapist.city }}
+        {{ therapist.offices[0].street }}<br>
+        {{ therapist.offices[0].zipcode }} {{ therapist.offices[0].city }}
       </address>
       <div id="map"></div>
     </section>
+    {% endif %}
 
     {% if therapist.pictures %}
     <section>

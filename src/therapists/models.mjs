@@ -20,7 +20,7 @@ const Office = new mongoose.Schema({
   street: String,
   zipCode: String,
   city: String,
-  country: String,
+  country: { type: String, default: 'ch' },
   pictures: [String],
   location: GeoLocation,
 })
@@ -59,6 +59,10 @@ TherapistSchema.virtual('name').get(function() {
 
 TherapistSchema.virtual('city').get(function() {
   return this.offices.length && this.offices[0].city
+})
+
+TherapistSchema.virtual('url').get(function() {
+  return `/${this.slug}/${this.id}`
 })
 
 const Therapist = mongoose.model('Therapist', TherapistSchema)
