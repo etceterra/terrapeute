@@ -21,7 +21,6 @@ export default function (app, prefix = '') {
 
   app.get(`${prefix}/:slug0/:slug1/:id`, async (req, res) => {
     const therapist = await Therapist.findOne({ id: mongoose.ObjectId(req.params.id) })
-    console.log(therapist)
     res.render('provider', { therapist })
   })
 
