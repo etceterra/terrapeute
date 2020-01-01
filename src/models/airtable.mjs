@@ -62,4 +62,4 @@ const Therapy = {
   },
 }
 
-export default { Provider, Therapy, therapies, symptoms, preload }
+export default { Therapy }

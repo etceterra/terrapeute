@@ -1,8 +1,7 @@
 import airtable from './src/models/airtable.mjs'
-// import { Provider, Therapy, Symptom } from './src/models/providers.mjs'
 import request from 'request-promise-native'
 
-import { Therapist } from './src/therapists/models.mjs'
+import { Therapist, Therapy } from './src/therapists/models.mjs'
 
 
 // async function getSymptom(data) {
@@ -46,21 +45,27 @@ async function transferTherapies () {
     const therapy = new Therapy({
       slug: t.slug,
       name: t.name,
-      providers: []
+      airtableId: t._id,
     })
-    await therapy.save()
-    console.log(t)
+    const instance = await therapy.save()
   })
 }
 
 
 async function transferProviders () {
   await Therapist.deleteMany({})
+  console.log(airtable.Provider)
   const providers = await airtable.Provider.getAll()
+  const therapies = await Therapy.find()
+  const airtableTherapiesId = {}
+  therapies.forEach(t => airtableTherapiesId[t.airtableId] = t._id)
+  console.log(therapies)
+  return
   providers.forEach(async (atp) => {
     if(await Therapist.count({airtableId: atp.id})) return
     //
     // const therapies = await Promise.all(atp.therapies.map(async t => await Therapy.findOne({ slug: t.slug })))
+    const localTherapies = therapies.filter(t => atp.map(a => a.airtableId).includes(t._id))
     //
     const offices = [{
       location: { coordinates: atp.latlng.split(',') },
@@ -90,11 +95,10 @@ async function transferProviders () {
       creationDate: atp.creationDate,
       expirationDate: atp.expirationDate,
       languages: atp.languages || [],
-      therapies: [],
+      therapies: localTherapies,
       airtableId: atp.id,
     })
     const p = await provider.save()
-    console.debug(p)
   })
 }
 

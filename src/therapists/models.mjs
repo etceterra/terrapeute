@@ -9,7 +9,6 @@ const Therapy = mongoose.model('Therapy', {
   name: String,
 })
 
-
 const GeoLocation = new mongoose.Schema({
   coordinates: [Number],
   type: { type: String, default: 'Point' },
