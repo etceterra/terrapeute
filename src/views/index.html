@@ -21,6 +21,18 @@
   </div>
 </section>
 
+<section id=partnership>
+  <h2 class="partner iconed">Espace partenaires</h2>
+  <p>
+    Vous êtes une association, une école ou une antité soigneuse de la santé, de l'éducation et des thérapies complémentaires ?<br>
+    Vous souhaiteriez établir un partenariat et communiquer par notre réseau ?
+    Nous sommes joignables et ouverts à échanger et vous proposer nos offres de partenariat.
+  </p>
+  <aside>
+    <a href="mailto:contact@terrapeutes.com?subject=Partenariat" class="primary button">Prendre contact</a>
+  </aside>
+</section>
+
 <style>
   main {
     position: relative;
@@ -76,6 +88,19 @@
     border-bottom-left-radius: 0;
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  #partnership {
+    display: inline-flex;
+    flex-flow: column;
+  }
+  #partnership aside {
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .partner {
+    background-image: url('/img/balloons.svg');
   }
 </style>
 {% endblock %}

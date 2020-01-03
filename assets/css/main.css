@@ -80,15 +80,12 @@ body > header nav a {
   font-size: 1.1em;
   text-decoration: none;
   color: inherit;
-  background-size: contain;
-  padding-left: 35px;
 }
 body > header nav a.journal {
-  background: url('/img/newspaper.svg') no-repeat;
+  background-image: url('/img/newspaper.svg');
 }
 body > header nav a.therapist {
-  background: url('/img/therapist.svg') no-repeat;
-  background-size: contain; /* not sure why it doesn't display within the block */
+  background-image: url('/img/therapist.svg');
 }
 
 h1 a {
@@ -128,6 +125,17 @@ body > footer .copyright {
   font-size: .7em;
 }
 
+
+.iconed {
+  background-repeat: no-repeat;
+  background-size: contain; /* not sure why it doesn't display within the block */
+  padding-left: 35px;
+}
+h2.iconed {
+  padding-left: 65px;
+  padding-bottom: 0;
+  margin-bottom: 1rem;
+}
 
 .tag {
   display: inline-block;
