@@ -3,7 +3,7 @@ help:
 
 deploy:
 	ssh terrapeutes "cd ~/terrapeutes && \
-	git pull && \
+	git reset --hard FETCH_HEAD && \
 	sudo cp terrapeutes.service /etc/systemd/system/ && \
 	sudo systemctl daemon-reload && \
 	npm install && \

@@ -9,6 +9,7 @@ mongoose.connect('mongodb://localhost:27017/terrapeutes', { useNewUrlParser: tru
 
 const ArticleSchema = new mongoose.Schema({
   slug: String,
+  image: String,
   title: String,
   body: String,
   tags: [String],

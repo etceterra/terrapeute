@@ -7,6 +7,10 @@
 {% block content %}
 <form method=post id="edit-form">
   <div>
+    <label>URL de l'image</label>
+    <input name="image" value="{{ article.image }}" required placeholder="Image de l'article">
+  </div>
+  <div>
     <label>Titre</label>
     <input name="title" value="{{ article.title }}" required placeholder="Titre de l'article">
   </div>

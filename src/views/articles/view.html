@@ -13,6 +13,9 @@
     {% endif %}
     {% endfor %}
   </header>
+  {% if article.image -%}
+  <img src="{{ article.image }}" alt="image pour « {{ article.title }} »">
+  {%- endif %}
 
   {{ article.body|markdown }}
 
