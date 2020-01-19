@@ -152,3 +152,11 @@ main.static {
   max-width: 900px;
   margin: 3rem auto;
 }
+
+
+/* journal */
+
+article img {
+  max-width: 100%;
+  height: auto;
+}

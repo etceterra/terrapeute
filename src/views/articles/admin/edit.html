@@ -6,6 +6,7 @@
 
 {% block content %}
 <form method=post id="edit-form">
+  <input type=hidden name=id value={{ article.id }}>
   <div>
     <label>URL de l'image</label>
     <input name="image" value="{{ article.image }}" placeholder="Image de l'article">
@@ -16,7 +17,8 @@
   </div>
   <div>
     <label>Contenu</label>
-    <textarea name=body placeholder="Texte de l'article">{{ article.body|markdown }}</textarea>
+    <input type=hidden name=body id=body-input value="{{ article.body }}">
+    <trix-editor input=body-input></trix-editor>
   </div>
   <div>
     <label>Tags</label>
@@ -48,9 +50,26 @@
   }
 </style>
 
-<script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+<script src=https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix-core.js></script>
+<link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/trix/1.2.1/trix.css>
 
-<script>var editor = new MediumEditor('textarea')</script>
+<script>
+  addEventListener("trix-attachment-add", async (event) => {
+    if (event.attachment.file) {
+      const form = new FormData()
+      const file = event.attachment.file
+      const userText = window.getSelection().toString()
+      form.append("Content-Type", file.type)
+      form.append('id', document.querySelector('[name=id]').value)
+      form.append('file', file)
+      const response = await fetch('/upload', { method: 'post', body: form })
+      const attributes = await response.json()
+      if(!event.attachment.file.type.startsWith('image')) {
+        attributes.content = userText || event.attachment.file.name
+      }
+      event.attachment.setAttributes(attributes)
+    }
+  })
+</script>
 
 {% endblock %}
