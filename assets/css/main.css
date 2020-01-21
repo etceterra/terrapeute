@@ -29,7 +29,7 @@
 body {
   margin: 0;
   background-color: #f9f9f9;
-  font-size: 18px;
+  font-size: 16px;
   color: #5b5b5b;
   font-family: Orkney,Arial;
 }
@@ -55,7 +55,7 @@ button,
 .button {
   border-radius: .25rem;
   padding: .7rem 4rem;
-  font-size: .85rem;
+  font-size: .9rem;
   font-weight: normal;
   border: 0;
   border: 1px solid #519631;
@@ -104,7 +104,6 @@ body > header nav a {
   display: inline-block;
   margin-left: 1.5rem;
   margin-right: 1rem;
-  font-size: .95em;
   text-decoration: none;
   color: #333;
   border-bottom: 2px solid transparent;
@@ -142,7 +141,7 @@ section.highlight {
 
 body > footer {
   padding: 2rem 5rem;
-  font-size: .8rem;
+  font-size: .85rem;
   justify-content: space-around;
   box-shadow: 0 -3px 5px #eee;
   margin: 0 !important;
@@ -161,7 +160,7 @@ body > footer .secondary a:not(:last-of-type) {
 }
 
 body > footer .copyright {
-  font-size: .7em;
+  font-size: .8em;
 }
 
 

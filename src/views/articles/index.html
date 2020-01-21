@@ -11,13 +11,15 @@ l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, l
 {% for article in articles %}
   <article>
     <h1>{{ article.title }}</h1>
-    {% for tag in article.tags %}
-    {% if tag %}
-    <span class=tag>{{ tag }}</span>
-    {% endif %}
-    {% endfor %}
     <p>{{ article.summary|markdown|striptags }}…</p>
     <a href=/journal/{{ article.slug }}>Lire cet article</a>
+    {% if article.tags[0] %}
+    <footer>
+      {% for tag in article.tags %}
+      <span class=tag>{{ tag }}</span>
+      {% endfor %}
+    </footer>
+    {% endif %}
   </article>
   {% endfor %}
 </section>
@@ -26,7 +28,7 @@ l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, l
   #articles {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
   }
   article {
     position: relative;
@@ -41,7 +43,7 @@ l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, l
     box-shadow: 0 0 3px rgba(53, 53, 53, .1);
   }
   article h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin: 0;
   }
   article a {
@@ -51,6 +53,15 @@ l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, l
     left: 0;
     right: 0;
     text-indent: -9999%;
+  }
+  article p {
+    margin-top: 0;
+    font-size: .8rem;
+  }
+  article footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
   }
 </style>
 {% endblock %}
