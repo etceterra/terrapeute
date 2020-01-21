@@ -10,8 +10,8 @@
 <div class=wrapper>
   <section id=content>
     <h1>
-      {% if q %}Thérapeutes pour "{{ q }}"
-      {% else %}Les thérapeutes du réseau{% endif %}
+      {% if q %}Thérapeutes en {{ q }}
+      {% else %}Les thérapeutes en Suisse{% endif %}
     </h1>
     <div class=wrapper>
       {% for provider in providers %}
