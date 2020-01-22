@@ -21,7 +21,11 @@ ArticleSchema.virtual('label').get(function () {
 })
 ArticleSchema.virtual('summary').get(function () {
   if (!this.body) return ''
-  return filters.striptags(marked(this.body)).substr(0, 100)
+  return filters.striptags(marked(this.body)).substr(0, 160)
+})
+ArticleSchema.virtual('readingTime').get(function () {
+  if (!this.body) return ''
+  return Math.ceil(this.body.split('').length / 1500)
 })
 
 ArticleSchema.pre('save', function(next) {
