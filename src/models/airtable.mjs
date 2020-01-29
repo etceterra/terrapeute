@@ -17,7 +17,6 @@ async function preload() {
   symptomData.forEach(s => symptoms[s.id] = Object.assign({}, s.fields, { id: s.id }))
 }
 
-preload()
 
 const Provider = {
   toInstance(p) {
@@ -62,4 +61,4 @@ const Therapy = {
   },
 }
 
-export default { Therapy }
+export default { Therapy, symptoms, preload, Provider }

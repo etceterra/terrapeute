@@ -51,6 +51,10 @@ p {
   margin: .3rem 0;
 }
 
+small {
+  font-size: small;
+}
+
 button,
 .button {
   border-radius: .25rem;
@@ -66,6 +70,12 @@ a.button.primary {
   background-color: #68b246;
   color: #fff;
   border: 0;
+}
+button.calltoaction,
+a.button.calltoaction {
+  display: block;
+  width: fit-content;
+  margin: 1rem auto;
 }
 
 button[disabled],

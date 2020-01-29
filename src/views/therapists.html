@@ -6,11 +6,13 @@
 {% block meta_description %}Prendre rendez-vous avec un thérapeute à Genève : accupressing, nutritionistes, massothérapeutes à Genève{% endblock %}
 
 {% block content %}
+
 {% if therapists | length %}
 <div class=wrapper>
   <section id=content>
     <h1>
-      {% if q %}Thérapeutes en {{ q }}
+      {% if therapy %}Thérapeutes en {{ therapy }}
+      {% elif symptom %}Ces thérapeutes peuvent vous aider pour un problème de {{ symptom }}
       {% else %}Les thérapeutes en Suisse{% endif %}
     </h1>
     <div class=wrapper>
@@ -40,10 +42,9 @@
 
 {% else %}
   <section class=no-result>
-    <p>Le système n'a pas pu trouver un thérapeute automatiquement expert dans les "{{ q }}".
-      <a href="mailto:contact@terrapeutes.com?subject=Recherche un thérapeute en {{ q }}">Partagez-nous votre besoin</a>
-      et nous vous indiquerons des thérapeutes adéquats.
+    <p>Les troubles de <strong>{{ symptom }} sont trop spécifiques</strong> pour une recherche automatique. <a href="mailto:contact@terrapeutes.com?subject=Recherche un thérapeute pour {{ symptom }}">contactez-nous</a> afin de <strong>vous conseiller et vous orienter</strong> vers des thérapeutes <small>(toujours gratuitement !)</small>.
     </p>
+    <a href="mailto:contact@terrapeutes.com?subject=Recherche un thérapeute pour {{ symptom }}" class="primary button calltoaction">Continuer ma recherche avec l'équipe</a>
   </section>
 {% endif %}
 

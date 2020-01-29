@@ -1,14 +1,15 @@
 import { Therapist } from './models.mjs'
+import { Symptom } from '../symptoms/models.mjs'
 import Vcard from 'vcards-js'
-import mongoose from 'mongoose'
 
 
 export default function (app, prefix = '') {
 
   app.get('/therapeutes', async (req, res) => {
-    let q = req.query.q && req.query.q.trim()
-    let therapists = await Therapist.find()
-    res.render('therapists', { therapists, q })
+    const q = req.query.q && req.query.q.trim()
+    const symptoms = q ? await Symptom.find({ $text: { $search: q } }) : []
+    const therapists = await Therapist.find()
+    res.render('therapists', { therapists, q, symptom: q })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
@@ -16,7 +17,7 @@ export default function (app, prefix = '') {
     const filter = `SEARCH("${therapy}", LOWER(Therapies))`
     let therapists = await Therapist.getAll(filter, [{ field: 'therapies' }])
     therapists = therapists.filter(p => !p.disabled)
-    res.render('therapists', { therapists, q: therapy })
+    res.render('therapists', { therapists, therapy })
   })
 
   app.get(`${prefix}/:slug0/:slug1/:id.vcf`, async (req, res) => {
