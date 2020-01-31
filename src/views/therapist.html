@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block meta_title %}{{ therapist.name }}, {{ therapist.therapies[0] }} à {{ therapist.city }}{% endblock %}
+{% block meta_title %}{{ therapist.name }}, {{ therapist.therapies[0].name }} à {{ therapist.city }}{% endblock %}
 
-{% block meta_description %}{{ therapist.name }} est thérapeute agréé {{ therapist.agreements | join(', ') }} en {{ therapist.therapies | join(', ') }} à {{ therapist.city }}.
+{% block meta_description %}{{ therapist.name }} est thérapeute agréé {{ therapist.agreements.join(', ') }} en {{ therapist.therapies.join(', ') }} à {{ therapist.city }}.
 {{ therapist.description | truncate(150) }}{% endblock %}
 
 {% block content %}
@@ -10,16 +10,16 @@
   <div>
     <section id=identity>
       {% import 'partials/avatar.html' as macro %}
-      {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies | join(', ') + ' à ' + therapist.city) }}
-      <h1>{{ therapist.therapies[0] }} à {{ therapist.city }}</h1>
+      {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies[0].name + ' à ' + therapist.city) }}
+      <h1>{{ therapist.therapies[0].name }} à {{ therapist.city }}</h1>
       <h2>{{ therapist.firstname }} {{ therapist.lastname }}</h2>
       <p>
-        {% for therapy_name in therapist.therapies %}
-          <span class=tag title="{{ therapy_name }} à {{ therapist.city }}">{{ therapy_name }}</span>
+        {% for therapy in therapist.therapies %}
+          <span class=tag title="{{ therapy.name }} à {{ therapist.city }}">{{ therapy.name }}</span>
         {% endfor %}
       </p>
-      <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements | join(', ') }}">Thérapeute professionnel
-        {% if therapist.agreements.length %}agréé {{ therapist.agreements | join(', ') | upper }}
+      <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements }}">Thérapeute professionnel
+        {% if therapist.agreements.length %}agréé {{ therapist.agreements.join(', ') }}
         {% else %}diplomé
         {% endif %}
       </p>
@@ -163,8 +163,8 @@
 
 {# After CSS for map sizing reasons #}
 {% import 'partials/map.html' as macro %}
-{{ macro.map(latlng=therapist.offices[0].location.coordinates.reverse(), zoom=12) }}
 
+{{ macro.map(latlng=therapist.offices[0].location.coordinates.reverse(), zoom=12) }}
 <script>
   document.querySelector('#contactButton').addEventListener('click', () => {
     document.querySelector('#contactInfos').classList.remove('hidden')

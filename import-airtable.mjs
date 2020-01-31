@@ -66,7 +66,7 @@ async function transferProviders () {
       symptoms: therapistSymptoms,
       timetable: atp.timetable,
       cost: atp.cost,
-      photo: atp.id,
+      photo: atp.photo && atp.photo[0].url,
       paymentTypes: atp.paymentTypes,
       creationDate: atp.creationDate,
       expirationDate: atp.expirationDate,

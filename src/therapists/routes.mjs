@@ -52,8 +52,10 @@ export default function (app, prefix = '') {
     res.send(vcard.getFormattedString())
   })
 
-  app.get(`${prefix}/:slug0/:slug1/:id`, async (req, res) => {
-    const therapist = await Therapist.findById(req.params.id)
+  app.get(`${prefix}/:slug0/:slug1/:airtableId`, async (req, res) => {
+    let therapist = await Therapist.findOne({ airtableId: req.params.airtableId }).populate('therapies')
+    if(!therapist) res.send('Therapist not found', 404)
+    console.debug(therapist)
     res.render('therapist', { therapist })
   })
 }

@@ -39,10 +39,10 @@ const TherapistSchema = new mongoose.Schema({
   languages: [String],
   photo: String,
   socials: [Object],
-  therapies: [mongoose.ObjectId],
+  therapies: [{ type: mongoose.ObjectId, ref: Therapy }],
   agreements: [String],
   paymentTypes: [String],
-  symptoms: [mongoose.ObjectId],
+  symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
   offices: [Office],
   creationDate: { type: Date, default: Date.now },
   expirationDate: Date,
@@ -51,7 +51,7 @@ const TherapistSchema = new mongoose.Schema({
 })
 
 TherapistSchema.virtual('photoUrl').get(function() {
-  return this.photo && `/uploads/therapists/${ this.photo }`
+  return this.photo
 })
 
 TherapistSchema.virtual('name').get(function() {
@@ -63,7 +63,7 @@ TherapistSchema.virtual('city').get(function() {
 })
 
 TherapistSchema.virtual('url').get(function() {
-  return `/${this.slug}/${this.id}`
+  return `/${this.slug}/${this.airtableId}`
 })
 
 const Therapist = mongoose.model('Therapist', TherapistSchema)

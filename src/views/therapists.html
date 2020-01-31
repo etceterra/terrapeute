@@ -186,7 +186,7 @@
         therapy: "{{therapist.therapies[0].name}}",
         label: "{{therapist.name}} — {{ therapist.therapies[0].name }}",
         latlng: [{{ therapist.offices[0].location.coordinates }}],
-        url: "{{therapist.slug}}/{{therapist.id}}",
+        url: "{{therapist.url}}",
         photo: "{{ therapist.photoUrl }}",
       },
     {% endfor %}
