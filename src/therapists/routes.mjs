@@ -8,7 +8,7 @@ export default function (app, prefix = '') {
   app.get('/therapeutes', async (req, res) => {
     const q = req.query.q && req.query.q.trim()
     const symptoms = q ? await Symptom.find({ $text: { $search: q } }) : []
-    const therapists = await Therapist.find()
+    const therapists = await Therapist.find({ symptoms: { $in: symptoms } })
     res.render('therapists', { therapists, q, symptom: q })
   })
 
