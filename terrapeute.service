@@ -1,17 +1,17 @@
 [Unit]
-Description=Terrapeutes web server
+Description=Terrapeute web server
 After=network.target
 
 [Service]
-ExecStart=node --experimental-modules /home/ubuntu/terrapeutes/src/index.mjs
+ExecStart=node --experimental-modules /home/ubuntu/prod/src/index.mjs
 # Required on some systems
-WorkingDirectory=/home/ubuntu/terrapeutes
+WorkingDirectory=/home/ubuntu/prod
 Restart=always
 RestartSec=3
 # Output to syslog
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=terrapeutes
+SyslogIdentifier=terrapeute
 #User=<alternate user>
 #Group=<alternate group>
 Environment=NODE_ENV=production PORT=8080

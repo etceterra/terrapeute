@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import elasticlunr from 'elasticlunr'
 
 
-mongoose.connect('mongodb://localhost:27017/terrapeutes', {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
 
 
 const indexer = elasticlunr(function () {

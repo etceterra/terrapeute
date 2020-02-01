@@ -5,7 +5,7 @@ import marked from 'marked'
 import { slugify } from '../utils.mjs'
 
 
-mongoose.connect('mongodb://localhost:27017/terrapeutes', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/terrapeute', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const ArticleSchema = new mongoose.Schema({
   slug: String,

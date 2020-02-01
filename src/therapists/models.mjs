@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import { Symptom } from '../symptoms/models.mjs'
 
 
-mongoose.connect('mongodb://localhost:27017/terrapeutes', {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
 
 
 const Therapy = mongoose.model('Therapy', {

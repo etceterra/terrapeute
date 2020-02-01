@@ -2,13 +2,13 @@ help:
 	@echo "Checkout the makefile"
 
 deploy:
-	ssh terrapeutes "cd ~/terrapeutes && \
+	ssh terrapeute "cd ~/prod && \
 	git reset --hard FETCH_HEAD && \
 	git fetch && \
-	sudo cp terrapeutes.service /etc/systemd/system/ && \
+	sudo cp terrapeute.service /etc/systemd/system/ && \
 	sudo systemctl daemon-reload && \
 	npm install && \
-	sudo systemctl restart terrapeutes"
+	sudo systemctl restart terrapeute"
 
 log:
-	ssh terrapeutes "systemctl status terrapeutes -n 50"
+	ssh terrapeute "systemctl status terrapeute -n 50"

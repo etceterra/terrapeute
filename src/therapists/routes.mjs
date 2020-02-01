@@ -37,7 +37,7 @@ export default function (app, prefix = '') {
     if (therapist.photoUrl) vcard.photo.attachFromUrl(therapist.photoUrl, 'JPEG')
     vcard.note = therapist.timetable
     // if (therapist.therapies) vcard.title = vcard.role = therapist.therapies.map(t => therapies[t]).join(', ')
-    vcard.organization = 'Thérapeute membre de Terrapeutes.com'
+    vcard.organization = 'Thérapeute membre de Terrapeute.ch'
     vcard.source = req.url
     const office = therapist.offices.length && therapist.offices[0]
     if(office) {
