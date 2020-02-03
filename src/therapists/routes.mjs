@@ -7,9 +7,17 @@ export default function (app, prefix = '') {
 
   app.get('/therapeutes', async (req, res) => {
     const q = req.query.q && req.query.q.trim()
-    const symptoms = q ? await Symptom.find({ $text: { $search: q } }) : []
-    const therapists = await Therapist.find({ symptoms: { $in: symptoms } })
-    res.render('therapists', { therapists, q, symptom: q })
+    const aggregation = [
+      { $addFields: { countSymptoms: { $size: "$symptoms" } } },
+      { $sort: { countSymptoms: 1 } }
+    ]
+    if (q) {
+      const symptoms = await Symptom.find({ $text: { $search: q } })
+      aggregation.push({ $match: { symptoms: { $in: symptoms.map(s => s._id) } } })
+    }
+    const therapistsRaw = await Therapist.aggregate(aggregation)
+    const therapists = therapistsRaw.map(t => Therapist(t))
+    res.render('therapists', { therapists, symptom: q })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
