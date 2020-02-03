@@ -93,6 +93,7 @@ section.highlight .button.primary {
 body > header {
   background-color: #fff;
   margin: 0 !important;
+  padding: 0 2rem;
   box-shadow: 0 2px 10px #eee;
 }
 body > header .innersection {
@@ -101,8 +102,9 @@ body > header .innersection {
 }
 body > header h1,
 body > header h1 img {
-  height: 60px; /* force height to match image */
+  max-height: 60px; /* force height to match image */
   font-size: .8rem;
+  align-self: center;
 }
 /* Align image with "pro" text and nav */
 body > header h1 img {

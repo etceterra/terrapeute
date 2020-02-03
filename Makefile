@@ -4,7 +4,7 @@ help:
 deploy:
 	ssh terrapeute "cd ~/prod && \
 	git reset --hard FETCH_HEAD && \
-	git fetch && \
+	git pull && \
 	sudo ln -s terrapeute.service /etc/systemd/system/ ; \
 	sudo systemctl daemon-reload && \
 	npm install && \
