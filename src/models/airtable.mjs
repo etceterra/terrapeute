@@ -11,9 +11,9 @@ let symptoms = []
 
 
 async function preload() {
-  const therapyData = await TherapyTable.select().firstPage()
+  const therapyData = await TherapyTable.select().all()
   therapyData.forEach(t => therapies[t.id] = Object.assign({}, t.fields, { id: t.id }))
-  const symptomData = await SymptomTable.select().firstPage()
+  const symptomData = await SymptomTable.select().all()
   symptomData.forEach(s => symptoms[s.id] = Object.assign({}, s.fields, { id: s.id }))
 }
 
@@ -35,7 +35,7 @@ const Provider = {
     const filters = {}
     if (params) filters.filterByFormula = params
     if (sort) filters.sort = sort
-    const data = await ProviderTable.select(filters).firstPage()
+    const data = await ProviderTable.select(filters).all()
     return data.filter(p => p.fields.slug).map(p => this.toInstance(p))
   },
 
