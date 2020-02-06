@@ -10,11 +10,17 @@
 {% if therapists | length %}
 <div class=wrapper>
   <section id=content>
-    <h1>
-      {% if therapy %}Thérapeutes en {{ therapy }}
-      {% elif symptom %}Ces thérapeutes peuvent vous aider pour un problème de {{ symptom }}
-      {% else %}Les thérapeutes en Suisse{% endif %}
-    </h1>
+    {% if symptoms %}
+    <aside class=block id=symptoms>
+      <bockquote>Les troubles de {{ q }} sont associées aux
+        {% set comma = joiner() %}
+        {% for symptom in symptoms -%}
+        <span>{{ comma() }} {{ symptom.name }}</span>
+        {%- endfor %}.
+      </bockquote>
+      <h1>{{ therapists|length }} thérapeutes peuvent vous accompagner dans les troubles de {{ q }}</h1>
+    </aside>
+    {% endif %}
     <div class=wrapper>
       {% for therapist in therapists %}
       <article id="{{ therapist.id }}">
@@ -35,7 +41,7 @@
       {% endfor %}
     </div>
   </section>
-  <aside>
+  <aside id=map-container>
     <div id="map"></div>
   </aside>
 </div>
@@ -57,7 +63,21 @@
     padding: 10rem;
   }
 
-  aside {
+  .block {
+    background: #fff;
+    padding: .5rem;
+    margin: .5rem;
+  }
+
+  #symptoms span {
+    font-weight: bold;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  #map-container {
     width: 20rem;
   }
 

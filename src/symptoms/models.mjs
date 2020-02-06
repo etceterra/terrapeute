@@ -1,6 +1,7 @@
 import fs from 'fs'
 import mongoose from 'mongoose'
 import elasticlunr from 'elasticlunr'
+import { cleanForSearch } from '../utils.mjs'
 
 
 mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
@@ -20,20 +21,17 @@ const SymptomSchema = new mongoose.Schema({
   airtableParentId: String,
 })
 
-SymptomSchema.methods.search = function (q) {
-  // q = q.split(' ').filter(s => {
-  //   return s.length > 2
-  // }).join(' ')
-  return this.find({ $text: { $search: q } })
+SymptomSchema.statics.search = function (q) {
+  q = cleanForSearch(q)
+  q = q.split(' ').map(w => `"${w}"`).join(' ')
+  return this.find(
+    { $text: { $search: q, $language: 'fr' } },
+    { score: { $meta: "textScore" } }
+  )
 }
 
 SymptomSchema.pre('save', function(next) {
-  const keywords = [...this.name.split(' '), ...new Set(this.synonyms)]
-    .filter(k => k.length > 2)
-    .map(k => {
-      return k.normalize('NFD').toLowerCase().replace(/[\u0300-\u036f]/g, '')
-    })
-  this.keywords = keywords.join(' ')
+  this.keywords = cleanForSearch(this.name + ' ' + this.synonyms.join(' '))
   return next()
 })
 

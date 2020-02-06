@@ -7,17 +7,18 @@ export default function (app, prefix = '') {
 
   app.get('/therapeutes', async (req, res) => {
     const q = req.query.q && req.query.q.trim()
+    let symptoms = null
     const aggregation = [
       { $addFields: { countSymptoms: { $size: "$symptoms" } } },
       { $sort: { countSymptoms: 1 } }
     ]
     if (q) {
-      const symptoms = await Symptom.find({ $text: { $search: q } })
+      symptoms = await Symptom.search(q)
       aggregation.push({ $match: { symptoms: { $in: symptoms.map(s => s._id) } } })
     }
     const therapistsRaw = await Therapist.aggregate(aggregation)
     const therapists = therapistsRaw.map(t => Therapist(t))
-    res.render('therapists', { therapists, symptom: q })
+    res.render('therapists', { therapists, symptoms, q })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
@@ -63,7 +64,6 @@ export default function (app, prefix = '') {
   app.get(`${prefix}/:slug0/:slug1/:airtableId`, async (req, res) => {
     let therapist = await Therapist.findOne({ airtableId: req.params.airtableId }).populate('therapies')
     if(!therapist) res.send('Therapist not found', 404)
-    console.debug(therapist)
     res.render('therapist', { therapist })
   })
 }
