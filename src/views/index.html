@@ -1,6 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
+<section id=event>
+  <img src=/img/event/detox/pot.jpg alt="Les ingrédients de la détox">
+  <div>
+    <h1>Bien préparer sa « détox » de printemps.</h1>
+    <h2>Conférence sur la naturopathie et la nutrition le 17 mars 2020 à Génève</h2>
+    <p>La « détox » est un véritable phénomène de mode, et nous allons voir pourquoi ! Nous sortons de l’hiver avec un ou deux
+    petits kilos en plus, une fatigue qui s’installe, parfois des problèmes de peau, de sommeil ou de concentration... et le
+    printemps arrive. Tous ces signes sont peut-être le témoin d’une accumulation de toxines que l’organisme ne parvient pas
+    ou plus assez bien à éliminer. C’est sans doute le bon moment pour une détox !
+    Lors de cette conférence, nous verrons ensemble ce qu’est « la détox » exactement, quel est le meilleur moment pour s’y
+    mettre, en quoi elle est bénéfique et comment bien la réussir grâce à la nutrition, l’hygiène de vie et la
+    phytothérapie.</p>
+    <p>Conférence présentée par <a href=/naturopathe-geneve/sarah-finci/rec8vmHBWsOgQxo39>Sarah Finci, naturopathe à Genève</a>.</p>
+    <a class="button calltoaction primary" href="https://www.eventbrite.fr/e/billets-bien-preparer-sa-detox-de-printemps-92747639687" target="_blank">Infos & réservations</a>
+  </div>
+</section>
 <section id=search>
   <div>
     <h1>Trouvez un thérapeute</h1>
@@ -49,6 +65,17 @@
     color: #777;
     font-size: 1em;
     text-decoration: none;
+  }
+
+  #event {
+    padding: 0;
+    display: flex;
+  }
+  #event div {
+    padding: 2rem;
+  }
+  #event h2 {
+    font-size: 1.2rem;
   }
 
   #search {
