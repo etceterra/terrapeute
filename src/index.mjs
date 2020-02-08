@@ -7,6 +7,8 @@ import config from './config.mjs'
 import articlesRoutes from './articles/routes.mjs'
 import therapistsRoutes from './therapists/routes.mjs'
 
+import { Therapy } from './therapists/models.mjs'
+
 
 const app = express()
 
@@ -18,7 +20,7 @@ app.use(express.static('assets'))
 app.use(bodyparser.urlencoded({ extended: false }))
 
 app.get('/', async (req, res) => {
-  const therapies = [] // await Therapy.getAll()
+  const therapies = await Therapy.find({}).sort({ slug: 1 })
   res.render('index', { therapies })
 })
 
