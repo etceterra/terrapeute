@@ -1,4 +1,4 @@
-import { Therapist } from './models.mjs'
+import { Therapist, Therapy } from './models.mjs'
 import { Symptom } from '../symptoms/models.mjs'
 import Vcard from 'vcards-js'
 
@@ -22,10 +22,9 @@ export default function (app, prefix = '') {
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
-    let therapy = req.params.therapy
-    const filter = `SEARCH("${therapy}", LOWER(Therapies))`
-    let therapists = await Therapist.getAll(filter, [{ field: 'therapies' }])
-    therapists = therapists.filter(p => !p.disabled)
+    const therapy = await Therapy.findOne({ slug: req.params.therapy })
+    if(!therapy) res.send('Therapy not found', 404)
+    const therapists = await Therapist.find({ therapies: { $in: [therapy] } })
     res.render('therapists', { therapists, therapy })
   })
 
