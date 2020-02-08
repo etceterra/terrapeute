@@ -25,7 +25,7 @@ SymptomSchema.statics.search = function (q) {
   q = cleanForSearch(q)
   q = q.split(' ').map(w => `"${w}"`).join(' ')
   return this.find(
-    { $text: { $search: q, $language: 'fr' } },
+    { $text: { $search: q } },
     { score: { $meta: "textScore" } }
   )
 }
