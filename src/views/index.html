@@ -1,22 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section id=event>
-  <img src=/img/event/detox/pot.jpg alt="Les ingrédients de la détox">
-  <div>
-    <h1>Bien préparer sa « détox » de printemps.</h1>
-    <h2>Conférence sur la naturopathie et la nutrition le 17 mars 2020 à Génève</h2>
-    <p>La « détox » est un véritable phénomène de mode, et nous allons voir pourquoi ! Nous sortons de l’hiver avec un ou deux
-    petits kilos en plus, une fatigue qui s’installe, parfois des problèmes de peau, de sommeil ou de concentration... et le
-    printemps arrive. Tous ces signes sont peut-être le témoin d’une accumulation de toxines que l’organisme ne parvient pas
+<article id=event>
+  <h1>Conférence le 17 mars 2020, à Génève</h1>
+  <h2>Bien préparer sa « détox » de printemps.</h2>
+  <section>
+    <p>
+      <img src=/img/event/detox/pot.jpg alt="Les ingrédients de la détox">
+      La « détox » est un véritable phénomène de mode, et nous allons voir pourquoi ! Nous sortons de l’hiver avec un ou deux
+    petits <strong>kilos en plus</strong>, une <strong>fatigue</strong> qui s’installe, parfois des <strong>problèmes de peau</strong>, de <strong>sommeil</strong> ou de <strong>concentration</strong>... et le
+    printemps arrive. Tous ces signes sont peut-être le témoin d’une <strong>accumulation de toxines</strong> que l’organisme ne parvient pas
     ou plus assez bien à éliminer. C’est sans doute le bon moment pour une détox !
-    Lors de cette conférence, nous verrons ensemble ce qu’est « la détox » exactement, quel est le meilleur moment pour s’y
-    mettre, en quoi elle est bénéfique et comment bien la réussir grâce à la nutrition, l’hygiène de vie et la
-    phytothérapie.</p>
+    Lors de cette conférence, nous verrons ensemble ce qu’est « la détox » exactement, quel est <strong>le meilleur moment</strong> pour s’y
+    mettre, en quoi elle est bénéfique et comment bien la réussir grâce à la <strong>nutrition, l’hygiène de vie et la phytothérapie</strong>.</p>
     <p>Conférence présentée par <a href=/naturopathe-geneve/sarah-finci/rec8vmHBWsOgQxo39>Sarah Finci, naturopathe à Genève</a>.</p>
-    <a class="button calltoaction primary" href="https://www.weezevent.com/bien-reussir-sa-detox-de-printemps" target="_blank">Infos & réservations</a>
-  </div>
-</section>
+    <a class="button primary" href="https://www.weezevent.com/bien-reussir-sa-detox-de-printemps" target="_blank">Infos & réservations</a>
+  </section>
+</article>
+
 <section id=search>
   <div>
     <h1>Trouvez un thérapeute</h1>
@@ -55,7 +56,8 @@
   main {
     position: relative;
   }
-  main > section {
+  main > section,
+  main > article {
     padding: 5rem 10rem;
   }
 
@@ -67,15 +69,24 @@
     text-decoration: none;
   }
 
-  #event {
+  #event section {
+    margin-top: 1rem;
+  }
+  #event h1,
+  #event h2 {
+    margin: 0 .1rem;
+    padding: 0 .1rem;
+    text-align: center;
+  }
+  #event h3 {
+    margin: 0;
     padding: 0;
-    display: flex;
+    font-size: 1rem;
+    font-weight: normal;
   }
   #event img {
-    min-width: 600px;
-  }
-  #event div {
-    padding: 2rem;
+    float: left;
+    margin: 0 1rem 1rem 0;
   }
   #event h2 {
     font-size: 1.2rem;
