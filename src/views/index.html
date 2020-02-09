@@ -2,21 +2,17 @@
 
 {% block content %}
 <article id=event>
-  <div class=container>
+  <figure>
+    <img src=/img/event/detox/pot.jpg alt="Les ingrédients de la détox">
+  </figure>
+  <div>
     <h1>Conférence le 17 mars 2020, à Génève</h1>
     <h2>Bien préparer sa « détox » de printemps.</h2>
-    <section>
-      <p>
-        <img src=/img/event/detox/pot.jpg alt="Les ingrédients de la détox">
-        La « détox » est un véritable phénomène de mode, et nous allons voir pourquoi !<br>
-        Nous sortons de l’hiver avec un ou deux petits <strong>kilos en plus</strong>, une <strong>fatigue</strong> qui s’installe, parfois des <strong>problèmes de peau</strong>, de <strong>sommeil</strong> ou de <strong>concentration</strong>... et le printemps arrive.<br>
-        Tous ces signes sont peut-être le témoin d’une <strong>accumulation de toxines</strong> que l’organisme ne parvient pas ou plus assez bien à éliminer. C’est sans doute le bon moment pour une détox !<br>
-        Lors de cette conférence, nous verrons ensemble ce qu’est « la détox » exactement, quel est <strong>le meilleur moment</strong> pour s’y mettre, en quoi elle est bénéfique et comment bien la réussir grâce à la <strong>nutrition, l’hygiène de vie et la phytothérapie</strong>.
-      </p>
-      <p>Conférence présentée par <a href=/naturopathe-geneve/sarah-finci/rec8vmHBWsOgQxo39>Sarah Finci, naturopathe à Genève</a>.</p>
-      <a class="button primary" href="https://www.weezevent.com/bien-reussir-sa-detox-de-printemps" target="_blank">Infos & réservations</a>
-    </section>
   </div>
+  <aside class=row>
+    <a class="button primary" href="https://www.weezevent.com/bien-reussir-sa-detox-de-printemps" target=_blank>Réservation</a>
+    <a class="button" href="https://terrapeute.ch/journal/bien-preparer-sa-detox-de-printemps">Informations</a>
+  </aside>
 </article>
 
 <section id=search>
@@ -57,8 +53,7 @@
   main {
     position: relative;
   }
-  main > section,
-  main > article {
+  main > section {
     padding: 5rem 10rem;
   }
 
@@ -70,30 +65,39 @@
     text-decoration: none;
   }
 
-  #event section {
-    margin-top: 1rem;
+  #event {
+    width: 800px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    margin: 1rem auto;
+  }
+  #event figure {
+    width: 800px;
+    margin: 0;
+    margin-top: -140px;
+  }
+  #event img {
+    width: 100%;
+  }
+  #event div {
+    background: rgba(255, 255, 255, .8);
+    position: absolute;
+    top: 20px;
+    left: 0;
+    padding: .5rem 1rem;
   }
   #event h1,
   #event h2 {
+    font-size: 1.2rem;
     margin: 0 .1rem;
     padding: 0 .1rem;
     text-align: center;
   }
-  #event h3 {
-    margin: 0;
-    padding: 0;
-    font-size: 1rem;
-    font-weight: normal;
-  }
-  #event img {
-    float: left;
-    margin: 0 1rem .3rem 0;
-  }
-  #event h2 {
-    font-size: 1.2rem;
-  }
-  #event p {
-    margin: 1rem 0;
+  #event aside {
+    position: absolute;
+    bottom: .2rem;
+    left: 100px;
   }
 
   #search {
@@ -147,6 +151,7 @@
     flex-flow: column;
     margin: auto 4.5rem;
   }
+
 
   .partner {
     background-image: url('/img/balloons.svg');

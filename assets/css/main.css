@@ -74,6 +74,7 @@ button,
   border: 0;
   border: 1px solid #519631;
   color: #519631;
+  font-weight: bold;
 }
 button.primary,
 a.button.primary {
@@ -233,12 +234,4 @@ main.static {
   max-width: 56rem;
   padding: 0 2rem;
   margin: 3rem auto;
-}
-
-
-/* journal */
-
-article img {
-  max-width: 100%;
-  height: auto;
 }
