@@ -5,7 +5,8 @@ import { slugify, cleanForSearch } from '../utils.mjs'
 describe('utils', () => {
   describe('#slugify()', () => {
     it('should slugify special chars', () => {
-      assert.equal(slugify(" WhåT??!&it's -/élégant* "), 'what-et-its-elegant')
+      assert.equal(slugify(" WhåT??!&it's -/élégant aujourd'hui* "), 'what-et-it-s-elegant-aujourd-hui')
+      assert.equal(slugify(" l'Essence "), 'essence')
     })
   })
 
@@ -17,13 +18,17 @@ describe('utils', () => {
       assert.equal(cleanForSearch("toto aux tata"), "toto tata")
     })
     it('should singularize words', () => {
-      assert.equal(cleanForSearch("lenteurs maux"), "lenteur mal")
+      assert.equal(cleanForSearch("lenteurs"), "lenteur")
+      assert.equal(cleanForSearch("mentaux"), "mental")
     })
     it('should translate synonyms', () => {
-      assert.equal(cleanForSearch("douleurs aux épaules"), "mal epaule")
+      assert.equal(cleanForSearch("brûlures à l'estomac"), "estomac")
     })
-    it('should remove duplicates', () => {
-      assert.equal(cleanForSearch("maux et douleurs aux articulations"), "mal articulation")
+    it('should preserve whitelist words', () => {
+      assert.equal(cleanForSearch("Les os du dos"), "os dos")
+    })
+    it('should remove duplicates, and blacklist', () => {
+      assert.equal(cleanForSearch("très mal, douleurs aux articulations"), "articulation")
     })
   })
 })

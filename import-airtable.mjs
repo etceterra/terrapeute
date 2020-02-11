@@ -9,7 +9,7 @@ import { Therapist, Therapy } from './src/therapists/models.mjs'
 
 async function transferSymptoms () {
   await Symptom.deleteMany({})
-  return Promise.all(Object.keys(airtable.symptoms).map(async airtableId => {
+  return Promise.all(Object.keys(airtable.symptoms).filter(s => s.slug.slice(0, 1) !== '_').map(async airtableId => {
     const data = airtable.symptoms[airtableId]
     if(!data.Name) return
       const symptom = new Symptom({
@@ -26,7 +26,7 @@ async function transferSymptoms () {
 async function transferTherapies () {
   const therapies = await airtable.Therapy.getAll()
   await Therapy.deleteMany({})
-  return Promise.all(therapies.map(async t => {
+  return Promise.all(therapies.filter(t => t.slug.slice(0, 1) !== '_').map(async t => {
     const therapy = new Therapy({
       slug: t.slug,
       name: t.name,

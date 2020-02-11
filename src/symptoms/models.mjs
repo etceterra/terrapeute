@@ -4,7 +4,7 @@ import elasticlunr from 'elasticlunr'
 import { cleanForSearch } from '../utils.mjs'
 
 
-mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/terrapeute', { useNewUrlParser: true, useUnifiedTopology: true })
 
 
 const indexer = elasticlunr(function () {
