@@ -26,6 +26,13 @@ const SymptomSchema = new mongoose.Schema({
   airtableParentId: String,
 })
 
+SymptomSchema.pre('save', function(next) {
+  const parentKeywords = this.parent ? this.parent.keywords.split(' ') : []
+  const keywords = [this.name, ...this.synonyms, parentKeywords]
+  this.keywords = cleanForSearch(keywords.join(' '))
+  return next()
+})
+
 SymptomSchema.statics.search = function (q) {
   q = cleanForSearch(q)
   q = q.split(' ').map(w => `"${w}"`).join(' ')
@@ -35,17 +42,9 @@ SymptomSchema.statics.search = function (q) {
   )
 }
 
-SymptomSchema.pre('save', function(next) {
-  this.keywords = cleanForSearch(this.name + ' ' + this.synonyms.join(' '))
-  return next()
-})
-
 SymptomSchema.index({ keywords: 'text' })
 
-
 const Symptom = mongoose.model('Symptom', SymptomSchema)
-
-
 
 
 const Office = new mongoose.Schema({
