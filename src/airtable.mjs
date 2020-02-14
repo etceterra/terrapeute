@@ -2,8 +2,7 @@ import Airtable from 'airtable'
 import config from './config.mjs'
 import request from 'request-promise-native'
 
-import { Symptom } from './symptoms/models.mjs'
-import { Therapist, Therapy } from './therapists/models.mjs'
+import { Therapist, Therapy, Symptom } from './therapists/models.mjs'
 
 Airtable.configure({ endpointUrl: 'https://api.airtable.com', apiKey: config.AIRTABLE_API_KEY })
 const db = Airtable.base('app1Ab6PilgNTXMYp')
@@ -66,7 +65,7 @@ const AirtableTherapy = {
 
 async function transferSymptoms () {
   await Symptom.deleteMany({})
-  return Promise.all(Object.keys(symptoms).filter(s => s.slug && s.slug.slice(0, 1) !== '_').map(async airtableId => {
+  return Promise.all(Object.keys(symptoms).map(async airtableId => {
     const data = symptoms[airtableId]
     if(!data.Name) return
       const symptom = new Symptom({

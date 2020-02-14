@@ -1,6 +1,5 @@
-import { Therapist, Therapy } from './models.mjs'
-import { Symptom } from '../symptoms/models.mjs'
 import Vcard from 'vcards-js'
+import { Therapist, Therapy, Symptom } from './models.mjs'
 
 
 export default function (app, prefix = '') {

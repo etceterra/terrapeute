@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { Symptom } from '../symptoms/models.mjs'
+import { cleanForSearch } from '../utils.mjs'
 
 
 mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
@@ -16,6 +16,37 @@ const GeoLocation = new mongoose.Schema({
   type: { type: String, default: 'Point' },
   index: { type: String, default: '2dsphere' },
 })
+
+const SymptomSchema = new mongoose.Schema({
+  name: { type: String, unique: true },
+  parent: { type: String, ref: 'Symptom' },
+  synonyms: [String],
+  keywords: String,
+  airtableId: String,
+  airtableParentId: String,
+})
+
+SymptomSchema.statics.search = function (q) {
+  q = cleanForSearch(q)
+  q = q.split(' ').map(w => `"${w}"`).join(' ')
+  return this.find(
+    { $text: { $search: q } },
+    { score: { $meta: "textScore" } }
+  )
+}
+
+SymptomSchema.pre('save', function(next) {
+  this.keywords = cleanForSearch(this.name + ' ' + this.synonyms.join(' '))
+  return next()
+})
+
+SymptomSchema.index({ keywords: 'text' })
+
+
+const Symptom = mongoose.model('Symptom', SymptomSchema)
+
+
+
 
 const Office = new mongoose.Schema({
   street: String,
@@ -69,4 +100,4 @@ TherapistSchema.virtual('url').get(function() {
 const Therapist = mongoose.model('Therapist', TherapistSchema)
 
 
-export { Therapist, Therapy }
+export { Therapist, Therapy, Symptom }
