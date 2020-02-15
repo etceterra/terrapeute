@@ -80,13 +80,14 @@ async function transferSymptoms () {
 
 async function consolidateSymptoms () {
   const symptoms = await Symptom.find()
-  symptoms.forEach(s => console.debug('sympt', s.id))
-  await Promise.all(symptoms.forEach(async symptom => {
-    const parent = symptoms.find(s => s.airtableId === s.airtableParentId)
-    if(!parent) return
-    symptom.parent = parent
-    return symptom.save()
-  }))
+  try {
+    await Promise.all(symptoms.forEach(async symptom => {
+      const parent = symptoms.find(s => s.airtableId === s.airtableParentId)
+      if(!parent) return
+      symptom.parent = parent
+      return await symptom.save()
+    }))
+  } catch (e) {}
 }
 
 
@@ -132,9 +133,9 @@ async function transferProviders () {
       agreements: atp.agreements || [],
       symptoms: therapistSymptoms,
       timetable: atp.timetable,
-      cost: atp.cost,
+      price: atp.price,
       photo: atp.photo && atp.photo[0].url,
-      paymentTypes: atp.paymentTypes,
+      paymentTypes: atp.payment_means,
       creationDate: atp.creationDate,
       expirationDate: atp.expirationDate,
       languages: atp.languages || [],
@@ -151,11 +152,11 @@ async function transferAll() {
   await transferSymptoms()
   console.info('.......consolidate symptoms')
   await consolidateSymptoms()
-  // console.info('...Importing therapies')
-  // await transferTherapies()
-  // console.info('...Importing therapists')
-  // await transferProviders()
-  // console.info('completed!')
+  console.info('...Importing therapies')
+  await transferTherapies()
+  console.info('...Importing therapists')
+  await transferProviders()
+  console.info('completed!')
 }
 
 export default { transferAll }

@@ -32,7 +32,7 @@
       </p>
     </section>
 
-    {% if therapist.paymentTypes.length %}
+    {% if therapist.price or therapist.paymentTypes.length %}
     <section>
       <h3>Paiement</h3>
       {{ therapist.price }}
@@ -63,11 +63,14 @@
 
   <aside>
     <ul>
-      {% if therapist.socials.website %}
-      <li><i class="fa fa-desktop"></i> <a href={{ therapist.socials.website }} target=_blank>Site web</a></li>
-      {% endif %}
-      {% if therapist.socials.facebook %}
-      <li><i class="fab fa-facebook-square"></i> <a href={{ therapist.socials.facebook }} target=_blank>Page Facebook</a></li>
+      {% if therapist.socials.length %}
+      {% for social in therapist.socials %}
+        {% if social.name == 'facebook' %}
+          <li><i class="fab fa-facebook-square"></i> <a href={{ therapist.socials.facebook }} target=_blank>Page Facebook</a></li>
+        {% elif social.name == 'website' %}
+          <li><i class="fa fa-desktop"></i> <a href={{ social.url }} target=_blank>Site internet</a></li>
+        {% endif %}
+      {% endfor %}
       {% endif %}
     </ul>
 

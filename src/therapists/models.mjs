@@ -64,7 +64,7 @@ const TherapistSchema = new mongoose.Schema({
   phone: String,
   isCertified: Boolean,
   description: String,
-  cost: String,
+  price: String,
   timetable: String,
   languages: [String],
   photo: String,
