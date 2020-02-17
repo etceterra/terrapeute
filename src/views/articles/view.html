@@ -2,6 +2,19 @@
 
 {% block meta_title %}{{ article.title }}{% endblock %}
 
+{% block meta_og -%}
+<meta property="og:type" content="article">
+<meta property="og:image" content="{{ article.image }}">
+<meta property="article:published_time" content="{{ article.creationDate.toLocaleDateString() }}">
+<meta property="article:author" content="Terrapeute.ch">
+{% if tags.length -%}
+<meta property="article:section" content="{{ tags[0] }}">
+{% for tag in article.tags -%}
+<meta property="article:tag" content="{{ tag }}">
+{% endfor %}
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <article>
   <header>
