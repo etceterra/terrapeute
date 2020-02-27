@@ -3,6 +3,7 @@ import nunjucks from 'nunjucks'
 import bodyparser from 'body-parser'
 import marked from 'marked'
 
+import { bbcode } from './utils.mjs'
 import config from './config.mjs'
 import articlesRoutes from './articles/routes.mjs'
 import adminRoutes from './admin/routes.mjs'
@@ -16,6 +17,7 @@ const app = express()
 app.set('view engine', 'html')
 const template = nunjucks.configure(`src/views`, { express: app, autoescape: true })
 template.addFilter('markdown', (str = '') => nunjucks.runtime.markSafe(marked(str)))
+template.addFilter('bbcode', (str = '') => nunjucks.runtime.markSafe(bbcode(str)))
 
 app.use(express.static('assets'))
 app.use(bodyparser.urlencoded({ extended: false }))

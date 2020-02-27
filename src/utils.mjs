@@ -39,6 +39,10 @@ function cleanForSearch(phrase) {
   return words.join(' ')
 }
 
+function bbcode(str) {
+  return str.replace(/\[(\/?\w+)\]/g, '<$1>')
+}
 
 
-export { slugify, cleanForSearch }
+
+export { slugify, cleanForSearch, bbcode }
