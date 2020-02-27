@@ -1,4 +1,5 @@
 @import url('https://cdn.jsdelivr.net/gh/polight/decor@master/decor.css');
+@import url('https://use.fontawesome.com/releases/v5.12.0/css/all.css');
 
 @font-face {
   font-family: Muli;
@@ -67,7 +68,7 @@ small {
 button,
 .button {
   border-radius: .25rem;
-  padding: .7rem 4rem;
+  padding: .7rem 1rem;
   font-size: .9rem;
   font-weight: normal;
   border: 0;
@@ -226,7 +227,6 @@ h2.iconed {
   padding: .2rem 1rem;
   margin: .1rem .2rem;
   border-radius: 2rem;
-  cursor: default;
 }
 
 main.static {
