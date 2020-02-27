@@ -30,6 +30,10 @@
       <p>
         {{ therapist.description }}
       </p>
+
+      {% if therapist.languages %}
+      <p>{{ therapist.name }} parle {{ therapist.languages|join(', ') }}</p>
+      {% endif %}
     </section>
 
     {% if therapist.price or therapist.paymentTypes.length %}
@@ -40,22 +44,28 @@
     </section>
     {% endif %}
 
+    {% if therapist.timetable %}
+    <section>
+      <h3>Horaires</h3>
+      <p>{{ therapist.timetable }}</p>
+    </section>
+    {% endif %}
+
     {% if therapist.offices.length %}
     <section>
-      <h3>Adresse</h3>
+      <h2>Cabinet à {{ therapist.offices[0].city }}</h2>
       <address>
         {{ therapist.offices[0].street }}<br>
-        {{ therapist.offices[0].zipcode }} {{ therapist.offices[0].city }}
+        {{ therapist.offices[0].zipCode }} {{ therapist.offices[0].city }}
       </address>
       <div id="map"></div>
     </section>
     {% endif %}
 
-    {% if therapist.pictures %}
+    {% if therapist.offices[0].pictures.length %}
     <section>
-      <h3>Le cabinet</h3>
-      {% for picture in therapist.pictures %}
-      <img src={{ picture.thumbnails.large.url }} height=200>
+      {% for picture in therapist.offices[0].pictures %}
+      <img src="{{ picture }}" height=200>
       {% endfor %}
     </section>
     {% endif %}

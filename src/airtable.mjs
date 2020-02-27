@@ -111,13 +111,14 @@ async function transferProviders () {
   const therapies = await Therapy.find()
   const symptoms = await Symptom.find()
   return Promise.all(providers.map(async (atp) => {
+    const pictures = atp.pictures && await Promise.all(atp.pictures.map(async pic => pic.url))
     const offices = [{
       location: { coordinates: atp.latlng.split(',') },
       street: atp.street,
       city: atp.city,
-      zipcode: atp.zipcode,
+      zipCode: atp.zipcode,
       country: 'ch',
-      photos: atp.pictures && await Promise.all(atp.pictures.map(async pic => request({ encoding: null, uri: pic.url })))
+      pictures
     }]
     const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id) : []
 
@@ -149,11 +150,11 @@ async function transferProviders () {
 async function transferAll() {
   await preload()
   console.info('...Importing symptoms')
-  await transferSymptoms()
+  // await transferSymptoms()
   console.info('.......consolidate symptoms')
-  await consolidateSymptoms()
+  // await consolidateSymptoms()
   console.info('...Importing therapies')
-  await transferTherapies()
+  // await transferTherapies()
   console.info('...Importing therapists')
   await transferProviders()
   console.info('completed!')
