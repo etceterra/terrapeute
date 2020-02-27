@@ -13,15 +13,21 @@
       {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies[0].name + ' à ' + therapist.city) }}
       <h1>{{ therapist.therapies[0].name }} à {{ therapist.city }}</h1>
       <h2>{{ therapist.firstname }} {{ therapist.lastname }}</h2>
-      <p>
-        {% for therapy in therapist.therapies %}
-          <span class=tag title="{{ therapy.name }} à {{ therapist.city }}">{{ therapy.name }}</span>
-        {% endfor %}
-      </p>
+
+
       <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements }}">Thérapeute professionnel
-        {% if therapist.agreements.length %}agréé {{ therapist.agreements.join(', ') }}
+        {% if therapist.agreements.length %}agréé
+          {% for agreement in therapist.agreements -%}
+            <span class=tag>{{ agreement }}</span>
+          {% endfor %}
         {% else %}diplomé
         {% endif %}
+      </p>
+
+      <p>
+        {% for therapy in therapist.therapies %}
+          <a href="/therapeutes/{{ therapy.slug }}" class=therapy title="Thérapeutes en {{ therapy.name }} à {{ therapist.city }}">{{ therapy.name }}</a>
+        {% endfor %}
       </p>
     </section>
 
@@ -76,9 +82,9 @@
       {% if therapist.socials.length %}
       {% for social in therapist.socials %}
         {% if social.name == 'facebook' %}
-          <li><i class="fab fa-facebook-square"></i> <a href={{ therapist.socials.facebook }} target=_blank>Page Facebook</a></li>
+          <li><i class="fab fa-facebook-square"></i> <a href="{{ social.url }}" target=_blank>Page Facebook</a></li>
         {% elif social.name == 'website' %}
-          <li><i class="fa fa-desktop"></i> <a href={{ social.url }} target=_blank>Site internet</a></li>
+          <li><i class="fa fa-desktop"></i> <a href="{{ social.url }}" target=_blank>Site internet</a></li>
         {% endif %}
       {% endfor %}
       {% endif %}
@@ -89,7 +95,7 @@
       <li><i class="fa fa-envelope"></i> <a href="mailto:{{ therapist.email }}">Envoyer un email</a></li>
     </ul>
     <button class=primary id=contactButton><i class="fa fa-phone fa-flip-horizontal"> </i> Contacter</button>
-    <a class=button href={{ therapist.url }}/vcf><i class="far fa-address-card"></i> Télécharger la vCard</a>
+    <a class=button href={{ therapist.url }}.vcf><i class="far fa-address-card"></i> Télécharger la vCard</a>
   </aside>
 </article>
 
@@ -157,6 +163,13 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  .therapy {
+    font-size: .7rem;
+    margin-right: .3rem;
+    color: inherit;
+    font-weight: bold;
   }
 
   aside {

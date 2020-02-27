@@ -28,7 +28,7 @@ export default function (app, prefix = '') {
   })
 
   app.get(`${prefix}/:slug0/:slug1/:id.vcf`, async (req, res) => {
-    const therapist = await Therapist.findById(req.params.id)
+    const therapist = await Therapist.findOne({airtableId: req.params.id})
     const vcard = Vcard()
     vcard.firstName = therapist.firstname
     vcard.lastName = therapist.lastname
@@ -54,7 +54,7 @@ export default function (app, prefix = '') {
       vcard.workAddress.postalCode = office.zipCode
       vcard.workAddress.countryRegion = office.country
     }
-    res.set('Content-Type', `text/vcard; name="${therapist.firstname}-${therapist.lastname}.vcf"`)
+    res.set('Content-Type', `text/vcard; name="terrapeute-${therapist.firstname}-${therapist.lastname}.vcf"`)
     res.set('Content-Disposition', `inline; filename="${therapist.firstname}-${therapist.lastname}.vcf"`)
     res.send(vcard.getFormattedString())
   })
