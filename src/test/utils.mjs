@@ -14,7 +14,7 @@ describe('utils', () => {
       assert.equal(bbcode("test me"), 'test me')
     })
     it('should convert single code to html', () => {
-      assert.equal(bbcode("[span]hey[/span]"), '<span>hey</span>')
+      assert.equal(bbcode('[span class="test" href="this@me"]hey[/span]'), '<span class="test" href="this@me">hey</span>')
     })
     it('should convert multiple codes to html', () => {
       assert.equal(bbcode("[span]hey[/span] and [a]link[/a]"), '<span>hey</span> and <a>link</a>')

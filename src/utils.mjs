@@ -40,7 +40,7 @@ function cleanForSearch(phrase) {
 }
 
 function bbcode(str) {
-  return str.replace(/\[(\/?\w+)\]/g, '<$1>')
+  return str.replace(/\[(\/?[^\]]+)\]/g, '<$1>')
 }
 
 
