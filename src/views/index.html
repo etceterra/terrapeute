@@ -35,6 +35,18 @@
   </div>
 </section>
 
+<section id=provider>
+  <h2 class="therapist iconed">Espace thérapeutes</h2>
+  <p>
+    Vous êtes thérapeute, vous exercez en Suisse, et vous souhaitez intégrer le réseau ?
+  </p>
+  <aside>
+    <a href="htps://pro.terrapeute.ch" class="primary button calltoaction" title="Réseau des thérapeutes en Suisse">
+      M'inscrire sur le réseau
+    </a>
+  </aside>
+</section>
+
 <section id=partnership>
   <h2 class="partner iconed">Espace partenaires</h2>
   <p>
@@ -141,15 +153,33 @@
     padding-right: 1rem;
   }
 
+  #therapists {
+    background-image: url('/img/therapist.svg')
+  }
+
   #therapies {
     color: #555;
     font-size: .8rem;
   }
 
+  #provider {
+    background-color: #68b246;
+    color: white;
+  }
+  #provider h1,
+  #provider h2 {
+    background-color: #68b246;
+    color: white;
+  }
+  #provider .button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
   #partnership {
     display: inline-flex;
     flex-flow: column;
-    margin: auto 4.5rem;
   }
 
 
