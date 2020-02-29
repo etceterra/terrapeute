@@ -4,30 +4,30 @@
 @font-face {
   font-family: Muli;
   src: local("Muli"),
-       url("muli/Muli-ExtraLight.ttf");
+       url("./muli/Muli-ExtraLight.ttf");
   font-weight: 100;
 }
 @font-face {
   font-family: Muli;
   src: local("Muli"),
-       url("muli/Muli-Light.ttf");
+       url("./muli/Muli-Light.ttf");
 }
 @font-face {
   font-family: Muli;
   src: local("Muli"),
-       url("muli/Muli-SemiBold.ttf");
+       url("./muli/Muli-SemiBold.ttf");
   font-weight: bold;
 }
 @font-face {
   font-family: Muli;
   src: local("Muli"),
-       url("muli/Muli-Italic.ttf");
+       url("./muli/Muli-Italic.ttf");
   font-style: italic;
 }
 @font-face {
   font-family: Muli;
   src: local("Muli"),
-       url("muli/Muli-SemiBoldItalic.ttf");
+       url("./muli/Muli-SemiBoldItalic.ttf");
   font-weight: bold;
   font-style: italic;
 }
