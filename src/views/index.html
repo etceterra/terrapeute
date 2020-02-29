@@ -140,9 +140,10 @@
     padding: .7rem;
     margin-right: 0;
     border-color: rgb(102, 102, 102, .6);
-    border-right: 0;
-    border-top-left-radius: .5rem;
-    border-bottom-left-radius: .5rem;
+    border-right-width: 0;
+    border-radius: .5rem;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
   #search button {
     border: 1px solid #888;
@@ -182,9 +183,65 @@
     flex-flow: column;
   }
 
-
   .partner {
     background-image: url('/img/balloons.svg');
+  }
+
+  @media screen and (max-width: 900px) {
+    main > section {
+      padding: .8rem;
+    }
+
+    main > section h1,
+    main > section h2,
+    main > section h2.iconed
+    {
+      text-align: center;
+      padding-left: 0;
+      background: none;
+    }
+
+    #therapies a {
+      display: block;
+    }
+
+    #event {
+      width: auto;
+      height: 280px;
+    }
+    #event aside {
+      left: calc((100% - 312px) / 2);
+    }
+
+    #search > div {
+      padding: .3rem;
+    }
+    #search form {
+      flex-direction: column;
+    }
+    #search input {
+      border-right-width: 1px;
+      border-bottom-right-radius: .5rem;
+      border-top-right-radius: .5rem;
+    }
+
+    body > header .container {
+      flex-direction: column;
+      padding: .8rem;
+    }
+    body > header nav {
+      display: flex;
+      justify-content: space-around;
+    }
+    body > header nav a {
+      margin: 0;
+      padding: 25px 0 0 0 !important;
+      background-position: top;
+    }
+
+    body > footer a {
+      padding: .8rem;
+    }
   }
 </style>
 {% endblock %}
