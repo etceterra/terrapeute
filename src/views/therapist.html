@@ -25,9 +25,9 @@
       </p>
 
       <p>
-        {% for therapy in therapist.therapies %}
+        {% for therapy in therapist.therapies -%}
           <a href="/therapeutes/{{ therapy.slug }}" class=therapy title="Thérapeutes en {{ therapy.name }} à {{ therapist.city }}">{{ therapy.name }}</a>
-        {% endfor %}
+        {%- endfor %}
       </p>
     </section>
 
@@ -167,9 +167,12 @@
 
   .therapy {
     font-size: .7rem;
-    margin-right: .3rem;
     color: inherit;
     font-weight: bold;
+  }
+  .therapy:not(:last-of-type)::after {
+    content: "•";
+    margin: 0 .5rem;
   }
 
   aside {
