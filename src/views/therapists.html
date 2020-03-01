@@ -21,6 +21,18 @@
       <h1>{{ therapists|length }} thérapeutes peuvent vous accompagner dans les troubles de {{ q }}</h1>
     </aside>
     {% endif %}
+
+    <section id=filters>
+      <nav class=selector>
+        <h4>Thérapie</h4>
+        <div>
+          {% for therapy in therapies %}
+            <a href=/therapeutes/{{ therapy.slug }} title="Thérapeutes en {{ therapy.name }}">{{ therapy.name }}</a>
+          {% endfor %}
+        </div>
+      </nav>
+    </section>
+
     <div class=wrapper>
       {% for therapist in therapists %}
       <article id="{{ therapist.id }}">
@@ -83,6 +95,7 @@
 
   #content {
     width: calc(100% - 20rem);
+    padding-top: 1rem;
   }
   #content >.wrapper {
     display: flex;
@@ -96,6 +109,10 @@
     height: 100vh;
     position: sticky !important;
     top: 0;
+  }
+
+  #filters {
+    margin: .5rem 1rem;
   }
 
   article {
@@ -193,6 +210,50 @@
     padding: .3rem 1rem;
     text-decoration: none;
   }
+
+  .selector {
+    position: relative;
+    z-index: 1;
+    display: inline;
+  }
+  .selector h4 {
+    font-size: .8rem;
+    border: 1px solid #aaa;
+    border-radius: 1rem;
+    display: inline;
+    padding: .3rem .8rem;
+  }
+  .selector h4::after {
+    content: " ▾";
+  }
+  .selector div {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 32px;
+    background-color: white;
+    max-height: 400px;
+    padding: .5rem;
+    overflow-y: scroll;
+    box-shadow: 1px 1px 3px rgba(88, 88, 88, .2);
+    width: max-content;
+  }
+  .selector:hover div {
+    display: block;
+  }
+  .selector div a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding-right: .2rem;
+    transition: all .3s;
+  }
+  .selector div a:hover {
+    padding-right: 0;
+    padding-left: .2rem;
+    color: #000;
+  }
+
 </style>
 {% if therapists | length %}
   {% import "partials/map.html" as macro %}

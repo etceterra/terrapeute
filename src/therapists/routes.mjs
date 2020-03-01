@@ -17,14 +17,16 @@ export default function (app, prefix = '') {
     }
     const therapistsRaw = await Therapist.aggregate(aggregation)
     const therapists = therapistsRaw.map(t => Therapist(t))
-    res.render('therapists', { therapists, symptoms, q })
+    const therapies = await Therapy.find()
+    res.render('therapists', { therapists, symptoms, therapies, q })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
     const therapy = await Therapy.findOne({ slug: req.params.therapy })
     if(!therapy) res.send('Therapy not found', 404)
     const therapists = await Therapist.find({ therapies: { $in: [therapy] } })
-    res.render('therapists', { therapists, therapy })
+    const therapies = await Therapy.find()
+    res.render('therapists', { therapists, therapy, therapies })
   })
 
   app.get(`${prefix}/:slug0/:slug1/:id.vcf`, async (req, res) => {
