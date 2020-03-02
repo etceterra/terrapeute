@@ -33,9 +33,9 @@ SymptomSchema.pre('save', function(next) {
   return next()
 })
 
-SymptomSchema.statics.search = function (q) {
+SymptomSchema.statics.search = function (q = '') {
   q = cleanForSearch(q)
-  q = q.split(' ').map(w => `"${w}"`).join(' ')
+  q = q.trim().split(' ').map(w => `"${w}"`).join(' ')
   return this.find(
     { $text: { $search: q } },
     { score: { $meta: "textScore" } }
@@ -79,6 +79,22 @@ const TherapistSchema = new mongoose.Schema({
   disabled: Boolean,
   airtableId: String,
 })
+
+TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapists = []) {
+  if(!symptoms.length) return []
+  const aggregation = [
+    { $addFields: { countSymptoms: { $size: "$symptoms" } } },
+    { $sort: { countSymptoms: 1 } },
+    { $match: { symptoms: { $in: symptoms.map(s => s._id) } } }
+  ]
+  if(therapists.length) aggregation.push({ $match: { _id: { $in: therapists.map(t => t._id) }}})
+  const therapistsRaw = await Therapist.aggregate(aggregation)
+  return therapistsRaw.map(t => Therapist(t))
+}
+
+TherapistSchema.query.byTherapy = function (therapy) {
+  return this.find({ therapies: { $in: [therapy] } })
+}
 
 TherapistSchema.virtual('photoUrl').get(function() {
   return this.photo

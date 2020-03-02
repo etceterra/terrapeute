@@ -10,7 +10,7 @@
 {% if therapists | length %}
 <div class=wrapper>
   <section id=content>
-    {% if symptoms %}
+    {% if symptoms.length %}
     <aside class=block id=symptoms>
       <bockquote>Les troubles de {{ q }} sont associées aux
         {% set comma = joiner() %}
@@ -18,7 +18,8 @@
         <span>{{ comma() }} {{ symptom.name }}</span>
         {%- endfor %}.
       </bockquote>
-      <h1>{{ therapists|length }} thérapeutes peuvent vous accompagner dans les troubles de {{ q }}</h1>
+      <h1>{{ therapists|length }} thérapeutes
+        {% if therapy -%} en {{ therapy.name }} {%- endif %} peuvent vous accompagner dans les troubles de {{ q }}</h1>
     </aside>
     {% endif %}
 
@@ -27,7 +28,7 @@
         <h4>Thérapie</h4>
         <div>
           {% for therapy in therapies %}
-            <a href=/therapeutes/{{ therapy.slug }} title="Thérapeutes en {{ therapy.name }}">{{ therapy.name }}</a>
+            <a href=/therapeutes/{{ therapy.slug }}{{ queryParams }} title="Thérapeutes en {{ therapy.name }}">{{ therapy.name }}</a>
           {% endfor %}
         </div>
       </nav>
@@ -281,7 +282,7 @@
       <section>
         <h4>${ therapist.name }</h4>
         <h5>${ therapist.therapy }</h5>
-        <a class="button primary" href="${ therapist.url }"><i class="far fa-id-card"></i> Consulter</a>
+        <a class="button primary" href="${ therapist.url }{{ queryParams }}"><i class="far fa-id-card"></i> Consulter</a>
       </section>
     `)
     marker._therapist = therapist
