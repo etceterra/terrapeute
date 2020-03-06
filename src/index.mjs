@@ -34,6 +34,7 @@ therapistsRoutes(app)
 
 app.get('/therapies', async (req, res) => res.render(`therapies/index.html`))
 app.get('/therapies/:name', async (req, res) => res.render(`therapies/${req.params.name}`))
+app.get('/charte.html', async (req, res) => res.render('charte'))
 app.get('/privacy.html', async (req, res) => res.render('privacy'))
 app.get('/policy.html', async (req, res) => res.render('policy'))
 app.get('/evenements.html', async (req, res) => res.render('events'))
