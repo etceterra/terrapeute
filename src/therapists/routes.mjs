@@ -9,8 +9,8 @@ async function getTherapies() {
 export default function (app, prefix = '') {
 
   app.get('*', async (req, res, next) => {
-    let queryParams = req.url.split('?').pop()
-    if(queryParams) queryParams = '?' + queryParams
+    let queryParams = req.url.split('?')
+    queryParams = queryParams.length > 1 ? queryParams = '?' + queryParams.pop() : ''
     res.locals = { queryParams }
     next()
   })
@@ -19,25 +19,34 @@ export default function (app, prefix = '') {
     let therapists
     let symptoms = []
     const q = req.query.q
-    console.debug(req.query)
+    let therapies
     if(q) {
       symptoms = await Symptom.search(req.query.q)
       therapists = await Therapist.matchSymptoms(symptoms)
+      therapies = await Therapy.find().byTherapists(therapists)
     }
-    else therapists = await Therapist.find()
-    res.render('therapists', { therapists, symptoms, therapies: await getTherapies(), q, queryParams: res.locals.queryParams })
+    else {
+      therapists = await Therapist.find()
+      therapies = await getTherapies()
+    }
+    res.render('therapists', { therapists, symptoms, therapies, q, queryParams: res.locals.queryParams })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
     const therapy = await Therapy.findOne({ slug: req.params.therapy })
     if(!therapy) return res.status(404).send('Therapy not found')
     const q = req.query.q
-    const symptoms = await Symptom.search(q)
     let therapists
-    therapists = await Therapist.find().byTherapy(therapy)
-    therapists = await Therapist.matchSymptoms(symptoms, therapists)
+    let symptoms = []
+    const therapistsAll = await Therapist.find().byTherapy(therapy)
+    if(q) {
+      symptoms = await Symptom.search(q)
+      therapists = await Therapist.matchSymptoms(symptoms, therapistsAll)
+    }
+    else therapists = therapistsAll
+    const therapies = await Therapy.find().byTherapists(therapists)
 
-    res.render('therapists', { therapists, symptoms, therapies: await getTherapies(), therapy, q, queryParams: res.locals.queryParams })
+    res.render('therapists', { therapists, symptoms, therapies, therapy, q, queryParams: res.locals.queryParams })
   })
 
   app.get(`${prefix}/:slug0/:slug1/:id.vcf`, async (req, res) => {
