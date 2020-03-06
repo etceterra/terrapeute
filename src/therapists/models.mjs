@@ -5,11 +5,18 @@ import { cleanForSearch } from '../utils.mjs'
 mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
 
 
-const Therapy = mongoose.model('Therapy', {
+const TherapySchema = mongoose.Schema({
   slug: String,
   name: String,
   airtableId: String,
 })
+
+TherapySchema.query.byTherapists = function(therapists = []) {
+  return this.find({ _id: { $in: [].concat.apply([], therapists.map(t => t.therapies)) }})
+}
+
+const Therapy = mongoose.model('Therapy', TherapySchema)
+
 
 const GeoLocation = new mongoose.Schema({
   coordinates: [Number],
