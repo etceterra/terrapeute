@@ -15,15 +15,16 @@
   </aside>
 </article>
 
-<section id=search>
+<article id=search>
   <div>
+
     <h1>Trouvez un thérapeute</h1>
     <form action="/therapeutes" class=row>
       <input type=search name=q placeholder="Quel est votre symptôme principal ?">
       <button class=primary>Rechercher les thérapeutes</button>
     </form>
 
-    Ou trouvez un thérapeute spécialisé dans un pratique :
+    Ou trouvez un thérapeute spécialisé dans une pratique :
     <nav id=therapies>
       {% for therapy in therapies %}
       <a href=/therapeutes/{{ therapy.slug }}{{ queryParams }}>{{ therapy.name }}</a>
@@ -33,9 +34,9 @@
     <p>Terrapeute est le réseau des <strong>thérapeutes en Suisse</strong>. Quelques soient vos symptômes,
     il y a toujours un <strong>thérapeute professionnel</strong> à proximité.</p>
   </div>
-</section>
+</article>
 
-<section id=provider>
+<article id=provider>
   <h2 class="therapist"><i class="fas fa-user-nurse"></i> Espace thérapeutes</h2>
   <p>
     Vous êtes thérapeute, vous exercez en Suisse, et vous souhaitez intégrer le réseau ?
@@ -45,27 +46,36 @@
       M'inscrire sur le réseau
     </a>
   </aside>
-</section>
+</article>
 
-<section id=partnership>
+<article id=partnership>
   <h2 class="partner iconed">Espace partenaires</h2>
+  <nav>
+    <a href=https://esclarmonde.net target="_blank">
+      <img src="https://esclarmonde.net/wp-content/themes/esclarmonde/img/logo_w.png" id=logo-esclarmonde alt="Ecole d'Esclarmonde">
+    </a>
+    <a href=https://www.satoriz.fr/magasin-bio/satoriz-thoiry/ target="_blank">
+      <img src="https://www.satoriz.fr/wp-content/themes/Satoriz/images/logo.png" id=logo-satoriz alt="Satoriz Thoiry">
+    </a>
+  </nav>
   <p>
     Vous êtes une association, une école, un collectif ou une entité soigneuse de la santé, de l'éducation et des thérapies complémentaires ?
   </p>
   <p>
-    Vous souhaiteriez établir un partenariat et communiquer par notre réseau ?
-    Nous sommes joignables et ouverts à échanger et vous proposer nos offres de partenariat.
+    Vous souhaiteriez établir un partenariat, participer à des événements et communiquer avec notre réseau ?
+    Nous sommes joignables et ouverts pour échanger et vous proposer nos offres de partenariat.
   </p>
   <aside>
     <a href="mailto:contact@terrapeute.ch?subject=Partenariat" class="primary button calltoaction">Prendre contact</a>
   </aside>
-</section>
+</article>
 
 <style>
   main {
     position: relative;
   }
-  main > section {
+  main > section,
+  main > article {
     padding: 5rem 14rem;
   }
 
@@ -78,6 +88,7 @@
   }
 
   #event {
+    padding: 0;
     width: 800px;
     height: 200px;
     overflow: hidden;
@@ -163,24 +174,30 @@
     font-size: .8rem;
   }
 
-  #provider {
-    background-color: #68b246;
-    color: white;
-  }
-  #provider h1,
-  #provider h2 {
-    background-color: #68b246;
-    color: white;
-  }
-  #provider .button {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-  }
-
   #partnership {
     display: inline-flex;
     flex-flow: column;
+  }
+
+  #partnership {
+    background-color: #68b246;
+    color: white;
+  }
+  #partnership nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 1rem 0;
+  }
+  #partnership h1,
+  #partnership h2 {
+    background-color: #68b246;
+    color: white;
+  }
+  #partnership .button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
   }
 
   .partner {
@@ -188,6 +205,7 @@
   }
 
   @media screen and (max-width: 900px) {
+    main > article,
     main > section {
       padding: .8rem;
     }
@@ -211,6 +229,10 @@
     }
     #event aside {
       left: calc((100% - 312px) / 2);
+    }
+
+    #partnership nav {
+      flex-direction: column;
     }
 
     #search > div {
