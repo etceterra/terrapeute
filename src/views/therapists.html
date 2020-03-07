@@ -257,6 +257,17 @@
     color: #000;
   }
 
+  @media screen and (max-width: 900px) {
+    #content {
+      width: auto;
+    }
+    article {
+      min-width: auto;
+    }
+    #map-container {
+      display: none;
+    }
+  }
 </style>
 {% if therapists | length %}
   {% import "partials/map.html" as macro %}
