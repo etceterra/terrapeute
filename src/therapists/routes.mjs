@@ -23,7 +23,7 @@ export default function (app, prefix = '') {
     if(q) {
       symptoms = await Symptom.search(req.query.q)
       therapists = await Therapist.matchSymptoms(symptoms)
-      therapies = await Therapy.find().byTherapists(therapists)
+      therapies = await Therapy.find()
     }
     else {
       therapists = await Therapist.find()
@@ -44,7 +44,7 @@ export default function (app, prefix = '') {
       therapists = await Therapist.matchSymptoms(symptoms, therapistsAll)
     }
     else therapists = therapistsAll
-    const therapies = await Therapy.find().byTherapists(therapists)
+    const therapies = await Therapy.find()
 
     res.render('therapists', { therapists, symptoms, therapies, therapy, q, queryParams: res.locals.queryParams })
   })
@@ -76,7 +76,16 @@ export default function (app, prefix = '') {
 
   app.get(`${prefix}/:slug0/:slug1/:airtableId`, async (req, res) => {
     let therapist = await Therapist.findOne({ airtableId: req.params.airtableId }).populate('therapies')
+    const dict = {
+      'fr': 'français',
+      'en': 'anglais',
+      'de': 'allemand',
+      'nl': 'néerlandais',
+      'it': 'italien',
+      'ru': 'russe',
+      'es': 'espagnol',
+    }
     if(!therapist) res.status(404).send('Therapist not found')
-    res.render('therapist', { therapist })
+    res.render('therapist', { therapist, dict })
   })
 }

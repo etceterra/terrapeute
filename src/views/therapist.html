@@ -38,7 +38,11 @@
       </p>
 
       {% if therapist.languages %}
-      <p>{{ therapist.name }} parle {{ therapist.languages|join(', ') }}</p>
+      <p>{{ therapist.name }} parle {% for lang in therapist.languages %}
+        {%- if loop.last %} et {% elif not loop.first -%}, {% endif %}
+        {{- dict[lang] -}}
+        {%- endfor -%}
+      </p>
       {% endif %}
     </section>
 
