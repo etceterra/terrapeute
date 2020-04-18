@@ -23,24 +23,24 @@ const synonyms = [
   { word: 'mal', synonyms: ['douleur', 'bobo', 'douloureux', 'douloureuse'] },
   { word: 'inflammation', synonyms: ['brulure', 'gonflement', 'gonfle', 'gonfler', 'rougeur', 'picotement'] },
 { word: "abandonner", synonyms: "abandonnement abandon".split(' ')},
-{ word: "addiction", synonyms: "accoutumance dependance assujettissement asservissement soumission chaine esclavage esclave domination contrainte enchainement assuetude".split(' ')},
-{ word: "ado", synonyms: "ados adolescent adolescente ephebe jeune teenager".split(' ')},
-{ word: "agacer", synonyms: "s'emporter emportement irascibilite facher agacement susceptible susceptibilite exasperer exasperation".split(' ')},
+{ word: "addiction", synonyms: "accoutumance dependance".split(' ')},
+{ word: "ado", synonyms: "adolescent ephebe jeune teenager".split(' ')},
+{ word: "agacer", synonyms: "s'emporter emportement irascibilite facher agacement susceptible susceptibilite exasperer enerver exasperer".split(' ')},
 { word: "aliment", synonyms: "nourriture bouffe boustifaille becquetance denree".split(' ')},
 { word: "allergie", synonyms: "intolerance".split(' ')},
-{ word: "anal", synonyms: "anale anus cul trou-de-balle fesse rectum rectal rectale".split(' ')},
+{ word: "anal", synonyms: "anale anus cul trou-de-balle fesse rectum rectal rectale derche".split(' ')},
 { word: "appareil", synonyms: "systeme".split(' ')},
 { word: "appetit", synonyms: "faim fringale".split(' ')},
-{ word: "articulation", synonyms: "machoire nuque cervicale colonne vertebrale CV vertebre hanche bassin epaule bras coude poignet main doigt phalange pouce index majeur annulaire Jambe genou pied cheville malleole cote arthrologie syndesmologie temporo-mandibulaire incudo-malleolaire incudo-stapedienne gomphose suture atlanto-occipitale atlanto-axoïdienne atlanto-axoïdienne intervertebrale lombo-sacree intercorporeale symphyse zygapophysaire costo-vertebrale costo-corporeale costo-transversaire interchondrale sterno-costale manubrio-sternale xipho-sternale sterno-claviculaire sacro-coccygienne intercoccygienne sacro-iliaque pubienne gleno-humerale scapulo-humerale acromio-claviculaire Sterno-costo-claviculaire sous-acromio-deltoïdienne scapulo-thoracique humero-ulnaire humero-radiale radio-ulnaire radio-carpienne carpo-metacarpienne carpe intermetacarpienne metacarpo-phalangienne interphalangienne coxo-femorale tibio-femorale patello-femorale tibiofibulaire talo-crurale sub-talaire tarse tarso-metatarsienne intermetatarsienne metatarso-phalangienne synovie".split(' ')},
+{ word: "articulation", synonyms: "hanche bassin epaule bras coude poignet main doigt phalange pouce index majeur annulaire Jambe genou pied cheville malleole cote arthrologie syndesmologie temporo-mandibulaire incudo-malleolaire incudo-stapedienne gomphose suture atlanto-occipitale atlanto-axoidienne atlanto-axoidienne intervertebrale lombo-sacree intercorporeale symphyse zygapophysaire costo-vertebrale costo-corporeale costo-transversaire interchondrale sterno-costale manubrio-sternale xipho-sternale sterno-claviculaire sacro-coccygienne intercoccygienne sacro-iliaque pubienne gleno-humerale scapulo-humerale acromio-claviculaire Sterno-costo-claviculaire sous-acromio-deltoidienne scapulo-thoracique humero-ulnaire humero-radiale radio-ulnaire radio-carpienne carpo-metacarpienne carpe intermetacarpienne metacarpo-phalangienne interphalangienne coxo-femorale tibio-femorale patello-femorale tibiofibulaire talo-crurale sub-talaire tarse tarso-metatarsienne intermetatarsienne metatarso-phalangienne synovie".split(' ')},
 { word: "ballonnement" , synonyms: "tiraillement convulsion spasme spasmodique colique pincement retraction pesanteur".split(' ')},
-{ word: "begayer", synonyms: "balbutiement bredouillement begayage balbutier balbisme bafouillage begaiement".split(' ')},
+{ word: "begayer", synonyms: "balbutiement bredouillement begayage balbutier balbisme bafouillage begaier".split(' ')},
 { word: "bouche", synonyms: "bucco buccal buccale stomatologie bec gueule palais palatine luette amygdale langue gensive levre gosier".split(' ')},
 { word: "bruit", synonyms: "sifflement bourdonnement grondement bruissement chuintement cornement sibilance sibilation sifflet stridulation assourdissant assourdissante".split(' ')},
 { word: "cheveu", synonyms: "cheveux capilaire poil tif touffe chevelure tignasse criniere toison".split(' ')},
 { word: "claudiquer", synonyms: "boiter boitiller clopiner clocher boiterie".split(' ')},
 { word: "cœur", synonyms: "coeur cardiaque cardia cardi myocarde endocarde".split(' ')},
 { word: "contracter", synonyms: "contraction contracture crispation convulsion spasme spasmodique constriction crampe tetanie trismus contractilite raideur".split(' ')},
-{ word: "corps" , synonyms: "colonne vertebrale CV vertebre pouce coude genou hanche cervicale epaule doigt majeur index annulaire  bras Jambe poignet main pied cheville phalange orteil hallux machoire dos cou nuque lombaire fesse cuisse mollet malleole cotes membre".split(' ')},
+{ word: "corps" , synonyms: "corporel".split(' ')},
 { word: "decrochage" , synonyms: "abandon renoncement delaissement delaisser renonciation renoncer demission demissionner capitulation capituler rupture desinteresser decrocher".split(' ')},
 { word: "demangeaison", synonyms: "piquer piquant gratter demanger picoter picotement irriter grattage irritation".split(' ')},
 { word: "dent", synonyms: "incisive canine molaire premolaire chicotte stomatologie".split(' ')},
@@ -52,11 +52,11 @@ const synonyms = [
 { word: "enfant", synonyms: "gamin gosse moutard mioche mome rejeton marmot bambin enfance enfantin enfantine".split(' ')},
 { word: "etirer", synonyms: "extension etirement".split(' ')},
 { word: "fatigue", synonyms: "epuisement ereintement extenuation harassement surmenage rompu fatigabilite fatiguant asthenie".split(' ')},
-{ word: "femme", synonyms: "fille nenette nana donzelle".split(' ')},
-{ word: "flatuler", synonyms: "air gaz pet peter flatulence ".split(' ')},
+{ word: "femme", synonyms: "fille nenette nana donzelle gonzesse".split(' ')},
+{ word: "flatuler", synonyms: "air gaz pet peter flatulence".split(' ')},
 { word: "genou", synonyms: "menisque ligament croise rotule patella".split(' ')},
 { word: "gonfler", synonyms: "gonflement enfler enflement boursoufler tumefaction enflure".split(' ')},
-{ word: "homme" , synonyms: "mec gars male garçon masculin gonze masculinite".split(' ')},
+{ word: "homme" , synonyms: "mec gars male garcon masculin gonze masculinite".split(' ')},
 { word: "insuffisance", synonyms: "manque faible defaut deficience deficit carence rarete".split(' ')},
 { word: "intestin", synonyms: "colon".split(' ')},
 { word: "jambe", synonyms: "guibole gambette".split(' ')},
@@ -65,11 +65,11 @@ const synonyms = [
 { word: "maigre", synonyms: "maigrir amaigrir mince decharne chetif squelettique rachitique gringalet maigrichon".split(' ')},
 { word: "main", synonyms: "patte paluche menotte".split(' ')},
 { word: "manger" , synonyms: "goinfrer s'empiffrer bouffer bafrer s'envoyer goberger bourrer gloutonner".split(' ')},
-{ word: "muscle", synonyms: "abaisseur adducteur abducteur amygdalo-glosse ancone extenseur flechisseur elevateur ancone angulaire ary-epiglottique arytenoïdien atloïdo-mastoïdien auriculaire anterieur posterieur interne externe moyen superieur inferieur droit oblique lateral medial transverse azygos luette biceps brachial crural femoral brachioradial buccinateur bulbo-caverneux canin carre crural lombes sylvius ciliaire cleido-occipital coccygien constricteur coraco-brachial corrugateur court radial fibulaire palmaire supinateur pronateur couturier sartorius crico-arytenoïdiens crico-arytenoïdiens crico-pharyngien crico-thyroïdiens vaste intermediaire cubital Deltoïde demi-membraneux demi-tendineux dentele radial diaphragme digastrique scapulo-jugulo-hyoïdien abdomen eminence hypothenar thenar marteau ulnaire frontal gastrocnemien mollet jumeau genio-glosse genio-hyoïdien gracile complexus dentele latissimus dorsi dorsal fessier pectoral psoas rhomboïde rond sus-maxillo-labial zygomatique hyo-glosse humero-stylo-brachial ilio-costal ilio-psoas infra-epineux sous-epineux intercostaux interepineux interosseux dorsaux ischio-caverneux jambier labial lacrymal lombricaux longissimus manducateur masseter mentonnier sus-maxillo-labial mylo-hyoïdien Myrtiforme nasal naso-labial obturateur occipital occipito-frontal oculomoteur omo-hyoïdien oppposant orbiculaire orbito-palpebral palatoglosse palatopharyngien palato-glosse muscle palato-pharyngien peaucier pectine pedieux petro-pharyngien pharyngo-glosse piriforme platysma poplite pterygoïdien lateral pyramidal quadriceps releveur rhomboïde risorius salpingo-pharyngien scalene semi-epineux semi-membraneux semi-tendineux soleaire sourcilier ischio-jambier gracil sous-clavier sphincter splenius stapedien sterno-cleido-hyoïdien sterno-cleido-mastoïdien sterno-cleido-occipito-mastoïdien sterno-cleido-thyroïdien sterno-hyoïdien sterno-thyroïdien stylo-glosse stylo-hyoïdien stylo-pharyngien subclavier sous-clavier subscapulaire supinateur supra-epineux sus-epineux temporal tenseur fascia lata thyro-arytenoïdien thyro-hyoïdien tibial jambier transversaires-epineux transverse trapeze perinee triangulaire triceps brachial sural quadriceps uvulaire pectoraux abdominaux abdo".split(' ')},
+{ word: "muscle", synonyms: "abaisseur adducteur abducteur amygdalo-glosse ancone extenseur flechisseur elevateur ancone angulaire ary-epiglottique arytenoidien atloido-mastoidien auriculaire anterieur posterieur interne externe moyen superieur inferieur droit oblique lateral medial transverse azygos luette biceps brachial crural femoral brachioradial buccinateur bulbo-caverneux canin carre crural lombes sylvius ciliaire cleido-occipital coccygien constricteur coraco-brachial corrugateur court radial fibulaire palmaire supinateur pronateur couturier sartorius crico-arytenoidiens crico-arytenoidiens crico-pharyngien crico-thyroidiens vaste intermediaire cubital Deltoide demi-membraneux demi-tendineux dentele radial diaphragme digastrique scapulo-jugulo-hyoidien abdomen eminence hypothenar thenar marteau ulnaire frontal gastrocnemien mollet jumeau genio-glosse genio-hyoidien gracile complexus dentele latissimus dorsi dorsal fessier pectoral psoas rhomboide rond sus-maxillo-labial zygomatique hyo-glosse humero-stylo-brachial ilio-costal ilio-psoas infra-epineux sous-epineux intercostaux interepineux interosseux dorsaux ischio-caverneux jambier labial lacrymal lombricaux longissimus manducateur masseter mentonnier sus-maxillo-labial mylo-hyoidien Myrtiforme nasal naso-labial obturateur occipital occipito-frontal oculomoteur omo-hyoidien oppposant orbiculaire orbito-palpebral palatoglosse palatopharyngien palato-glosse muscle palato-pharyngien peaucier pectine pedieux petro-pharyngien pharyngo-glosse piriforme platysma poplite pterygoidien lateral pyramidal quadriceps releveur rhomboide risorius salpingo-pharyngien scalene semi-epineux semi-membraneux semi-tendineux soleaire sourcilier ischio-jambier gracil sous-clavier sphincter splenius stapedien sterno-cleido-hyoidien sterno-cleido-mastoidien sterno-cleido-occipito-mastoidien sterno-cleido-thyroidien sterno-hyoidien sterno-thyroidien stylo-glosse stylo-hyoidien stylo-pharyngien subclavier sous-clavier subscapulaire supinateur supra-epineux sus-epineux temporal tenseur fascia lata thyro-arytenoidien thyro-hyoidien tibial jambier transversaires-epineux transverse trapeze perinee triangulaire triceps brachial sural quadriceps uvulaire pectoraux abdominaux abdo".split(' ')},
 { word: "nausee", synonyms: "haut-le-cœur haut-le-coeur ecoeurement degoût mal-de-cœur mal-de-coeur mal-de-mer remontee".split(' ')},
 { word: "nerveux", synonyms: "agiter exciter agitation exitation".split(' ')},
-{ word: "oreille", synonyms: "ouïe ouie audition ecoute entendre ouïr ouir esgourde".split(' ')},
-{ word: "os", synonyms: "parietal temporal occipital sphenoide ethmoide vomer maxillaire lacrymal palatin cornet nasal zygomatique mandibule vertebre hyoïde sternum cote sacrum coccyx omoplate scapula clavicule manubrium humerus radius ulna cubitus carpe scaphoide lunatum triquetrum pisiforme trapeze trapezoide capitatum hamatum metacarpien phalange sesamoide coxal ilium pubis hanche femur patella rotule tibia fibula perone tarse calcaneus talus cuboide naviculaire cuneiforme metatarsien".split(' ')},
+{ word: "oreille", synonyms: "ouie ouie audition ecoute entendre ouir ouir esgourde".split(' ')},
+{ word: "os", synonyms: "parietal temporal occipital sphenoide ethmoide vomer maxillaire lacrymal palatin cornet nasal zygomatique mandibule vertebre hyoide sternum cote sacrum coccyx omoplate scapula clavicule manubrium humerus radius ulna cubitus carpe scaphoide lunatum triquetrum pisiforme trapeze trapezoide capitatum hamatum metacarpien phalange sesamoide coxal ilium pubis hanche femur patella rotule tibia fibula perone tarse calcaneus talus cuboide naviculaire cuneiforme metatarsien".split(' ')},
 { word: "parent", synonyms: "papa maman pere mere".split(' ')},
 { word: "peau", synonyms: "derme epiderme hypoderme cutanee".split(' ')},
 { word: "persistant", synonyms: "continu constant permanent dure durable incessant continuel sempiternel".split(' ')},
@@ -125,9 +125,10 @@ function cleanForSearch(phrase) {
       if(w.endsWith('elle')) w = w.slice(0, -3) + 'el'
       if(w.endsWith('ee')) w = w.slice(0, -1)
       if(w.endsWith('ation')) w = w.slice(0, -5) + 'er'
-      if(w.endsWith('ation')) w = w.slice(0, -5) + 'er'
       if(w.endsWith('euse')) w = w.slice(0, -4) + 'eu'
       if(w.endsWith('eux')) w = w.slice(0, -3) + 'eu'
+      if(w.endsWith('ement')) w = w.slice(0, -5) + 'er'
+      if(w.endsWith('age')) w = w.slice(0, -3) + 'er'
       const synonym = synonyms.find(s => s.synonyms.includes(w))
       if(synonym) w = synonym.word
       return w
