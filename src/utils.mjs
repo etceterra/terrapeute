@@ -42,7 +42,7 @@ const synonyms = [
 { word: "corps" , synonyms: "corporel".split(' ')},
 { word: "decrochage" , synonyms: "abandon renoncement delaissement delaisser renonciation renoncer demission demissionner capitulation capituler rupture desinteresser decrocher".split(' ')},
 { word: "demangeaison", synonyms: "piquer piquant gratter demanger picoter picotement irriter grattage irritation".split(' ')},
-{ word: "dent", synonyms: "incisive canine molaire premolaire chicotte stomatologie".split(' ')},
+{ word: "dent", synonyms: "incisive canine molaire premolaire chicotte".split(' ')},
 { word: "depression", synonyms: "abattement aneantissement effondrement".split(' ')},
 { word: "difficulte", synonyms: "peine difficile penible ardu complique".split(' ')},
 { word: "diminution", synonyms: "abaissement degradation reduction declin depreciation attenuation appauvrissement amoindrissement amenuisement ralentissement rarefaction ischemie ischemique affaiblissement deterioration".split(' ')},
