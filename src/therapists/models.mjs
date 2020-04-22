@@ -43,6 +43,7 @@ SymptomSchema.pre('save', function(next) {
 SymptomSchema.statics.search = function (q = '') {
   q = cleanForSearch(q)
   q = q.trim().split(' ').map(w => `"${w}"`).join(' ')
+  console.debug('searching for', q)
   return this.find(
     { $text: { $search: q } },
     { score: { $meta: "textScore" } }
