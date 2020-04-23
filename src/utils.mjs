@@ -14,14 +14,14 @@ function slugify(string) {
 }
 
 // Force these words to be preserved
-const whitelist = ['os', 'dos']
+const whitelist = ['os', 'dos', 'pus']
 // 3 letters or more list of words to be ignored
 const blacklist = ['alors', 'aucun', 'aussi', 'autre', 'avant', 'avec', 'avoir', 'bon', 'car', 'cela', 'ces', 'ceux', 'chaque', 'comme', 'comment', 'dans', 'des', 'dedans', 'dehors', 'depuis', 'devrait', 'doit', 'donc', 'debut', 'elle', 'elles', 'encore', 'essai', 'est', 'fait', 'faites', 'fois', 'font', 'hors', 'ici', 'ils', 'juste', 'les', 'leur', 'maintenant', 'mais', 'mes', 'mien', 'moins', 'mon', 'mot', 'meme', 'ni', 'notre', 'nous', 'par', 'parce', 'pas', 'peut', 'peu', 'plupart', 'pour', 'pourquoi', 'quand', 'que', 'quel', 'qui', 'sans', 'ses', 'seulement', 'sien', 'son', 'sont', 'sous', 'soyez', 'sujet', 'sur', 'tandis', 'tellement', 'tels', 'tes', 'ton', 'tous', 'tout', 'trop', 'tres', 'voient', 'vont', 'votre', 'vous', 'etaient', 'etat', 'etions', 'ete', 'etre', 'les', 'des', 'aux', 'dans', 'pour', 'lie', 'liee',
-"accident", "baisse", "bobo", "brulure", "chronique", "chute", "crise", "diminution", "douleur", "douloureuse", "douloureux", "dysfonctionnement", "etat", "fievre", "gonflement", "hypersensibilite", "infection", "lesion", "mal", "maladie", "malaise", "manque", "organe", "perte", "probleme", "reaction", "rouge", "rythme", "sensation", "syndrome", "trouble"]
+"accident", "baisse", "bobo", "brulure", "chronique", "chute", "crise", "diminution", "douleur", "douloureuse", "douloureux", "dysfonctionnement", "etat", "fievre", "hypersensibilite", "infection", "lesion", "mal", "maladie", "malaise", "manque", "organe", "perte", "probleme", "reaction", "rouge", "rythme", "sensation", "syndrome", "trouble"]
 
 const synonyms = [
-  { word: 'mal', synonyms: ['douleur', 'bobo', 'douloureux', 'douloureuse'] },
-  { word: 'inflammation', synonyms: ['brulure', 'gonflement', 'gonfle', 'gonfler', 'rougeur', 'picotement', 'inflammatoire', 'enflame', 'enflamer'] },
+  { word: "mal", synonyms: "douleur bobo douloureux douloureuse".split(' ') },
+  { word: "inflammation", synonyms: "brulure inflammatoire enflame enflamer inflamer enflammer inflammer".split(' ') },
 { word: "abandonner", synonyms: "abandonnement abandon".split(' ')},
 { word: "addiction", synonyms: "accoutumance dependance".split(' ')},
 { word: "ado", synonyms: "adolescent ephebe jeune teenager".split(' ')},
@@ -54,7 +54,7 @@ const synonyms = [
 { word: "femme", synonyms: "fille nenette nana donzelle gonzesse".split(' ')},
 { word: "flatuler", synonyms: "air gaz pet peter flatulence".split(' ')},
 { word: "genou", synonyms: "menisque ligament croise rotule patella".split(' ')},
-{ word: "gonfler", synonyms: "gonflement enfler enflement boursoufler tumefaction enflure".split(' ')},
+{ word: "gonfler", synonyms: "enfler boursoufler tumefaction tumefier enflure".split(' ')},
 { word: "homme" , synonyms: "mec gars male garcon masculin gonze masculinite".split(' ')},
 { word: "insuffisance", synonyms: "manque faible defaut deficience deficit carence rarete".split(' ')},
 { word: "intestin", synonyms: "colon".split(' ')},
