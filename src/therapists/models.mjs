@@ -86,6 +86,7 @@ const TherapistSchema = new mongoose.Schema({
   expirationDate: Date,
   disabled: Boolean,
   airtableId: String,
+  extraData: Object,
 })
 
 TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapists = []) {
@@ -119,6 +120,16 @@ TherapistSchema.virtual('city').get(function() {
 TherapistSchema.virtual('url').get(function() {
   return `/${this.slug}/${this.airtableId}`
 })
+
+TherapistSchema.methods.toJSON = function() {
+  const keys = ['firstname', 'lastname', 'phone', 'email', 'offices', 'extraData']
+  const data = keys.reduce((data, k) => {
+    data[k] = this[k]
+    return data
+  }, {})
+  data.id = this._id
+  return data
+}
 
 const Therapist = mongoose.model('Therapist', TherapistSchema)
 

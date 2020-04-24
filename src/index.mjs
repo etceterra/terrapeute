@@ -21,7 +21,8 @@ template.addFilter('markdown', (str = '') => nunjucks.runtime.markSafe(marked(st
 template.addFilter('bbcode', (str = '') => nunjucks.runtime.markSafe(bbcode(str)))
 
 app.use(express.static('assets'))
-app.use(bodyparser.urlencoded({ extended: false }))
+// app.use(bodyparser.urlencoded({ extended: false }))
+app.use(express.json())
 
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find({}).sort({ slug: 1 })
