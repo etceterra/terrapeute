@@ -8,6 +8,7 @@ import config from './config.mjs'
 import articlesRoutes from './articles/routes.mjs'
 import adminRoutes from './admin/routes.mjs'
 import therapistsRoutes from './therapists/routes.mjs'
+import apiRoutes from './api/routes.mjs'
 
 import { Therapy } from './therapists/models.mjs'
 
@@ -29,6 +30,7 @@ app.get('/', async (req, res) => {
 
 articlesRoutes(app, '/journal')
 adminRoutes(app, '/admin')
+apiRoutes(app, '/api')
 
 therapistsRoutes(app)
 
