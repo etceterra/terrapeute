@@ -76,7 +76,7 @@ const synonyms = [
 { word: "pied", synonyms: "peton panard pinceau arpion nougat plantaire".split(' ')},
 { word: "poitrine", synonyms: "torse poitrail thorax buste".split(' ')},
 { word: "reccurent", synonyms: "cyclique periodique renaissant regulier".split(' ')},
-{ word: "regle", synonyms: "menstruation menstruel sang amenorrhee dysmenorrhee menorragies hypermenorrhee hypomenorrhee premenstruel SPM polymenorrhee oligomenorrhee spaniomenorrhee metrorragie menometrorragie".split(' ')},
+{ word: "regle", synonyms: "menstruation menstruel amenorrhee dysmenorrhee menorragies hypermenorrhee hypomenorrhee premenstruel SPM polymenorrhee oligomenorrhee spaniomenorrhee metrorragie menometrorragie".split(' ')},
 { word: "relation", synonyms: "rapport frequentation".split(' ')},
 { word: "respirer", synonyms: "inspirer expirer inspiration expiration respiration respiratoire inspiratoire expiratoire".split(' ')},
 { word: "roter", synonyms: "rot roter eructation hoquet air gaz".split(' ')},
