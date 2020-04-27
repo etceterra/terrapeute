@@ -68,6 +68,7 @@ const synonyms = [
 { word: "manger" , synonyms: "goinfrer s'empiffrer bouffer bafrer s'envoyer goberger bourrer gloutonner".split(' ')},
 { word: "musculature", synonyms: "adducteur abducteur oblique biceps brachial fémoral couturier sartorius  Deltoïde dentelé hypothénar thénar  gastrocnémien  gracile  pectoral pectoraux psoas rhomboïde zygomatique epineux intercostaux ischio masseter peaucier pectine piriforme quadriceps rhomboïde scalène soléaire jumeau splénius sterno-cléido-mastoïdien supinateur lata tibial triceps sural jambier".split(' ')},
 { word: "nausee", synonyms: "haut-le-cœur haut-le-coeur ecoeurement degoût mal-de-cœur mal-de-coeur mal-de-mer remontee".split(' ')},
+{ word: "muscle", synonyms: "musculaire musculation musculairement".split(' ') },
 { word: "nerveux", synonyms: "agiter exciter agitation exitation".split(' ')},
 { word: "oreille", synonyms: "ouie ouie audition ecoute entendre ouir ouir esgourde".split(' ')},
 { word: "os", synonyms: "parietal temporal occipital sphenoide ethmoide vomer maxillaire lacrymal palatin cornet nasal zygomatique mandibule vertebre hyoide sternum cote sacrum coccyx omoplate scapula clavicule manubrium humerus radius ulna cubitus carpe scaphoide lunatum triquetrum pisiforme trapeze trapezoide capitatum hamatum metacarpien phalange sesamoide coxal ilium pubis hanche femur patella rotule tibia fibula perone tarse calcaneus talus cuboide naviculaire cuneiforme metatarsien".split(' ')},
