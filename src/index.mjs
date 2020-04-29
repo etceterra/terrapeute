@@ -24,6 +24,13 @@ app.use(express.static('assets'))
 // app.use(bodyparser.urlencoded({ extended: false }))
 app.use(express.json())
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Origin', '*.aposto.ch')
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, OPTIONS')
+  next()
+})
+
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find({}).sort({ slug: 1 })
   res.render('index', { therapies })
