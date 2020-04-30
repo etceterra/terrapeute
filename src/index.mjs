@@ -27,7 +27,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', async (req, res) => {
-  const therapies = await Therapy.find({}).sort({ slug: 1 })
+  const therapies = await Therapy.find().sort({ slug: 1 })
   res.render('index', { therapies })
 })
 

@@ -113,7 +113,7 @@ async function transferProviders () {
   return Promise.all(providers.map(async (atp) => {
     const pictures = atp.pictures && await Promise.all(atp.pictures.map(async pic => pic.url))
     const offices = [{
-      location: { coordinates: atp.latlng.split(',') },
+      location: { coordinates: (atp.latlng || '').split(',') },
       street: atp.street,
       city: atp.city,
       zipCode: atp.zipcode,
@@ -129,6 +129,7 @@ async function transferProviders () {
       email: atp.email,
       phone: atp.phone,
       description: atp.description,
+      disabled: atp.disabled,
       socials: Object.keys(atp.socials).map(name => ({ name, url: atp.socials[name] })) || [],
       offices: offices || [],
       agreements: atp.agreements || [],

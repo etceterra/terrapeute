@@ -101,8 +101,13 @@ TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapist
   return therapistsRaw.map(t => Therapist(t))
 }
 
+TherapistSchema.query.enabled = function (args) {
+  args = Object.assign({ disabled: { $ne: true } }, args)
+  return this.find(args)
+}
+
 TherapistSchema.query.byTherapy = function (therapy) {
-  return this.find({ therapies: { $in: [therapy] } })
+  return this.enabled({ therapies: { $in: [therapy] } })
 }
 
 TherapistSchema.virtual('photoUrl').get(function() {

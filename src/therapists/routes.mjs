@@ -26,7 +26,7 @@ export default function (app, prefix = '') {
       therapies = await Therapy.find()
     }
     else {
-      therapists = await Therapist.find()
+      therapists = await Therapist.find().enabled()
       therapies = await getTherapies()
     }
     res.render('therapists', { therapists, symptoms, therapies, q, queryParams: res.locals.queryParams })
@@ -38,7 +38,7 @@ export default function (app, prefix = '') {
     const q = req.query.q
     let therapists
     let symptoms = []
-    const therapistsAll = await Therapist.find().byTherapy(therapy)
+    const therapistsAll = await Therapist.find().enabled().byTherapy(therapy)
     if(q) {
       symptoms = await Symptom.search(q)
       therapists = await Therapist.matchSymptoms(symptoms, therapistsAll)
