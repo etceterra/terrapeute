@@ -1,7 +1,6 @@
 import express from 'express'
 import cors from 'cors'
 import nunjucks from 'nunjucks'
-import bodyparser from 'body-parser'
 import marked from 'marked'
 
 import { bbcode } from './utils.mjs'
@@ -22,7 +21,6 @@ template.addFilter('markdown', (str = '') => nunjucks.runtime.markSafe(marked(st
 template.addFilter('bbcode', (str = '') => nunjucks.runtime.markSafe(bbcode(str)))
 
 app.use(express.static('assets'))
-// app.use(bodyparser.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(cors())
 

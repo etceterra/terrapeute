@@ -86,7 +86,6 @@ const TherapistSchema = new mongoose.Schema({
   expirationDate: Date,
   disabled: Boolean,
   airtableId: String,
-  extraData: Object,
 })
 
 TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapists = []) {
@@ -126,17 +125,33 @@ TherapistSchema.virtual('url').get(function() {
   return `/${this.slug}/${this.airtableId}`
 })
 
-TherapistSchema.methods.toJSON = function() {
-  const keys = ['firstname', 'lastname', 'phone', 'email', 'offices', 'extraData']
-  const data = keys.reduce((data, k) => {
-    data[k] = this[k]
-    return data
-  }, {})
-  data.id = this._id
+TherapistSchema.virtual('extraData').get(async function() {
+  const inst = await TherapistData.findOne({ therapistAirtableId: this.airtableId })
+  const data = inst.data || {epmty: true}
   return data
+})
+
+TherapistSchema.methods.toJSON = async function() {
+  const keys = ['firstname', 'lastname', 'phone', 'email', 'offices']
+  const values = keys.reduce((value, k) => {
+    value[k] = this[k]
+    return value
+  }, {})
+  values.id = this._id
+  const therapistData = await TherapistData.findOne({ therapistAirtableId: this.airtableId })
+  values.extraData = therapistData.data
+  return values
 }
 
 const Therapist = mongoose.model('Therapist', TherapistSchema)
 
 
-export { Therapist, Therapy, Symptom }
+const TherapistDataSchema = new mongoose.Schema({
+  therapistAirtableId: { type: String, unique: true },
+  data: Object,
+})
+
+const TherapistData = mongoose.model('TherapistData', TherapistDataSchema)
+
+
+export { Therapist, TherapistData, Therapy, Symptom }
