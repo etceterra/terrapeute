@@ -139,7 +139,7 @@ TherapistSchema.methods.toJSON = async function() {
   }, {})
   values.id = this._id
   const therapistData = await TherapistData.findOne({ therapistAirtableId: this.airtableId })
-  values.extraData = therapistData.data
+  values.extraData = therapistData ? therapistData.data : {}
   return values
 }
 
