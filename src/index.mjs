@@ -32,7 +32,7 @@ app.get('/', async (req, res) => {
 })
 
 articlesRoutes(app, '/journal')
-adminRoutes(app, '/admin')
+// adminRoutes(app, '/admin')
 apiRoutes(app, '/api')
 
 therapistsRoutes(app)
