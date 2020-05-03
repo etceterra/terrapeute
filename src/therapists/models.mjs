@@ -1,14 +1,11 @@
 import mongoose from 'mongoose'
 import { cleanForSearch } from '../utils.mjs'
-
-
-mongoose.connect('mongodb://localhost:27017/terrapeute', {useNewUrlParser: true, useUnifiedTopology: true })
-
+import db from '../db.mjs'  // connect db
 
 const TherapySchema = mongoose.Schema({
   slug: String,
   name: String,
-  airtableId: String,
+  airtableId: {type: String, unique: true},
 })
 
 TherapySchema.query.byTherapists = function(therapists = []) {
