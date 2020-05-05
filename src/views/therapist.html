@@ -39,7 +39,7 @@
 
       {% if therapist.languages %}
       <p>{{ therapist.name }} parle {% for lang in therapist.languages %}
-        {%- if loop.last %} et {% elif not loop.first -%}, {% endif %}
+        {%- if loop.last and not loop.first %} et {% elif not loop.first -%}, {% endif %}
         {{- dict[lang] -}}
         {%- endfor -%}
       </p>
