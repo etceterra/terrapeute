@@ -34,7 +34,7 @@
     <section>
       <h3>À propos</h3>
       <p>
-        {{ therapist.description }}
+        {{ therapist.description | markdown }}
       </p>
 
       {% if therapist.languages %}
