@@ -9,6 +9,7 @@ import articlesRoutes from './articles/routes.mjs'
 import adminRoutes from './admin.mjs'
 import therapistsRoutes from './therapists/routes.mjs'
 import apiRoutes from './api/routes.mjs'
+import airtable from './airtable.mjs'
 
 import { Therapy } from './therapists/models.mjs'
 
@@ -27,6 +28,11 @@ app.use(cors())
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find().sort({ slug: 1 })
   res.render('index', { therapies })
+})
+
+app.get(`/admin/import-airtable`, async (req, res) => {
+  await airtable.transferAll()
+  res.send("Import depuis Airtable terminé.")
 })
 
 articlesRoutes(app, '/journal')

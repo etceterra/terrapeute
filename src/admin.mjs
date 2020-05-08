@@ -8,7 +8,19 @@ export default function (app, route) {
   AdminBro.registerAdapter(AdminBroMongoose)
   const adminBro = new AdminBro({
     rootPath: route,
-    resources: [Synonym],
+    branding: {
+      companyName: 'Terrapeute Admin',
+    },
+    resources: [
+      { resource: Synonym,
+        options: {
+          listProperties: ['name', 'words'],
+          showProperties: ['name', 'words'],
+          editProperties: ['name', 'words'],
+          titleProperty: 'name',
+        }
+      },
+    ],
   })
   const router = AdminBroExpress.buildRouter(adminBro)
   app.use(route, router)
