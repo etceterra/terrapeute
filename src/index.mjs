@@ -6,7 +6,7 @@ import marked from 'marked'
 import { bbcode } from './utils.mjs'
 import config from './config.mjs'
 import articlesRoutes from './articles/routes.mjs'
-import adminRoutes from './admin/routes.mjs'
+import adminRoutes from './admin.mjs'
 import therapistsRoutes from './therapists/routes.mjs'
 import apiRoutes from './api/routes.mjs'
 
