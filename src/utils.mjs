@@ -147,4 +147,4 @@ function bbcode(str) {
 
 
 
-export { slugify, cleanForSearch, bbcode }
+export { slugify, cleanForSearch, bbcode, synonyms, blacklist, whitelist }

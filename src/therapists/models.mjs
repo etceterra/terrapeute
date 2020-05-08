@@ -130,5 +130,12 @@ TherapistSchema.methods.toJSON = function() {
 
 const Therapist = mongoose.model('Therapist', TherapistSchema)
 
+const SynonymSchema = new mongoose.Schema({
+  name: { type: String, unique: true },
+  words: [String],
+})
 
-export { Therapist, Therapy, Symptom }
+const Synonym = mongoose.model('Synonym', SynonymSchema)
+
+
+export { Therapist, Therapy, Symptom, Synonym }
