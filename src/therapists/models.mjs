@@ -30,15 +30,15 @@ const SymptomSchema = new mongoose.Schema({
   airtableParentId: String,
 })
 
-SymptomSchema.pre('save', function(next) {
+SymptomSchema.pre('save', async function(next) {
   const parentKeywords = this.parent ? this.parent.keywords.split(' ') : []
   const keywords = [this.name, ...this.synonyms, parentKeywords]
-  this.keywords = cleanForSearch(keywords.join(' '))
+  this.keywords = await cleanForSearch(keywords.join(' '))
   return next()
 })
 
-SymptomSchema.statics.search = function (q = '') {
-  q = cleanForSearch(q)
+SymptomSchema.statics.search = async function (q = '') {
+  q = await cleanForSearch(q)
   q = q.trim().split(' ').map(w => `"${w}"`).join(' ')
   console.debug('searching for', q)
   return this.find(
