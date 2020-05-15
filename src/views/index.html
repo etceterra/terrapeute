@@ -21,9 +21,20 @@
   <div>
 
     <h1>Trouvez un thérapeute</h1>
-    <form action="/therapeutes" class=row>
-      <input type=search name=q placeholder="Quel est votre symptôme principal ?">
-      <button class=primary>Rechercher les thérapeutes</button>
+    <form action="/therapeutes">
+      <label>Rechercher en fonction d'un symptôme</label>
+      <div class=row>
+        <input type=search name=q placeholder="Quel est votre symptôme principal ?">
+        <button class=primary>Trouver les thérapeutes</button>
+      </div>
+    </form>
+
+    <form action="/therapeutes">
+      <label>Rechercher en fonction d'un symptôme</label>
+      <div class=row>
+        <input type=search name=q placeholder="Quel est votre symptôme principal ?">
+        <button class=primary>Trouver les thérapeutes</button>
+      </div>
     </form>
 
     Ou trouvez un thérapeute spécialisé dans une pratique :
@@ -241,7 +252,7 @@
     #search > div {
       padding: .3rem;
     }
-    #search form {
+    #search form .row {
       flex-direction: column;
     }
     #search input {
