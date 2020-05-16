@@ -16,9 +16,14 @@ export default function (app, prefix = '') {
   })
 
   app.get('/therapeutes', async (req, res) => {
+    const therapy = req.query.therapy
+    if(therapy) {
+      const instance = await Therapy.findOne({ name: therapy })
+      return res.redirect(`/therapeutes/${instance.slug}`)
+    }
     let therapists
     let symptoms = []
-    const q = req.query.q
+    const q = req.query.symptom
     let therapies
     if(q) {
       symptoms = await Symptom.search(req.query.q)

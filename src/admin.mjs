@@ -13,7 +13,7 @@ export default function (app, route) {
       companyName: 'Naturapeute Admin',
     },
     dashboard: {
-      component: AdminBro.bundle('./my-dashboard-component')
+      // component: AdminBro.bundle('./my-dashboard-component')
     },
     resources: [
       {
