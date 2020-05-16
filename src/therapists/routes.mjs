@@ -26,7 +26,7 @@ export default function (app, prefix = '') {
     const q = req.query.symptom
     let therapies
     if(q) {
-      symptoms = await Symptom.search(req.query.q)
+      symptoms = await Symptom.search(q)
       therapists = await Therapist.matchSymptoms(symptoms)
       therapies = await Therapy.find()
     }

@@ -11,7 +11,7 @@ import therapistsRoutes from './therapists/routes.mjs'
 import apiRoutes from './api/routes.mjs'
 import airtable from './airtable.mjs'
 
-import { Therapy } from './therapists/models.mjs'
+import { Therapy, Therapist, Symptom } from './therapists/models.mjs'
 
 
 const app = express()
@@ -47,5 +47,11 @@ app.get('/charte.html', async (req, res) => res.render('charte'))
 app.get('/privacy.html', async (req, res) => res.render('privacy'))
 app.get('/policy.html', async (req, res) => res.render('policy'))
 app.get('/evenements.html', async (req, res) => res.render('events'))
+app.get('/navigation.html', async (req, res) => {
+  const therapies = await Therapy.find()
+  const therapists = await Therapist.find().populate('therapies')
+  const symptoms = await Symptom.find().populate('parent')
+  res.render('sitemap', { therapies, therapists, symptoms })
+})
 
 app.listen(config.PORT, () => console.log(`App running on http://localhost:${config.PORT}`))

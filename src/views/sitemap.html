@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body_class %}static{% endblock %}
+
+{% block meta_title %}Salons et rencontres des thérapies complémentaires{% endblock %}
+{% block meta_description %}Prochaines rencontres de thérapeutes professionnels en Suisse sur l'accupressing et l'accupuncture, la massothérapie, la kinésiologie, la naturopathie,
+l'homéopathie, l'Ayurveda, la nutrition, la réflexologie, la phytothérapie, le shiatsu, les ventouses et la Chromotherapie.{% endblock %}
+
+{% block content %}
+<article>
+  <h1>Les thérapeutes</h1>
+  <nav>
+    <ul>
+      {% for therapist in therapists %}
+      <li>
+      <a href="{{ therapist.slug }}/{{ therapist.airtableId }}">{{ therapist.name }} pratique le {{ therapist.therapies[0].name }} à {{ therapist.offices[0].city }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</article>
+
+<article>
+  <h1>Les thérapies</h1>
+  <nav>
+    <ul>
+      {% for therapy in therapies %}
+      <li>
+      <a href="therapeutes/{{ therapy.slug }}/">{{ therapy.name }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+</article>
+
+<article>
+  <h1>Les symptômes</h1>
+  <nav>
+    <ul>
+    {% for symptom in symptoms %}
+    <li>
+      <a href="therapeutes/?symptom={{ symptom.name }}">thérapeutes en {{ symptom.name }}</a>
+    </li>
+    {% endfor %}
+    </ul>
+  </nav>
+</article>
+
+{% endblock %}
