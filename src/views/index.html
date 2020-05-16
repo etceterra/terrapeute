@@ -21,17 +21,26 @@
   <div>
 
     <h1>Trouvez un thérapeute</h1>
-    <form action="/therapeutes" class=row>
-      <input type=search name=q placeholder="Quel est votre symptôme principal ?">
-      <button class=primary>Rechercher les thérapeutes</button>
+    <form action="/therapeutes">
+      <label>Vous avez un symptôme spécifique ?</label>
+      <div class=row>
+        <input type=search name=symptom placeholder="Ex: troubles du sommeil…">
+        <button class=primary><i class="fas fa-search" title="Trouver les thérapeutes intervenant sur ces symptômes"></i></button>
+      </div>
     </form>
 
-    Ou trouvez un thérapeute spécialisé dans une pratique :
-    <nav id=therapies>
-      {% for therapy in therapies %}
-      <a href=/therapeutes/{{ therapy.slug }}{{ queryParams }}>{{ therapy.name }}</a>
-      {% endfor %}
-    </nav>
+    <form action="/therapeutes">
+      <label>Vous cherchez un pratique thérapeutique ?</label>
+      <div class=row>
+        <input type=search name=therapy list="therapies" placeholder="Ex: naturopathie">
+        <datalist id=therapies>
+          {% for therapy in therapies %}
+          <option value="{{ therapy.name }}">
+          {% endfor %}
+        </datalist>
+        <button class=primary><i class="fas fa-search" title="Trouver les thérapeutes intervenant sur ces symptômes"></i></button>
+      </div>
+    </form>
 
     <p>Terrapeute est le réseau des <strong>thérapeutes en Suisse</strong>. Quelques soient vos symptômes,
     il y a toujours un <strong>thérapeute professionnel</strong> à proximité.</p>
@@ -241,7 +250,7 @@
     #search > div {
       padding: .3rem;
     }
-    #search form {
+    #search form .row {
       flex-direction: column;
     }
     #search input {
