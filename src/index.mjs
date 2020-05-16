@@ -27,7 +27,8 @@ app.use(cors())
 
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find().sort({ slug: 1 })
-  res.render('index', { therapies })
+  const therapists = await Therapist.find().enabled().sort({ creationDate: -1 }).limit(5)
+  res.render('index', { therapies, therapists })
 })
 
 app.get(`/admin/import-airtable`, async (req, res) => {

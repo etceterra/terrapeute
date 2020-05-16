@@ -1,0 +1,19 @@
+{% import './avatar.html' as macro %}
+
+{% macro therapist_card(therapist) %}
+  <article class="therapist-card" id="{{ therapist.id }}">
+    <h1>{{ therapist.therapy }}</h1>
+    {{ macro.avatar(therapist, therapist.name + ' : thérapeute à ' + therapist.city) }}
+    <div>
+      <h2>{{ therapist.name }}</h2>
+      <p>{{ therapist.city }}</p>
+      <p class=description>{{ therapist.description | truncate(120) }}</p>
+    </div>
+    <footer>
+      {% for agreement in therapist.agreements %}
+      <span class=tag title="{{ therapist.therapy }} agréé {{ agreement }}">{{ agreement | upper }}</span>
+      {% endfor %}
+    </footer>
+    <a href={{ therapist.url }} title="{{ therapist.name }} est {# therapist.therapies_name | join(', ') #} à {{ therapist.city }}">Voir ce {{ therapist.therapies[0].name }} à {{ therapist.city }}</a>
+  </article>
+{% endmacro %}
