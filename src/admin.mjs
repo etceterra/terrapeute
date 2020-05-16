@@ -29,7 +29,7 @@ export default function (app, route) {
       {
         resource: Article,
         options: {
-          listProperties: ['title'],
+          listProperties: ['title', 'creationDate'],
           showProperties: ['title', 'slug', 'tags', 'body'],
           titleProperty: 'title',
           properties: {

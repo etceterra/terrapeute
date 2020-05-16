@@ -45,7 +45,7 @@ async function cleanForSearch(phrase) {
       if(w.endsWith('ement')) w = w.slice(0, -5) + 'er'
       if(w.endsWith('age')) w = w.slice(0, -3) + 'er'
       const synonym = synonyms.find(s => s.words.includes(w))
-      if(synonym) w = synonym.word
+      if(synonym) w = synonym.name
       return w
     })
     // Pass a second time though translated words
