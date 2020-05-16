@@ -2,6 +2,7 @@ import { Synonym } from './therapists/models.mjs'
 
 
 function slugify(string) {
+  if(!string) return ''
   return string.toString().normalize('NFD').toLowerCase()
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/œ/g, 'oe')

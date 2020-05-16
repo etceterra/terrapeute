@@ -30,7 +30,7 @@ ArticleSchema.virtual('readingTime').get(function () {
 
 ArticleSchema.pre('save', function(next) {
   if(!this.slug) this.slug = slugify(this.title)
-  if(this.tags[0].includes(',')) this.tags = this.tags[0].split(',').map(t => t.trim())
+  if(this.tags.length && this.tags[0].includes(',')) this.tags = this.tags[0].split(',').map(t => t.trim())
   return next()
 })
 
