@@ -1,4 +1,4 @@
-import airtable from './src/airtable.mjs'
+import airtable from './src/airtable.js'
 
 async function init() {
   await airtable.transferAll()

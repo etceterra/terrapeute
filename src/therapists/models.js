@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import { cleanForSearch } from '../utils.mjs'
-import db from '../db.mjs'  // connect db
+import { cleanForSearch } from '../utils.js'
+import db from '../db.js'  // connect db
 
 const TherapySchema = mongoose.Schema({
   slug: String,

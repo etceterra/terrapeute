@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { Article } from '../models.mjs'
+import { Article } from '../models.js'
 
 
 describe('Article', () => {

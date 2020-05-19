@@ -1,8 +1,8 @@
 import Airtable from 'airtable'
-import config from './config.mjs'
+import config from './config.js'
 import request from 'request-promise-native'
 
-import { Therapist, Therapy, Symptom } from './therapists/models.mjs'
+import { Therapist, Therapy, Symptom } from './therapists/models.js'
 
 Airtable.configure({ endpointUrl: 'https://api.airtable.com', apiKey: config.AIRTABLE_API_KEY })
 const db = Airtable.base('app1Ab6PilgNTXMYp')

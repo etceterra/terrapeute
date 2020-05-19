@@ -3,7 +3,7 @@ Description=Terrapeute web server
 After=network.target
 
 [Service]
-ExecStart=node --experimental-modules /home/ubuntu/prod/src/index.mjs
+ExecStart=node --experimental-modules /home/ubuntu/prod/src/index.js
 # Required on some systems
 WorkingDirectory=/home/ubuntu/prod
 Restart=always

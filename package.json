@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "dependencies": {
+    "@std/esm": "^0.26.0",
     "admin-bro": "^2.2.9",
     "admin-bro-expressjs": "^2.0.5",
     "admin-bro-mongoose": "^0.5.1",
@@ -26,10 +28,10 @@
     "nodemon": "^1.19.4"
   },
   "scripts": {
-    "start": "nodemon -e mjs,html --experimental-modules src/index.mjs",
-    "debug": "DEBUG=express:* node inspect --experimental-modules src/index.mjs -- -R spec",
-    "import-airtable": "node --experimental-modules import-airtable.mjs",
-    "test": "node --experimental-modules node_modules/mocha-esm/bin/mocha-esm src/test/utils.mjs"
+    "start": "nodemon -e js,html --experimental-modules src/index.js",
+    "debug": "DEBUG=express:* node inspect --experimental-modules src/index.js -- -R spec",
+    "import-airtable": "node --experimental-modules import-airtable.js",
+    "test": "node --experimental-modules node_modules/mocha-esm/bin/mocha-esm src/test/utils.js"
   },
   "repository": {
     "type": "git",

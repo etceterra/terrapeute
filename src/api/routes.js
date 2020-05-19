@@ -1,4 +1,4 @@
-import { Therapist, TherapistData } from '../therapists/models.mjs'
+import { Therapist, TherapistData } from '../therapists/models.js'
 
 
 export default function (app, prefix = '') {

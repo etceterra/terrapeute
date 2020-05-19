@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import filters from 'nunjucks/src/filters.js'
 import marked from 'marked'
 
-import { slugify } from '../utils.mjs'
+import { slugify } from '../utils.js'
 
 
 mongoose.connect('mongodb://localhost:27017/terrapeute', { useNewUrlParser: true, useUnifiedTopology: true })

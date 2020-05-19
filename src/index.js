@@ -3,15 +3,15 @@ import cors from 'cors'
 import nunjucks from 'nunjucks'
 import marked from 'marked'
 
-import { bbcode } from './utils.mjs'
-import config from './config.mjs'
-import articlesRoutes from './articles/routes.mjs'
-import adminRoutes from './admin.mjs'
-import therapistsRoutes from './therapists/routes.mjs'
-import apiRoutes from './api/routes.mjs'
-import airtable from './airtable.mjs'
+import { bbcode } from './utils.js'
+import config from './config.js'
+import articlesRoutes from './articles/routes.js'
+import adminRoutes from './admin.js'
+import therapistsRoutes from './therapists/routes.js'
+import apiRoutes from './api/routes.js'
+import airtable from './airtable.js'
 
-import { Therapy, Therapist, Symptom } from './therapists/models.mjs'
+import { Therapy, Therapist, Symptom } from './therapists/models.js'
 
 
 const app = express()

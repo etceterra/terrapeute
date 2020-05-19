@@ -1,5 +1,5 @@
-import { Article } from './models.mjs'
-import config from '../config.mjs'
+import { Article } from './models.js'
+import config from '../config.js'
 import multer from 'multer'
 import fs from 'fs'
 

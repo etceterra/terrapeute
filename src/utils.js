@@ -1,4 +1,4 @@
-import { Synonym } from './therapists/models.mjs'
+import { Synonym } from './therapists/models.js'
 
 
 function slugify(string) {

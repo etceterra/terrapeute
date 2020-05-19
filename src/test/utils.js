@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { slugify, cleanForSearch, bbcode } from '../utils.mjs'
+import { slugify, cleanForSearch, bbcode } from '../utils.js'
 
 
 describe('utils', () => {

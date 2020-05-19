@@ -1,5 +1,5 @@
-import { synonyms } from '../src/utils.mjs'
-import { Synonym } from '../src/therapists/models.mjs'
+import { synonyms } from '../src/utils.js'
+import { Synonym } from '../src/therapists/models.js'
 
 
 synonyms.forEach(async (s) => {

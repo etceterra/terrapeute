@@ -2,8 +2,8 @@ import AdminBro from 'admin-bro'
 import AdminBroExpress from 'admin-bro-expressjs'
 import AdminBroMongoose from 'admin-bro-mongoose'
 
-import { Therapist, Therapy, Symptom, Synonym } from './therapists/models.mjs'
-import { Article } from './articles/models.mjs'
+import { Therapist, Therapy, Symptom, Synonym } from './therapists/models.js'
+import { Article } from './articles/models.js'
 
 export default function (app, route) {
   AdminBro.registerAdapter(AdminBroMongoose)
@@ -13,7 +13,7 @@ export default function (app, route) {
       companyName: 'Naturapeute Admin',
     },
     dashboard: {
-      // component: AdminBro.bundle('./my-dashboard-component')
+      // component: 'StringsList'
     },
     resources: [
       {
@@ -39,7 +39,8 @@ export default function (app, route) {
             },
             tags: {
               components: {
-                // list: AdminBro.bundle('./strings-list.jsx'),
+                // edit: AdminBro.bundle('strings-list'), //'StringsList',
+                // list: AdminBro.bundle('strings-list'), //'StringsList',
               }
             }
           }

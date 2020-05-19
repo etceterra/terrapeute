@@ -1,5 +1,5 @@
 import Vcard from 'vcards-js'
-import { Therapist, Therapy, Symptom } from './models.mjs'
+import { Therapist, Therapy, Symptom } from './models.js'
 
 
 async function getTherapies() {
