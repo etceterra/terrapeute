@@ -2,7 +2,7 @@ help:
 	@echo "Checkout the makefile"
 
 deploy:
-	ssh terrapeute "cd ~/prod && \
+	ssh naturapeute "cd ~/prod && \
 	git reset --hard FETCH_HEAD && \
 	git pull && \
 	sudo ln -s terrapeute.service /etc/systemd/system/ ; \
