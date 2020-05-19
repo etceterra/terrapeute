@@ -240,6 +240,11 @@ main.static {
   margin: 3rem auto;
 }
 
+#journal #article-image {
+  margin: 0 auto;
+  display: block;
+}
+
 
 @media screen and (max-width: 900px) {
   body > header .container {

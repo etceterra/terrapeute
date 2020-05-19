@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block content %}
-<article>
+<article id=journal>
   <header>
     <h1>{{ article.title }}</h1>
 
@@ -28,7 +28,7 @@
     {% endfor %}
   </header>
   {% if article.image -%}
-  <img src="{{ article.image }}" alt="image pour « {{ article.title }} »">
+  <img src="{{ article.image }}" alt="image pour « {{ article.title }} »" id=article-image>
   {%- endif %}
 
   {{ article.body|markdown|bbcode }}
