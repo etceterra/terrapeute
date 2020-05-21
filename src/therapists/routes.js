@@ -27,11 +27,11 @@ export default function (app, prefix = '') {
     let therapies
     if(q) {
       symptoms = await Symptom.search(q)
-      therapists = await Therapist.matchSymptoms(symptoms)
+      therapists = await Therapist.matchSymptoms(symptoms).populate('therapies')
       therapies = await Therapy.find()
     }
     else {
-      therapists = await Therapist.find().enabled()
+      therapists = await Therapist.find().enabled().populate('therapies')
       therapies = await getTherapies()
     }
     res.render('therapists', { therapists, symptoms, therapies, q, queryParams: res.locals.queryParams })

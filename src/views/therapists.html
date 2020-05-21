@@ -3,7 +3,7 @@
 
 {% block meta_title %}Thérapeutes agréés ASCA autour de Genève{% endblock %}
 
-{% block meta_description %}Prendre rendez-vous avec un thérapeute à Genève : accupressing, nutritionistes, massothérapeutes à Genève{% endblock %}
+{% block meta_description %}Prendre rendez-vous avec un thérapeute à Genève : accupressing, nutritionistes, massothérapeutes à Genève{% endblock %}
 
 {% block content %}
 
@@ -190,8 +190,8 @@
       {
         id: "{{therapist.id}}",
         name: "{{therapist.name}}",
-        therapy: "{{therapist.therapies[0].name}}",
-        label: "{{therapist.name}} — {{ therapist.therapies[0].name }}",
+        therapy: "{{therapist.therapy.name}}",
+        label: "{{therapist.name}} — {{ therapist.therapy.name }}",
         latlng: [{{ therapist.offices[0].location.coordinates }}],
         url: "{{therapist.url}}",
         photo: "{{ therapist.photoUrl }}",

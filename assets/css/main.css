@@ -244,6 +244,23 @@ main.static {
   margin: 0 auto;
   display: block;
 }
+.therapist-card .therapies-list {
+  height: 30px;
+  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+a.therapy {
+  font-size: .7rem;
+  color: inherit;
+  font-weight: bold;
+  text-decoration: none;
+}
+a.therapy:not(:last-of-type)::after {
+  content: "•";
+  margin: 0 .5rem;
+}
 
 
 @media screen and (max-width: 900px) {

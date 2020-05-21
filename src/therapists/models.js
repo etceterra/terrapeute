@@ -114,6 +114,11 @@ TherapistSchema.virtual('name').get(function() {
   return `${this.firstname} ${this.lastname}`
 })
 
+TherapistSchema.virtual('therapy').get(function() {
+  console.debug(this.therapies)
+  return this.therapies.length && this.therapies[0]
+})
+
 TherapistSchema.virtual('city').get(function() {
   return this.offices.length && this.offices[0].city
 })
