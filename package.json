@@ -1,5 +1,5 @@
 {
-  "name": "terrapeute",
+  "name": "naturapeute",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -35,12 +35,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/etceterra/terrapeutes.git"
+    "url": "git+https://github.com/etceterra/naturapeute.git"
   },
   "author": "Vincent Agnano",
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/etceterra/terrapeutes/issues"
+    "url": "https://github.com/etceterra/naturapeute/issues"
   },
-  "homepage": "https://github.com/etceterra/terrapeutes#readme"
+  "homepage": "https://github.com/etceterra/naturapeute#readme"
 }

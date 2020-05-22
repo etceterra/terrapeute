@@ -11,7 +11,7 @@ deploy:
 	sudo systemctl restart terrapeute"
 
 remote-import-airtable:
-	ssh terrapeute "cd ~/prod && npm run import-airtable"
+	ssh naturapeute "cd ~/prod && npm run import-airtable"
 
 log:
-	ssh terrapeute "systemctl status terrapeute -n 50"
+	ssh naturapeute "systemctl status terrapeute -n 50"

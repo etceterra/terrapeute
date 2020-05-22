@@ -63,7 +63,7 @@ export default function (app, prefix = '') {
     if (therapist.socials) vcard.workUrl = therapist.socials.website
     if (therapist.photoUrl) vcard.photo.attachFromUrl(therapist.photoUrl, 'JPEG')
     vcard.note = therapist.timetable
-    vcard.organization = 'Thérapeute membre de Terrapeute.ch'
+    vcard.organization = 'Thérapeute membre de Naturapeute.ch'
     vcard.source = req.url
     const office = therapist.offices.length && therapist.offices[0]
     if(office) {
@@ -73,7 +73,7 @@ export default function (app, prefix = '') {
       vcard.workAddress.postalCode = office.zipCode
       vcard.workAddress.countryRegion = office.country
     }
-    res.set('Content-Type', `text/vcard; name="terrapeute-${therapist.firstname}-${therapist.lastname}.vcf"`)
+    res.set('Content-Type', `text/vcard; name="naturapeute-${therapist.firstname}-${therapist.lastname}.vcf"`)
     res.set('Content-Disposition', `inline; filename="${therapist.firstname}-${therapist.lastname}.vcf"`)
     res.send(vcard.getFormattedString())
   })
