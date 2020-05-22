@@ -90,7 +90,22 @@ TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapist
   const aggregation = [
     { $addFields: { countSymptoms: { $size: "$symptoms" } } },
     { $sort: { countSymptoms: 1 } },
-    { $match: { symptoms: { $in: symptoms.map(s => s._id) } } }
+    { $match: { symptoms: { $in: symptoms.map(s => s._id) } } },
+    // Find a way to popupate therapies without duplicating therapists
+    // { "$group": {
+    //   "_id": "therapies",
+    //   "t": { "$first": "$therapies" },
+    //   "message": { "$first": "$message" },
+    //   "date": { "$first": "$date" },
+    //   "origId": { "$first": "$_id" }
+    // }},
+    // { $lookup: {
+    //    from: 'therapies',
+    //    localField: 'therapies',
+    //    foreignField: '_id',
+    //    as: 'therapies'
+    // }},
+    // { $unwind: { path: '$therapies' } }
   ]
   if(therapists.length) aggregation.push({ $match: { _id: { $in: therapists.map(t => t._id) }}})
   const therapistsRaw = await Therapist.aggregate(aggregation)
@@ -133,7 +148,7 @@ TherapistSchema.virtual('extraData').get(async function() {
   return data
 })
 
-TherapistSchema.methods.toJSON = async function() {
+TherapistSchema.methods.asObject = async function() {
   const keys = ['firstname', 'lastname', 'phone', 'email', 'offices']
   const values = keys.reduce((value, k) => {
     value[k] = this[k]

@@ -21,17 +21,16 @@ export default function (app, prefix = '') {
       const instance = await Therapy.findOne({ name: therapy })
       return res.redirect(`/therapeutes/${instance.slug}`)
     }
-    let therapists
     let symptoms = []
     const q = req.query.symptom
     let therapies
+    let therapists = await Therapist.find().enabled().populate('therapies')
     if(q) {
       symptoms = await Symptom.search(q)
-      therapists = await Therapist.matchSymptoms(symptoms).populate('therapies')
+      therapists = await Therapist.matchSymptoms(symptoms)
       therapies = await Therapy.find()
     }
     else {
-      therapists = await Therapist.find().enabled().populate('therapies')
       therapies = await getTherapies()
     }
     res.render('therapists', { therapists, symptoms, therapies, q, queryParams: res.locals.queryParams })
@@ -43,7 +42,7 @@ export default function (app, prefix = '') {
     const q = req.query.q
     let therapists
     let symptoms = []
-    const therapistsAll = await Therapist.find().enabled().byTherapy(therapy)
+    const therapistsAll = await Therapist.find().enabled().byTherapy(therapy).populate('therapies')
     if(q) {
       symptoms = await Symptom.search(q)
       therapists = await Therapist.matchSymptoms(symptoms, therapistsAll)

@@ -46,6 +46,9 @@ export default function (app, route) {
           }
         }
       },
+      {
+        resource: Therapist,
+      }
     ],
   })
   const router = AdminBroExpress.buildRouter(adminBro)

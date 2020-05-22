@@ -7,7 +7,7 @@ export default function (app, prefix = '') {
     const therapist = await Therapist.findOne({ email: req.params.email })
     if(!therapist) return res.status(404).send('Therapist not found')
     res.setHeader('Content-Type', 'application/json')
-    res.send(await therapist.toJSON())
+    res.send(await therapist.asObject())
   })
 
   app.patch(`${prefix}/therapist/:id`, async (req, res) => {
@@ -21,7 +21,7 @@ export default function (app, prefix = '') {
     data.data = content
     await data.save()
     res.setHeader('Content-Type', 'application/json')
-    const inst = await therapist.toJSON()
+    const inst = await therapist.asObject()
     res.send(inst)
   })
 }
