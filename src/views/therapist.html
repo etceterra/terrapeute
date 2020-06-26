@@ -15,12 +15,12 @@
       <h2>{{ therapist.firstname }} {{ therapist.lastname }}</h2>
 
 
-      <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements }}">Thérapeute professionnel
-        {% if therapist.agreements.length %}agréé
+      <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements }}">Thérapeute professionnel(le)
+        {% if therapist.agreements.length %}agréé(e)
           {% for agreement in therapist.agreements -%}
             <span class=tag>{{ agreement }}</span>
           {% endfor %}
-        {% else %}diplomé
+        {% else %}diplomé(e)
         {% endif %}
       </p>
 
