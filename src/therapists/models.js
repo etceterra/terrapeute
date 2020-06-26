@@ -77,7 +77,7 @@ const TherapistSchema = new mongoose.Schema({
   therapies: [{ type: mongoose.ObjectId, ref: Therapy }],
   agreements: [String],
   paymentTypes: [String],
-  symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
+  // symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
   offices: [Office],
   creationDate: { type: Date, default: Date.now },
   expirationDate: Date,
@@ -90,7 +90,10 @@ TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapist
   const aggregation = [
     { $addFields: { countSymptoms: { $size: "$symptoms" } } },
     { $sort: { countSymptoms: 1 } },
-    { $match: { symptoms: { $in: symptoms.map(s => s._id) } } },
+    { $match: {
+      symptoms: { $in: symptoms.map(s => s._id) },
+      disabled: { $nin: [true] }
+    } },
     // Find a way to popupate therapies without duplicating therapists
     // { "$group": {
     //   "_id": "therapies",
