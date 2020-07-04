@@ -10,10 +10,7 @@ export default function (app, route) {
   const adminBro = new AdminBro({
     rootPath: route,
     branding: {
-      companyName: 'Naturapeute Admin',
-    },
-    dashboard: {
-      // component: 'StringsList'
+      companyName: 'Naturapeute',
     },
     resources: [
       {
@@ -40,14 +37,22 @@ export default function (app, route) {
             tags: {
               components: {
                 // edit: AdminBro.bundle('strings-list'), //'StringsList',
-                // list: AdminBro.bundle('strings-list'), //'StringsList',
+                list: AdminBro.bundle('upload-image'), //'StringsList',
               }
             }
           }
         }
       },
       {
+        resource: Therapy,
+      },
+      {
         resource: Therapist,
+        options: {
+          listProperties: ['firstname', 'lastname', 'creationDate'],
+          showProperties: ['firstname', 'lastname', 'creationDate', 'therapies'],
+          editProperties: ['firstname', 'lastname', 'creationDate', 'therapies'],
+        }
       }
     ],
   })

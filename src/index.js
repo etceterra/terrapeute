@@ -2,11 +2,12 @@ import express from 'express'
 import cors from 'cors'
 import nunjucks from 'nunjucks'
 import marked from 'marked'
+import bodyParser from 'body-parser'
 
 import { bbcode } from './utils.js'
 import config from './config.js'
 import articlesRoutes from './articles/routes.js'
-import adminRoutes from './admin.js'
+// import adminRoutes from './admin.js'
 import therapistsRoutes from './therapists/routes.js'
 import apiRoutes from './api/routes.js'
 import airtable from './airtable.js'
@@ -23,6 +24,7 @@ template.addFilter('bbcode', (str = '') => nunjucks.runtime.markSafe(bbcode(str)
 
 app.use(express.static('assets'))
 app.use(express.json())
+app.use(bodyParser())
 app.use(cors())
 
 app.get('/', async (req, res) => {
@@ -37,7 +39,7 @@ app.get(`/admin/import-airtable`, async (req, res) => {
 })
 
 articlesRoutes(app, '/journal')
-adminRoutes(app, '/admin')
+// adminRoutes(app, '/admin')
 apiRoutes(app, '/api')
 
 therapistsRoutes(app)
