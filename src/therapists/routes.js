@@ -24,7 +24,7 @@ export default function (app, prefix = '') {
     let symptoms = []
     const q = req.query.symptom
     let therapies
-    let therapists = await Therapist.find().enabled().populate('therapies')
+    let therapists = await Therapist.find().populate('therapies')
     if(q) {
       symptoms = await Symptom.search(q)
       therapists = await Therapist.matchSymptoms(symptoms)
@@ -42,7 +42,7 @@ export default function (app, prefix = '') {
     const q = req.query.q
     let therapists
     let symptoms = []
-    const therapistsAll = await Therapist.find().enabled().byTherapy(therapy).populate('therapies')
+    const therapistsAll = await Therapist.find().byTherapy(therapy).populate('therapies')
     if(q) {
       symptoms = await Symptom.search(q)
       therapists = await Therapist.matchSymptoms(symptoms, therapistsAll)

@@ -81,7 +81,6 @@ const TherapistSchema = new mongoose.Schema({
   offices: [Office],
   creationDate: { type: Date, default: Date.now },
   expirationDate: Date,
-  disabled: Boolean,
   airtableId: String,
 })
 
@@ -92,7 +91,6 @@ TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapist
     { $sort: { countSymptoms: 1 } },
     { $match: {
       symptoms: { $in: symptoms.map(s => s._id) },
-      disabled: { $nin: [true] }
     } },
     // Find a way to popupate therapies without duplicating therapists
     // { "$group": {
@@ -115,13 +113,8 @@ TherapistSchema.statics.matchSymptoms = async function (symptoms = [], therapist
   return therapistsRaw.map(t => Therapist(t))
 }
 
-TherapistSchema.query.enabled = function (args) {
-  args = Object.assign({ disabled: { $ne: true } }, args)
-  return this.find(args)
-}
-
 TherapistSchema.query.byTherapy = function (therapy) {
-  return this.enabled({ therapies: { $in: [therapy] } })
+  return this.find({ therapies: { $in: [therapy] } })
 }
 
 TherapistSchema.virtual('photoUrl').get(function() {
@@ -133,7 +126,6 @@ TherapistSchema.virtual('name').get(function() {
 })
 
 TherapistSchema.virtual('therapy').get(function() {
-  console.debug(this.therapies)
   return this.therapies.length && this.therapies[0]
 })
 

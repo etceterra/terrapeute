@@ -120,7 +120,7 @@ async function transferProviders () {
       country: 'ch',
       pictures
     }]
-    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id) : []
+    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id).filter(s => s.statut !== 'refuse') : []
 
     const therapist = new Therapist({
       firstname: atp.firstname,
@@ -129,7 +129,6 @@ async function transferProviders () {
       email: atp.email,
       phone: atp.phone,
       description: atp.description,
-      disabled: atp.disabled,
       socials: Object.keys(atp.socials).map(name => ({ name, url: atp.socials[name] })) || [],
       offices: offices || [],
       agreements: atp.agreements || [],

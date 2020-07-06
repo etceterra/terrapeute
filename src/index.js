@@ -29,7 +29,7 @@ app.use(cors())
 
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find().sort({ slug: 1 })
-  const therapists = await Therapist.find().enabled().sort({ creationDate: -1 }).limit(5)
+  const therapists = await Therapist.find({ photo: { $nin: [null] } }).sort({ creationDate: -1 }).limit(5)
   res.render('index', { therapies, therapists })
 })
 
