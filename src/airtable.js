@@ -111,7 +111,6 @@ async function transferProviders () {
   const therapies = await Therapy.find()
   const symptoms = await Symptom.find()
   return Promise.all(providers.filter(p => p.statut !== 'refuse').map(async (atp) => {
-    console.debug(atp.lastname, atp.statut)
     const pictures = atp.pictures && await Promise.all(atp.pictures.map(async pic => pic.url))
     const offices = [{
       location: { coordinates: (atp.latlng || '').split(',') },
