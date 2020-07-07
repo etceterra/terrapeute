@@ -110,7 +110,8 @@ async function transferProviders () {
   const providers = await AirtableProvider.getAll()
   const therapies = await Therapy.find()
   const symptoms = await Symptom.find()
-  return Promise.all(providers.map(async (atp) => {
+  return Promise.all(providers.filter(p => p.statut !== 'refuse').map(async (atp) => {
+    console.debug(atp.lastname, atp.statut)
     const pictures = atp.pictures && await Promise.all(atp.pictures.map(async pic => pic.url))
     const offices = [{
       location: { coordinates: (atp.latlng || '').split(',') },
@@ -120,7 +121,7 @@ async function transferProviders () {
       country: 'ch',
       pictures
     }]
-    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id).filter(s => s.statut !== 'refuse') : []
+    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id) : []
 
     const therapist = new Therapist({
       firstname: atp.firstname,
