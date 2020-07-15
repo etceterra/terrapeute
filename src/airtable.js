@@ -111,7 +111,7 @@ async function transferProviders () {
   const providers = await AirtableProvider.getAll()
   const therapies = await Therapy.find()
   const symptoms = await Symptom.find()
-  return Promise.all(providers.filter(p => p.statut !== 'refuse').map(async (atp) => {
+  return Promise.all(providers.filter(p => p.statut === 'confirme').map(async (atp) => {
     const pictures = atp.pictures && await Promise.all(atp.pictures.map(async pic => pic.url))
     const offices = [{
       location: { coordinates: (atp.latlng || '').split(',') },
