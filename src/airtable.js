@@ -147,6 +147,7 @@ async function transferProviders () {
       agreements: atp.agreements || [],
       symptoms: therapistSymptoms,
       timetable: atp.timetable,
+      isCertified: atp.is_certified,
       price: atp.price,
       photo,
       paymentTypes: atp.payment_means,
