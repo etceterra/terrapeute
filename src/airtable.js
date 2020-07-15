@@ -1,6 +1,7 @@
 import Airtable from 'airtable'
 import config from './config.js'
 import request from 'request-promise-native'
+import crypto from 'crypto'
 
 import { Therapist, Therapy, Symptom } from './therapists/models.js'
 
@@ -122,6 +123,18 @@ async function transferProviders () {
     }]
     const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id) : []
 
+    let photo = atp.photo && atp.photo[0].url
+    if(!photo) {
+      const hash = crypto.createHash('md5').update(atp.email).digest('hex')
+      try {
+        await request.get(`https://gravatar.com/avatar/${hash}?s=1&d=404`)
+        photo = `https://gravatar.com/avatar/${hash}?s=500`
+      }
+      catch(e) {
+        console.error('no photo for', atp.name)
+      }
+    }
+
     const therapist = new Therapist({
       firstname: atp.firstname,
       lastname: atp.lastname,
@@ -135,7 +148,7 @@ async function transferProviders () {
       symptoms: therapistSymptoms,
       timetable: atp.timetable,
       price: atp.price,
-      photo: atp.photo && atp.photo[0].url,
+      photo,
       paymentTypes: atp.payment_means,
       creationDate: atp.creation_date,
       expirationDate: atp.expirationDate,
