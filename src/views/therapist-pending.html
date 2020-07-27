@@ -9,21 +9,27 @@
 <article>
   <div>
     <section class=notification>
-      <p>Attention : cette fiche est consultable uniquement par ce lien privé. Si vous souhaitez la publier gratuitement, il vous suffit de la valider !</p>
-      <small>Une fois validée, vous pourrez apporter les corrections et améliorations.</small>
-      <div class=row>
-        <form>
-          <label class=row>
-            <input type=checkbox required>
-            <p>
-            <small>j'accepte la <a href="/charte.html" target=blank>charte étique du réseau</a> ainsi que <a href="/policy.html" target=blank>les conditions d'utilisation</a></small></p>
-          </label>
-          <button class=primary>Valider ma fiche</button>
-          <button>Valider et modifier</button>
-          <hr>
-          <p><small>Si vous ne souhaitez pas publier votre fiche, vous pouvez <a href="mailto:contact@naturapeute.ch?subject=Je ne souhaite pas paraitre sur le réseau&body=Identifiant de fiche : {{ therapist.slug }}">nous le signaler par simple email</a></small></p>
-        </form>
-      </div>
+      {% if therapist.confirmed %}
+        <h3>Bienvenue dans le réseau des thérapeutes suisses !</h3>
+        <p>Votre profil est confirmé, il sera publié rapidement</p>
+        <p>En attendant, <a href="mailto:contact@naturapeute.ch?subject=améliorer ma fiche {{ therapist.slug }}">contactez-nous</a> pour améliorer votre fiche, votre description, vos photos…</p>
+        <a class=button href="/">Visiter l'accueil</a>
+      {% else %}
+        <p>Attention : cette fiche est consultable uniquement par ce lien privé. Si vous souhaitez la publier gratuitement, il vous suffit de la valider !</p>
+        <small>Une fois validée, vous pourrez apporter les corrections et améliorations.</small>
+        <div class=row>
+          <form action="/therapeutes/{{ therapist.slug }}/en-attente" method=post>
+            <label class=row>
+              <input type=checkbox required>
+              <p>
+              <small>j'accepte la <a href="/charte.html" target=blank>charte étique du réseau</a> ainsi que <a href="/policy.html" target=blank>les conditions d'utilisation</a></small></p>
+            </label>
+            <button class=primary>Valider ma fiche</button>
+            <hr>
+            <p><small>Si vous ne souhaitez pas publier votre fiche, vous pouvez <a href="mailto:contact@naturapeute.ch?subject=Je ne souhaite pas paraitre sur le réseau&body=Identifiant de fiche : {{ therapist.slug }}">nous le signaler par simple email</a></small></p>
+          </form>
+        </div>
+      {% endif %}
     </section>
 
     <section id=identity>
@@ -126,7 +132,7 @@
     overflow: hidden;
   }
   .notification {
-    animation: 4s ease-out 0s 1 slideIn;
+    animation: 3s ease-out 0s 1 slideIn;
   }
 
   @keyframes slideIn {

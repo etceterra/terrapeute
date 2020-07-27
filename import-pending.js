@@ -40,7 +40,7 @@ async function createTherapists() {
       isCertified: true,
       description: Buffer.from(d.description.join('\n'), 'utf8'),
       languages: [d.language],
-      photoUrl: `assets/uploads/therapists/holistia/${slug}.jpg`,
+      // photoUrl: `assets/uploads/therapists/holistia/${slug}.jpg`,
       socials,
       agreements: d['asca-rme'] ? ['ASCA', 'RME'] : [],
       // paymentTypes: [String],

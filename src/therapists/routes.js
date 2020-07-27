@@ -1,6 +1,15 @@
 import Vcard from 'vcards-js'
 import { Therapist, Therapy, Symptom, TherapistPending } from './models.js'
 
+const languageCodes = {
+  'fr': 'français',
+  'en': 'anglais',
+  'de': 'allemand',
+  'nl': 'néerlandais',
+  'it': 'italien',
+  'ru': 'russe',
+  'es': 'espagnol',
+}
 
 async function getTherapies() {
   return await Therapy.find()
@@ -38,17 +47,16 @@ export default function (app, prefix = '') {
 
   app.get(`/therapeutes/:slug/en-attente`, async (req, res) => {
     const therapist = await TherapistPending.findOne({ slug: req.params.slug })
-    const dict = {
-      'fr': 'français',
-      'en': 'anglais',
-      'de': 'allemand',
-      'nl': 'néerlandais',
-      'it': 'italien',
-      'ru': 'russe',
-      'es': 'espagnol',
-    }
     if(!therapist) res.status(404).send('Therapist not found')
-    res.render('therapist-pending', { therapist, dict })
+    res.render('therapist-pending', { therapist, dict: languageCodes })
+  })
+
+  app.post(`/therapeutes/:slug/en-attente`, async (req, res) => {
+    const therapist = await TherapistPending.findOne({ slug: req.params.slug })
+    therapist.confirmed = true
+    await therapist.save()
+    if(!therapist) res.status(404).send('Therapist not found')
+    return res.redirect(`/therapeutes/${therapist.slug}/en-attente`)
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
@@ -95,16 +103,7 @@ export default function (app, prefix = '') {
 
   app.get(`${prefix}/:slug0/:slug1/:airtableId`, async (req, res) => {
     let therapist = await Therapist.findOne({ airtableId: req.params.airtableId }).populate('therapies')
-    const dict = {
-      'fr': 'français',
-      'en': 'anglais',
-      'de': 'allemand',
-      'nl': 'néerlandais',
-      'it': 'italien',
-      'ru': 'russe',
-      'es': 'espagnol',
-    }
     if(!therapist) res.status(404).send('Therapist not found')
-    res.render('therapist', { therapist, dict })
+    res.render('therapist', { therapist, dict: languageCodes })
   })
 }

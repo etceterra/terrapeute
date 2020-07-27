@@ -178,6 +178,7 @@ const TherapistPendingSchema = new mongoose.Schema({
   offices: [Office],
   creationDate: { type: Date, default: Date.now },
   expirationDate: Date,
+  confirmed: Boolean,
 })
 
 TherapistPendingSchema.virtual('photoUrl').get(function() {
