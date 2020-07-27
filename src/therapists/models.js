@@ -158,6 +158,36 @@ TherapistSchema.methods.asObject = async function() {
 const Therapist = mongoose.model('Therapist', TherapistSchema)
 
 
+
+const TherapistPendingSchema = new mongoose.Schema({
+  slug: { type: String, unique: true },
+  name: String,
+  email: String,
+  phone: String,
+  isCertified: Boolean,
+  description: String,
+  price: String,
+  timetable: String,
+  languages: [String],
+  photo: String,
+  socials: [Object],
+  therapies: [String],
+  agreements: [String],
+  paymentTypes: [String],
+  // symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
+  offices: [Office],
+  creationDate: { type: Date, default: Date.now },
+  expirationDate: Date,
+})
+
+TherapistPendingSchema.virtual('photoUrl').get(function() {
+  return `/uploads/therapists/holistia/${this.slug}.jpg`
+})
+
+
+const TherapistPending = mongoose.model('TherapistPending', TherapistPendingSchema)
+
+
 const TherapistDataSchema = new mongoose.Schema({
   therapistAirtableId: { type: String, unique: true },
   data: Object,
@@ -174,4 +204,4 @@ const SynonymSchema = new mongoose.Schema({
 const Synonym = mongoose.model('Synonym', SynonymSchema)
 
 
-export { Therapist, TherapistData, Therapy, Symptom, Synonym }
+export { Therapist, TherapistPending, TherapistData, Therapy, Symptom, Synonym }

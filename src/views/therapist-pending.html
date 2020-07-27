@@ -1,18 +1,36 @@
 {% extends "base.html" %}
 
-{% block meta_title %}{{ therapist.name }}, {{ therapist.therapies[0].name }} à {{ therapist.city }}{% endblock %}
+{% block meta_title %}{{ therapist.name }}, {{ therapist.therapies[0] }}{% endblock %}
 {{ therapist }}
-{% block meta_description %}{{ therapist.name }} est thérapeute agréé {{ therapist.agreements.join(', ') }} en {{ therapist.therapies.join(', ') }} à {{ therapist.city }}.
+{% block meta_description %}{{ therapist.name }} est thérapeute agréé {{ therapist.agreements.join(', ') }} en {{ therapist.therapies[0] }}.
 {{ therapist.description | truncate(150) }}{% endblock %}
 
 {% block content %}
 <article>
   <div>
+    <section class=notification>
+      <p>Attention : cette fiche est consultable uniquement par ce lien privé. Si vous souhaitez la publier gratuitement, il vous suffit de la valider !</p>
+      <small>Une fois validée, vous pourrez apporter les corrections et améliorations.</small>
+      <div class=row>
+        <form>
+          <label class=row>
+            <input type=checkbox required>
+            <p>
+            <small>j'accepte la <a href="/charte.html" target=blank>charte étique du réseau</a> ainsi que <a href="/policy.html" target=blank>les conditions d'utilisation</a></small></p>
+          </label>
+          <button class=primary>Valider ma fiche</button>
+          <button>Valider et modifier</button>
+          <hr>
+          <p><small>Si vous ne souhaitez pas publier votre fiche, vous pouvez <a href="mailto:contact@naturapeute.ch?subject=Je ne souhaite pas paraitre sur le réseau&body=Identifiant de fiche : {{ therapist.slug }}">nous le signaler par simple email</a></small></p>
+        </form>
+      </div>
+    </section>
+
     <section id=identity>
       {% import 'partials/avatar.html' as macro %}
-      {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies[0].name + ' à ' + therapist.city) }}
-      <h1>{{ therapist.therapies[0].name }} à {{ therapist.city }}</h1>
-      <h2>{{ therapist.firstname }} {{ therapist.lastname }}</h2>
+      {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies[0]) }}
+      <h1>{{ therapist.therapies[0] }}</h1>
+      <h2>{{ therapist.name }}</h2>
 
 
       <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements }}">Thérapeute
@@ -25,8 +43,9 @@
       </p>
 
       <p>
-        {% for therapy in therapist.therapies -%}
-          <a href="/therapeutes/{{ therapy.slug }}" class=therapy title="Thérapeutes en {{ therapy.name }} à {{ therapist.city }}">{{ therapy.name }}</a>
+
+        {% for therapy in therapist.therapies %}
+          <a href="#" class=therapy title="Thérapeutes en {{ therapy }} ">{{ therapy }}</a>
         {%- endfor %}
       </p>
     </section>
@@ -63,10 +82,9 @@
 
     {% if therapist.offices.length %}
     <section>
-      <h2>Cabinet à {{ therapist.offices[0].city }}</h2>
+      <h2>Cabinet</h2>
       <address>
-        {{ therapist.offices[0].street }}<br>
-        {{ therapist.offices[0].zipCode }} {{ therapist.offices[0].city }}
+        {{ therapist.offices[0].address }}
       </address>
       <div id="map"></div>
     </section>
@@ -104,6 +122,32 @@
 </article>
 
 <style>
+  article {
+    overflow: hidden;
+  }
+  .notification {
+    animation: 4s ease-out 0s 1 slideIn;
+  }
+
+  @keyframes slideIn {
+  0% {
+    transform: scaleY(0);
+    height: 0;
+  }
+  90% {
+    transform: scaleY(0);
+    height: 0;
+  }
+  91% {
+    height: auto;
+  }
+  100% {
+    transform: scaleY(1);
+    height: auto;
+  }
+}
+
+
   article {
     display: flex;
     justify-content: space-between;

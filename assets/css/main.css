@@ -73,7 +73,7 @@ small {
 button,
 .button {
   border-radius: .25rem;
-  padding: .7rem 1rem;
+  padding: .6rem 1.2rem;
   font-size: .9rem;
   font-weight: normal;
   border: 0;
@@ -260,6 +260,11 @@ a.therapy {
 a.therapy:not(:last-of-type)::after {
   content: "•";
   margin: 0 .5rem;
+}
+
+section.notification {
+  background: #eee;
+  padding: 1rem 2rem;
 }
 
 

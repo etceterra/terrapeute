@@ -1,5 +1,5 @@
 import Vcard from 'vcards-js'
-import { Therapist, Therapy, Symptom } from './models.js'
+import { Therapist, Therapy, Symptom, TherapistPending } from './models.js'
 
 
 async function getTherapies() {
@@ -34,6 +34,21 @@ export default function (app, prefix = '') {
       therapies = await getTherapies()
     }
     res.render('therapists', { therapists, symptoms, therapies, q, queryParams: res.locals.queryParams })
+  })
+
+  app.get(`/therapeutes/:slug/en-attente`, async (req, res) => {
+    const therapist = await TherapistPending.findOne({ slug: req.params.slug })
+    const dict = {
+      'fr': 'français',
+      'en': 'anglais',
+      'de': 'allemand',
+      'nl': 'néerlandais',
+      'it': 'italien',
+      'ru': 'russe',
+      'es': 'espagnol',
+    }
+    if(!therapist) res.status(404).send('Therapist not found')
+    res.render('therapist-pending', { therapist, dict })
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {
