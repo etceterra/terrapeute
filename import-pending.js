@@ -5,7 +5,7 @@ import { TherapistPending } from './src/therapists/models.js'
 const data = JSON.parse(fs.readFileSync("../holistia-scrapper/holistia.json"))
 
 async function createTherapists() {
-  data.slice(0, 10).forEach(async d => {
+  data.forEach(async d => {
     const nameparts = d.name.split(" ")
 
     const socials = d.socials.map(s => {
