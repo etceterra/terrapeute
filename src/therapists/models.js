@@ -77,7 +77,7 @@ const TherapistSchema = new mongoose.Schema({
   therapies: [{ type: mongoose.ObjectId, ref: Therapy }],
   agreements: [String],
   paymentTypes: [String],
-  // symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
+  symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
   offices: [Office],
   creationDate: { type: Date, default: Date.now },
   expirationDate: Date,

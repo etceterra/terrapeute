@@ -121,7 +121,7 @@ async function transferProviders () {
       country: 'ch',
       pictures
     }]
-    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)).filter(id => id) : []
+    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)) : []
 
     let photo = atp.photo && atp.photo[0].url
     if(!photo) {
