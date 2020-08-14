@@ -182,6 +182,7 @@ const TherapistPendingSchema = new mongoose.Schema({
 })
 
 TherapistPendingSchema.virtual('photoUrl').get(function() {
+  if(this.photo.startsWith('http')) return this.photo
   return `/uploads/therapists/holistia/${this.slug}.jpg`
 })
 

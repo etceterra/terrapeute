@@ -45,18 +45,19 @@ export default function (app, prefix = '') {
     res.render('therapists', { therapists, symptoms, therapies, q, queryParams: res.locals.queryParams })
   })
 
-  app.get(`/therapeutes/:slug/en-attente`, async (req, res) => {
-    const therapist = await TherapistPending.findOne({ slug: req.params.slug })
+  app.get(`/attente/*`, async (req, res) => {
+    const therapist = await TherapistPending.findOne({ slug: req.params[0] })
+    console.debug(therapist)
     if(!therapist) res.status(404).send('Therapist not found')
-    res.render('therapist-pending', { therapist, dict: languageCodes })
+    res.render('therapist-pending', { request: req, therapist, dict: languageCodes })
   })
 
-  app.post(`/therapeutes/:slug/en-attente`, async (req, res) => {
-    const therapist = await TherapistPending.findOne({ slug: req.params.slug })
+  app.post(`/attente/*`, async (req, res) => {
+    const therapist = await TherapistPending.findOne({ slug: req.params[0] })
     therapist.confirmed = true
     await therapist.save()
     if(!therapist) res.status(404).send('Therapist not found')
-    return res.redirect(`/therapeutes/${therapist.slug}/en-attente`)
+    return res.redirect(`/attente/${therapist.slug}`)
   })
 
   app.get('/therapeutes/:therapy', async (req, res) => {

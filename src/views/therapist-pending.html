@@ -18,7 +18,7 @@
         <p>Attention : cette fiche est consultable uniquement par ce lien privé. Si vous souhaitez la publier gratuitement, il vous suffit de la valider !</p>
         <small>Une fois validée, vous pourrez apporter les corrections et améliorations.</small>
         <div class=row>
-          <form action="/therapeutes/{{ therapist.slug }}/en-attente" method=post>
+          <form action="{{ request.url }}" method=post>
             <label class=row>
               <input type=checkbox required>
               <p>

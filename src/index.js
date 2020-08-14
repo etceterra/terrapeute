@@ -12,7 +12,7 @@ import therapistsRoutes from './therapists/routes.js'
 import apiRoutes from './api/routes.js'
 import airtable from './airtable.js'
 
-import { Therapy, Therapist, Symptom } from './therapists/models.js'
+import { Therapy, Therapist, Symptom, TherapistPending } from './therapists/models.js'
 
 
 const app = express()
@@ -36,6 +36,11 @@ app.get('/', async (req, res) => {
 app.get(`/admin/import-airtable`, async (req, res) => {
   await airtable.transferAll()
   res.send("Import depuis Airtable terminé.")
+})
+
+app.get(`/admin/confirmes`, async (req, res) => {
+  const pendings = await TherapistPending.find({ confirmed: true })
+  res.send(pendings.map((p) => p.name).join('<br>'))
 })
 
 articlesRoutes(app, '/journal')

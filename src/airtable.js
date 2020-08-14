@@ -3,7 +3,7 @@ import config from './config.js'
 import request from 'request-promise-native'
 import crypto from 'crypto'
 
-import { Therapist, Therapy, Symptom } from './therapists/models.js'
+import { Therapist, Therapy, Symptom, TherapistPending } from './therapists/models.js'
 
 Airtable.configure({ endpointUrl: 'https://api.airtable.com', apiKey: config.AIRTABLE_API_KEY })
 const db = Airtable.base('app1Ab6PilgNTXMYp')
@@ -161,17 +161,77 @@ async function transferProviders () {
   }))
 }
 
+async function transferPendingProviders () {
+  await TherapistPending.deleteMany({ confirmed: { $nin: [true] } })
+  const providers = await AirtableProvider.getAll()
+  const therapies = await Therapy.find()
+  const symptoms = await Symptom.find()
+  return Promise.all(providers.filter(p => p.statut === 'en attente').map(async (atp) => {
+    const pictures = atp.pictures && await Promise.all(atp.pictures.map(async pic => pic.url))
+    const offices = [{
+      location: { coordinates: (atp.latlng || '').split(',') },
+      street: atp.street,
+      city: atp.city,
+      zipCode: atp.zipcode,
+      country: 'ch',
+      pictures
+    }]
+    const therapistSymptoms = atp.Symptomes ? atp.Symptomes.map(airtableId => symptoms.find(s => s.airtableId == airtableId)) : []
+
+    let photo = atp.photo && atp.photo[0].url
+    if(!photo) {
+      const hash = crypto.createHash('md5').update(atp.email).digest('hex')
+      try {
+        await request.get(`https://gravatar.com/avatar/${hash}?s=1&d=404`)
+        photo = `https://gravatar.com/avatar/${hash}?s=500`
+      }
+      catch(e) {
+        console.error('no photo for', atp.name)
+      }
+    }
+
+    // console.debug('agreements', atp.agreements || [])
+
+    const therapist = new TherapistPending({
+      slug: atp.slug,
+      name: `${atp.firstname} ${atp.lastname}`,
+      email: atp.email,
+      phone: atp.phone,
+      isCertified: atp.is_certified,
+      description: atp.description,
+      price: atp.price,
+      timetable: atp.timetable,
+      languages: atp.languages || [],
+      photo,
+      socials: Object.keys(atp.socials).map(name => ({ name, url: atp.socials[name] })) || [],
+      therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id)) : [],
+      agreements: atp.agreements || [],
+      paymentTypes: atp.payment_means,
+      // symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
+      offices: offices || [],
+      creationDate: atp.creation_date,
+      expirationDate: atp.expirationDate,
+      therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id)) : [],
+      airtableId: atp.id,
+    })
+    return await therapist.save()
+  }))
+}
+
 async function transferAll() {
-  await preload()
-  console.info('...Importing symptoms')
-  await transferSymptoms()
-  console.info('.......consolidate symptoms')
-  await consolidateSymptoms()
-  console.info('...Importing therapies')
-  await transferTherapies()
-  console.info('...Importing therapists')
-  await transferProviders()
-  console.info('completed!')
+  // await preload()
+  // console.info('...Importing symptoms')
+  // await transferSymptoms()
+  // console.info('.......consolidate symptoms')
+  // await consolidateSymptoms()
+  // console.info('...Importing therapies')
+  // await transferTherapies()
+  // console.info('...Importing therapists confirmed and pending')
+  // await transferProviders()
+  await transferPendingProviders()
+  message = 'completed!'
+  console.info(message)
+  return message
 }
 
 export default { transferAll }
