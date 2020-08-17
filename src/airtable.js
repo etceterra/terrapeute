@@ -219,17 +219,17 @@ async function transferPendingProviders () {
 }
 
 async function transferAll() {
-  // await preload()
-  // console.info('...Importing symptoms')
-  // await transferSymptoms()
-  // console.info('.......consolidate symptoms')
-  // await consolidateSymptoms()
-  // console.info('...Importing therapies')
-  // await transferTherapies()
-  // console.info('...Importing therapists confirmed and pending')
-  // await transferProviders()
+  await preload()
+  console.info('...Importing symptoms')
+  await transferSymptoms()
+  console.info('.......consolidate symptoms')
+  await consolidateSymptoms()
+  console.info('...Importing therapies')
+  await transferTherapies()
+  console.info('...Importing therapists confirmed and pending')
+  await transferProviders()
   await transferPendingProviders()
-  message = 'completed!'
+  const message = 'completed!'
   console.info(message)
   return message
 }
