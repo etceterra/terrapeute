@@ -29,8 +29,10 @@ app.use(cors())
 
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find().sort({ slug: 1 })
-  const therapists = await Therapist.find({ photo: { $nin: [null] } }).sort({ creationDate: -1 }).limit(5)
-  res.render('index', { therapies, therapists })
+  const allTherapists = Therapist.find({ photo: { $nin: [null] } }).sort({ creationDate: -1 })
+  const therapistsCount = await allTherapists.count()
+  const therapists = await allTherapists.limit(5)
+  res.render('index', { therapies, therapists, therapistsCount })
 })
 
 app.get(`/admin/import-airtable`, async (req, res) => {
