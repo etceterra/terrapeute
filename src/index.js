@@ -29,9 +29,9 @@ app.use(cors())
 
 app.get('/', async (req, res) => {
   const therapies = await Therapy.find().sort({ slug: 1 })
-  const allTherapists = Therapist.find({ photo: { $nin: [null] } }).sort({ creationDate: -1 })
-  const therapistsCount = await allTherapists.count()
-  const therapists = await allTherapists.limit(5)
+  const therapistQuery = () => Therapist.find({ photo: { $nin: [null] } }).sort({ creationDate: -1 })
+  const therapists = await therapistQuery().limit(5)
+  const therapistsCount = await therapistQuery().count()
   res.render('index', { therapies, therapists, therapistsCount })
 })
 
