@@ -204,14 +204,13 @@ async function transferPendingProviders () {
       languages: atp.languages || [],
       photo,
       socials: Object.keys(atp.socials).map(name => ({ name, url: atp.socials[name] })) || [],
-      therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id)) : [],
+      therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id).name) : [],
       agreements: atp.agreements || [],
       paymentTypes: atp.payment_means,
       // symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
       offices: offices || [],
       creationDate: atp.creation_date,
       expirationDate: atp.expirationDate,
-      therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id)) : [],
       airtableId: atp.id,
     })
     return await therapist.save()

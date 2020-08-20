@@ -35,11 +35,11 @@
     <section id=identity>
       {% import 'partials/avatar.html' as macro %}
       {{ macro.avatar(therapist, therapist.name + ' : ' + therapist.therapies[0]) }}
-      <h1>{{ therapist.therapies[0] }}</h1>
+      <h1>{{ therapist.therapies[0].name }}</h1>
       <h2>{{ therapist.name }}</h2>
 
 
-      <p id=agreements title="{{ therapist.therapies[0] }} agréé {{ therapist.agreements }}">Thérapeute
+      <p id=agreements title="{{ therapist.therapies[0].name }} agréé {{ therapist.agreements }}">Thérapeute
         {% if therapist.agreements.length %}professionnel(le) agréé(e)
           {% for agreement in therapist.agreements -%}
             <span class=tag>{{ agreement }}</span>
@@ -51,7 +51,7 @@
       <p>
 
         {% for therapy in therapist.therapies %}
-          <a href="#" class=therapy title="Thérapeutes en {{ therapy }} ">{{ therapy }}</a>
+          <a href="#" class=therapy title="Thérapeutes en {{ therapy.name }} ">{{ therapy }}</a>
         {%- endfor %}
       </p>
     </section>
