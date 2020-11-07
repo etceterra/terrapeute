@@ -198,7 +198,7 @@
       },
     {% endfor %}
   ]
-  const markers = therapists.map(therapist => {
+  const markers = therapists.filter(t => t.latlng.length).map(therapist => {
     const marker = L.marker(therapist.latlng)
     marker.bindPopup(`
       <aside>
