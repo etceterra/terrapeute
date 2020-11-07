@@ -190,7 +190,12 @@ async function transferPendingProviders () {
       }
     }
 
-    // console.debug('agreements', atp.agreements || [])
+    const therapies = (atp.therapies || []).filter(at => at).reduce((acc, at) => {
+      const therapy = atp.therapies.find(t => t.airtableId === at.id)
+      if(therapy) acc.push(at)
+      return acc
+    }, [])
+
 
     const therapist = new TherapistPending({
       slug: atp.slug,
@@ -204,16 +209,21 @@ async function transferPendingProviders () {
       languages: atp.languages || [],
       photo,
       socials: Object.keys(atp.socials).map(name => ({ name, url: atp.socials[name] })) || [],
-      therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id).name) : [],
+      therapies,
       agreements: atp.agreements || [],
       paymentTypes: atp.payment_means,
       // symptoms: [{ type: mongoose.ObjectId, ref: Symptom }],
       offices: offices || [],
-      creationDate: atp.creation_date,
+      creationDate: atp.publication_date || atp.creation_date,
       expirationDate: atp.expirationDate,
       airtableId: atp.id,
     })
-    return await therapist.save()
+    try {
+      return await therapist.save()
+    }
+    catch(e) {
+      console.error(e)
+    }
   }))
 }
 
