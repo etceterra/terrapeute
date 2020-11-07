@@ -151,7 +151,7 @@ async function transferProviders () {
       price: atp.price,
       photo,
       paymentTypes: atp.payment_means,
-      creationDate: atp.creation_date,
+      creationDate: atp.publication_date || atp.creation_date,
       expirationDate: atp.expirationDate,
       languages: atp.languages || [],
       therapies: atp.therapies ? atp.therapies.filter(at => at).map(at => therapies.find(t => t.airtableId === at.id)) : [],
